@@ -20,7 +20,8 @@ set magic                                                                   " Fo
 set nocompatible                                                            " enter the current millenium
 set number                                                                  " always show line numbers
 set nofoldenable
-"set paste                                                                   " disable auto index (not working because of auto-pairs plugin) 
+set hidden
+"set paste                                                                   " disable auto index (not working because of auto-pairs plugin)
 "set rnu                                                                     " relative numbers
 set ruler                                                                   " Always show current position
 set shiftwidth=2                                                            " amount of block indenting
@@ -75,7 +76,7 @@ Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'ap/vim-css-color'
 Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 " theme plugins
 Plugin 'BrainDeath0/Hypsteria'
@@ -106,16 +107,23 @@ noremap <Leader>P "+p
 imap <leader>q <Esc>
 inoremap jj <Esc>
 
-" space-s to save
+" Buffer key mappings
+nnoremap <leader>l :bn<cr>
+nnoremap <leader>h :bp<cr>
+nnoremap <leader>0 :bf<cr>
+nnoremap <leader>9 :bl<cr>
+nnoremap <leader>d :bd<cr>
+
+" comma-s to save
 nnoremap <leader>s :w<cr>
 
-" space-q to quit (doesn't save, watch out!)
+" comma-q to quit (doesn't save, watch out!)
 nnoremap <leader>q :q!<cr>
 
 " quit all without saving
 nnoremap <leader>qa :qa!<cr>
 
-let $MYVIMRC="/home/habil/.vimrc"
+let $MYVIMRC="/home/bill/.vimrc"
 
 " Reload vimrc
 nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
@@ -124,23 +132,23 @@ nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
 nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 
 " Commenting
-" space-1 insert "!" commenting
+" comma-1 insert "!" commenting
 nnoremap <leader>1 :norm i!<cr>
 vnoremap <leader>1 :norm i!<cr>
 
-" space-' insert """ commenting
+" comma-' insert """ commenting
 nnoremap <leader>' :norm i"<cr>
 vnoremap <leader>' :norm i"<cr>
 
-" space-3 insert "#" commenting
+" comma-3 insert "#" commenting
 nnoremap <leader>3 :norm i#<cr>
 vnoremap <leader>3 :norm i#<cr>
 
-" space-- insert "--" commenting
+" comma-- insert "--" commenting
 nnoremap <leader>- :norm i--<cr>
 vnoremap <leader>- :norm i--<cr>
 
-" space-6 uncomment
+" comma-6 uncomment
 nnoremap <leader>6 :norm ^x<cr>
 vnoremap <leader>6 :norm ^x<cr>
 
@@ -273,7 +281,7 @@ let g:NERDTreeMouseMode = 3
 let NERDTreeShowLineNumbers = 1
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
-autocmd BufWinEnter * NERDTreeMirror                " open the new tab in NERDTree's buffer
+autocmd BufWinEnter * call timer_start(50, { tid -> execute('NERDTreeMirror')})    " open the new tab in NERDTree's buffer
 
 " vim-polyglot
 let g:graphql_javascript_tags = ["graphql"]
@@ -298,7 +306,7 @@ let g:minimap_toggle='<leader>gt'
 
 " vim-javascript
 " set conceallevel=1
-map <leader>l :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
+map <leader>co :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
 let g:javascript_conceal_function             = "ƒ"
 let g:javascript_conceal_null                 = "ø"
 let g:javascript_conceal_this                 = "@"
