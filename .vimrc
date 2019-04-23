@@ -98,6 +98,13 @@ let mapleader = ","
 set termguicolors
 nnoremap <leader>N :setlocal number!<cr>            " Toggle line numbers
 
+" Search highlight
+nnoremap <C-l> :nohlsearch<CR><C-l>
+nnoremap <leader>i :set incsearch!<CR>
+nnoremap <leader>ii :set hlsearch!<CR>
+autocmd InsertEnter * call timer_start(50, { tid -> execute(':setlocal nohlsearch')})
+autocmd InsertLeave * call timer_start(50, { tid -> execute(':setlocal hlsearch')})
+
 " Copy & paste to clipboard
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
