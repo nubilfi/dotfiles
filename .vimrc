@@ -26,7 +26,6 @@ set mouse=nicr
 set magic                                                                   " For regular expressions turn magic on
 set nocompatible                                                            " enter the current millenium
 set number                                                                  " always show line numbers
-"set nofoldenable                                                            " disable folding
 set hidden
 set ruler                                                                   " Always show current position
 set scrolloff=3                                                             " when scrolling, keep cursor 3 lines away from screen border
