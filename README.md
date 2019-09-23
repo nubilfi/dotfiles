@@ -57,7 +57,7 @@ Here are some information about mappings:
 |     normal    | Shift + >> | indent line to the right                      |
 |     normal    | Shift + << | indent line to the left                       |
 |     normal    | Shift + Y  | yank to the end of line                       |
-|     normal    | Y + p      | Duplicate line (Sublime like Ctrl+D)          |
+|     normal    | Y + p      | Duplicate line (Sublime like Ctrl+d)          |
 | visual/normal | comma + 1  | insert "!" commenting                         |
 | visual/normal | comma + '  | insert " commenting                           |
 | visual/normal | comma + 3  | insert "#" commenting                         |
