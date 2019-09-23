@@ -5,9 +5,9 @@
 
 I used Vundle as plugins manager, follow the instructions from the [Vundle](https://github.com/VundleVim/Vundle.vim) official documentation for setup and installation.
 
-As an addition to this config, please install these packages: `exuberant-ctags git ack-grep`. Find that packages name according to your Linux distro, it might be different for each distro. 
+As an addition to this config, please install these packages: `exuberant-ctags git ack-grep`. Find that packages name according to your Linux distro, it might be different for each distro.
 
-The last step is install the following dependencies: `pip install pep8 flake8 pyflakes isort yapf`
+The last step is install the following dependencies: `pip install pep8 flake8 pyflakes isort yapf`, and don't forget to patch icon to be able to show the icon files, please follow [vim-devicons](https://github.com/ryanoasis/vim-devicons) instructions.
 
 Brief help:
 
@@ -57,6 +57,7 @@ Here are some information about mappings:
 |     normal    | Shift + >> | indent line to the right                      |
 |     normal    | Shift + << | indent line to the left                       |
 |     normal    | Shift + Y  | yank to the end of line                       |
+|     normal    | Y + p      | Duplicate line (Sublime like Ctrl+D)          |
 | visual/normal | comma + 1  | insert "!" commenting                         |
 | visual/normal | comma + '  | insert " commenting                           |
 | visual/normal | comma + 3  | insert "#" commenting                         |
