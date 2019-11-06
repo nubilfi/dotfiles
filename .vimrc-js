@@ -5,7 +5,6 @@
 " and any other tool that uses GNU Readline, add the following line to ~/.inputrc
 " set editing-mode vi
 " ***************************************************************************
-filetype off
 
 set autoread                                                                " Set to auto read when a file is changed from the outside
 set backspace=indent,eol,start                                              " more powerful backspacing
@@ -63,6 +62,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
+Plugin 'leafgarland/typescript-vim'                                         " Typescript syntax files for Vim
 Plugin 'neoclide/coc.nvim'                                                  " Intellisense engine
 Plugin 'scrooloose/nerdtree'                                                " Better file browser
 Plugin 'scrooloose/nerdcommenter'                                           " Code commenter
@@ -421,6 +421,7 @@ let g:javascript_conceal_noarg_arrow_function = "🞅"
 let g:javascript_conceal_underscore_arrow_function = "🞅"
 
 " ALE (eslint)  -------------------------
+let g:ale_completion_enabled = 1
 map <C-t> :ALEDetail<CR>
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '✗'
@@ -451,4 +452,27 @@ let g:ale_fixers = {
 " vim jsx pretty -----------------------
 let g:vim_jsx_pretty_colorful_config = 1
 
-let g:coc_node_path = '/home/bill/.nvm/versions/node/v12.13.0/bin/node'
+" coc.nvim -----------------------------
+let g:coc_node_path = '/home/habil/.nvm/versions/node/v12.13.0/bin/node'
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" typescript-vim -----------------------
+let g:typescript_compiler_binary = 'tsc'
+autocmd FileType typescript :set makeprg=tsc
