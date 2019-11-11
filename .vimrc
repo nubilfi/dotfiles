@@ -5,7 +5,6 @@
 " and any other tool that uses GNU Readline, add the following line to ~/.inputrc
 " set editing-mode vi
 " ***************************************************************************
-filetype off
 
 set autoread                                                                " Set to auto read when a file is changed from the outside
 set backspace=indent,eol,start                                              " more powerful backspacing
