@@ -66,7 +66,7 @@ Plugin 'arielrossanigo/dir-configs-override.vim'                            " Ov
 Plugin 'scrooloose/nerdtree'                                                " Better file browser
 Plugin 'scrooloose/nerdcommenter'                                           " Code commenter
 Plugin 'majutsushi/tagbar'                                                  " Class/module browser
-Plugin 'ctrlpvim/ctrlp.vim'                                               " Code and files fuzzy finder
+Plugin 'ctrlpvim/ctrlp.vim'                                                 " Code and files fuzzy finder
 Plugin 'fisadev/vim-ctrlp-cmdpalette'                                       " Extension to ctrlp, for fuzzy command finder
 Plugin 'mattn/emmet-vim'                                                    " Zen coding, use emmet
 Plugin 'tpope/vim-fugitive'                                                 " Git integration
@@ -84,11 +84,12 @@ Plugin 'scrooloose/syntastic'                                               " La
 Plugin 'ap/vim-css-color'                                                   " Paint css colors with the real color
 Plugin 'mileszs/ack.vim'                                                    " Ack code search (requires ack installed in the system)
 Plugin 'google/vim-searchindex'                                             " display number of search matches & index of a current match
+Plugin 'ervandew/supertab'                                                  " vim insert mode completions with Tab
 
 " Plugins == FOR PYTHON ==
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'nvie/vim-flake8'
 Plugin 'michaeljsmith/vim-indent-object'                                    " Indent text object
-Plugin 'Shougo/neocomplcache.vim'                                           " Better autocompletion
 Plugin 'davidhalter/jedi-vim'                                               " Python autocompletion, go to definition.
 Plugin 'fisadev/vim-isort'                                                  " Automatically sort python imports
 if has('python')
@@ -354,6 +355,24 @@ let NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\.pyc$', '\~$']         "ignore files in NERDTree
 "autocmd BufWinEnter * call timer_start(50, { tid -> execute('NERDTreeMirror')})    " open the new tab in NERDTree's buffer
 
+" sync open file with NERDTree
+" check if NERDTree is open or active
+function! IsNERDTreeOpen()
+    return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind if NERDTree is active, current window contains a modifiable
+" file, and we are not if vimdiff
+function! SyncTree()
+    if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+        NERDTreeFind
+        wincmd p
+    endif
+endfunction
+
+" highlight currently open buffer in NERDTree
+"autocmd BufEnter * call SyncTree()
+
 " Tagbar -----------------------------
 " toggle tagbar display
 map <F4> :TagbarToggle<CR>
@@ -390,7 +409,10 @@ let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 "let g:syntastic_style_error_symbol = '✗'
 "let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_python_flake8_args='--ignore=E501,W504'
+let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_python_pylint_post_args="--max-line-length=79"
+let g:syntastic_python_flake8_args='--ignore=E501,W504,C0114,D103,D100,D104'
+let g:syntastic_aggregate_errors = 1
 
 " tabular -----------------------------
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
@@ -405,6 +427,12 @@ let g:jedi#usages_command = '<leader>o'
 let g:jedi#goto_assignments_command = '<leader>a'
 " Go to definition in new tab
 nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
+" jedi Vim split
+let g:jedi#use_splits_not_buffers = "left"
+" better typing flow
+let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = "2"
+
 
 " Airline -----------------------------
 let g:airline_powerline_fonts = 1
@@ -485,24 +513,6 @@ let g:minimap_toggle='<leader>gt'
 " vim emmet trigger key, prest ctrl + e + comma -----------------------------
 let g:user_emmet_leader_key='<C-E>'
 
-" NeoComplCache (== FOR PYTHON ==) -----------------------------
-" based on https://github.com/fisadev
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_ignore_case = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_enable_fuzzy_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_fuzzy_completion_start_length = 1
-let g:neocomplcache_auto_completion_start_length = 1
-let g:neocomplcache_manual_completion_start_length = 1
-let g:neocomplcache_min_keyword_length = 1
-let g:neocomplcache_min_syntax_length = 1
-" complete with workds from any opened file
-let g:neocomplcache_same_filetype_lists = {}
-let g:neocomplcache_same_filetype_lists._ = '_'
-
 " TabMan ------------------------------
 " mappings to toggle display, and to focus on it
 let g:tabman_toggle = 'tl'
@@ -529,8 +539,18 @@ let g:choosewin_overlay_enable = 1
 
 " vim-autoformat --------------------------
 let g:formatter_yapf_style = 'pep8'
-"let g:autoformat_verbosemode=1
+let g:autoformat_verbosemode=1
+let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
+let g:formatters_python = ['autopep8']
 au BufWrite *.py :Autoformat
 
 " isort -----------------------------------
 autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
+
+" Supertab 
+" completion from top-bottom --------------
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" vim-flake8 ------------------------------
+let g:flake8_cmd="/home/bill/.local/bin/flake8"
+autocmd BufWritePost *.py call flake8#Flake8()

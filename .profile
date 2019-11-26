@@ -20,9 +20,3 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-
-export PTOOLSPATH=/home/habil/phalcon-devtools/
-export PATH=$PATH:/home/habil/phalcon-devtools
-
-export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
-# export PATH="$HOME/.config/composer/vendor/bin:$PATH"
