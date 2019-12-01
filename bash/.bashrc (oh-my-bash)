@@ -88,7 +88,7 @@ source $OSH/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
-# NVM 
+# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -96,6 +96,7 @@ export NVM_DIR="$HOME/.nvm"
 # Android SDK
 export ANDROID_HOME="$HOME/android/sdk"
 #export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 # Gradle
@@ -106,6 +107,6 @@ export PATH=$PATH:$HOME/android/gradle/gradle-4.10.3/bin
 stty -ixon
 
 # Virtualenv
-#export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 
 

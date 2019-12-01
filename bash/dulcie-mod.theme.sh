@@ -117,15 +117,3 @@ dulcie_prompt() {
 }
 
 safe_append_prompt_command dulcie_prompt
-
-# NVM 
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Android SDK
-#export ANDROID_HOME="$HOME/android/sdk"
-#export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
-
-# Gradle
-#export PATH=$PATH:$HOME/android/gradle/gradle-4.4/bin
