@@ -1,0 +1,78 @@
+{
+  "editor.cursorBlinking": "smooth",
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "Source Code Pro",
+  "editor.fontSize": 11.5,
+  "editor.fontWeight": "500",
+  // disable if eslint autoFixOnSave is true
+  // "editor.formatOnPaste": true,
+  // "editor.formatOnSave": true,
+  "editor.letterSpacing": 0.3,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.renderLineHighlight": "all",
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [80, 120],
+  "editor.snippetSuggestions": "top",
+  "editor.tabSize": 2,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.tabCompletion": "on",
+  "emmet.includeLanguages": {
+    "javascript": ["javascript", "javascriptreact"],
+    "vue-html": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.nodePath": "~/.nvm/versions/node/v10.16.3/bin/eslint",
+  "eslint.packageManager": "npm",
+  "eslint.validate": ["javascript", "javascriptreact", "html"],
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "afterDelay",
+  "html.format.indentInnerHtml": true,
+  "npm.enableScriptExplorer": true,
+  "npm-intellisense.scanDevDependencies": true,
+  "npm-intellisense.showBuildInLibs": true,
+  "npm-intellisense.importES6": true,
+  "npm-intellisense.importQuotes": "'",
+  "npm-intellisense.importLinebreak": ";\r\n",
+  "npm-intellisense.importDeclarationType": "const",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 200,
+  "python.formatting.autopep8Path": "~/.local/bin/autopep8",
+  "python.formatting.provider": "autopep8",
+  "python.linting.pylintPath": "~/.local/bin/pylint",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Path": "~/.local/bin/flake8",
+  "python.linting.flake8Enabled": true,
+  "python.linting.ignorePatterns": [".vscode/*.py", "**/site-packages/**/*.py"],
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true
+  },
+  "terminal.integrated.rendererType": "dom",
+  "terminal.integrated.splitCwd": "initial",
+  "terminal.integrated.shellArgs.linux": ["-i"],
+  "window.menuBarVisibility": "toggle",
+  "window.zoomLevel": 1,
+  "workbench.colorCustomizations": {
+    "statusBarItem.hoverBackground": "#d9ff036b",
+    "statusBar.background": "#1A1A1A",
+    "statusBar.noFolderBackground": "#212121",
+    "statusBar.debuggingBackground": "#263238"
+  },
+  "workbench.colorTheme": "Monokai",
+  "workbench.activityBar.visible": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "search.location": "panel",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.editor.highlightModifiedTabs": true,
+  "todo-tree.highlights.enabled": true
+}

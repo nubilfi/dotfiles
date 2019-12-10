@@ -1,0 +1,4 @@
+{
+	"exclude_folders": ["node_modules", "bower_components", "vendor", ".cache"]
+}
+
