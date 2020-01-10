@@ -67,7 +67,6 @@ Plugin 'scrooloose/nerdtree'                                                " Be
 Plugin 'scrooloose/nerdcommenter'                                           " Code commenter
 Plugin 'majutsushi/tagbar'                                                  " Class/module browser
 Plugin 'ctrlpvim/ctrlp.vim'                                                 " Code and files fuzzy finder
-Plugin 'fisadev/vim-ctrlp-cmdpalette'                                       " Extension to ctrlp, for fuzzy command finder
 Plugin 'mattn/emmet-vim'                                                    " Zen coding, use emmet
 Plugin 'tpope/vim-fugitive'                                                 " Git integration
 Plugin 'kien/tabman.vim'                                                    " Tab list panel
@@ -353,25 +352,6 @@ let NERDTreeShowLineNumbers = 1
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\.pyc$', '\~$']         "ignore files in NERDTree
-"autocmd BufWinEnter * call timer_start(50, { tid -> execute('NERDTreeMirror')})    " open the new tab in NERDTree's buffer
-
-" sync open file with NERDTree
-" check if NERDTree is open or active
-function! IsNERDTreeOpen()
-    return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind if NERDTree is active, current window contains a modifiable
-" file, and we are not if vimdiff
-function! SyncTree()
-    if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-        NERDTreeFind
-        wincmd p
-    endif
-endfunction
-
-" highlight currently open buffer in NERDTree
-"autocmd BufEnter * call SyncTree()
 
 " Tagbar -----------------------------
 " toggle tagbar display
@@ -461,14 +441,6 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" ctrlpvim -----------------------------
-"nnoremap <leader>. :CtrlPTag<cr>                    " use Ctrlp to search for tags instead of files
-" set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-"let g:ctrlp_custom_ignore = {
-"  \ 'dir':  '\v[\/](node_modules|vendor)|\.(git|hg|svn)$',
-"  \ 'file': '\v\.(sh|so)$',
-"  \ }
-
 " CtrlP -----------------------------
 " file finder mapping
 let g:ctrlp_map = '<leader>ee'
@@ -547,7 +519,7 @@ au BufWrite *.py :Autoformat
 " isort -----------------------------------
 autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
 
-" Supertab 
+" Supertab
 " completion from top-bottom --------------
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
