@@ -1,6 +1,6 @@
 # Nubilfi's dotfiles
 
-### Vim 8+ as Python and Javascript IDE
+### Vim 8+ as Python or Javascript IDE
 
 I used Vundle as plugins manager, follow the instructions from the [Vundle](https://github.com/VundleVim/Vundle.vim) official documentation for setup and installation.
 
@@ -11,26 +11,24 @@ The next step is to install the following dependencies: `pip install pep8 flake8
 I'm using [coc.nvim](https://github.com/neoclide/coc.nvim) for `.vimrc-js` file, so please check on that link for more details about installation. And here are the list of `coc.nvim` extensions that i used:
 
 - coc-tsserver
-- coc-yank
-- coc-styled-components
-- coc-sql
+- coc-yank (optional)
+- coc-styled-components (optional)
+- coc-sql (optional)
 - coc-snippets
-- coc-python
+- coc-python (optional)
 - coc-pairs
 - coc-markdownlint
 - coc-json
 - coc-import-cost
 - coc-html
 - coc-highlight
-- coc-docker
+- coc-docker (optional)
 - coc-css
 
 Brief help:
 
-- :PluginList - lists configured plugins
-- :PluginInstall - installs plugins; append `!` to update or just :PluginUpdate
-- :PluginSearch foo - searches for foo; append `!` to refresh local cache
-- :PluginClean - confirms removal of unused plugins; append `!` to auto-approve removal
+- :PlugInstall    - installs plugins; to update :PlugUpdate
+- :PlugClean      - confirms removal of unused plugins
 
 Here are some information about mappings:
 
@@ -52,7 +50,6 @@ Here are some information about mappings:
 |    normal     | comma + rv | reload vimrc                                  |
 |    normal     | comma + ev | edit vimrc                                    |
 |    normal     | comma + Y  | copy to clipboard                             |
-|    normal     | comma + ev | paste to clipboard                            |
 |    normal     | comma + q  | back to normal mode                           |
 |    insert     | comma + jj | back to normal mode                           |
 |    normal     | comma + z  | to fold                                       |
@@ -74,11 +71,6 @@ Here are some information about mappings:
 |    normal     | Shift + << | indent line to the left                       |
 |    normal     | Shift + Y  | yank to the end of line                       |
 |    normal     |   Y + p    | Duplicate line (Sublime like Ctrl+d)          |
-| visual/normal | comma + 1  | insert "!" commenting                         |
-| visual/normal | comma + '  | insert " commenting                           |
-| visual/normal | comma + 3  | insert "#" commenting                         |
-| visual/normal | comma + -  | insert "--" commenting                        |
-| visual/normal | comma + 6  | uncomment                                     |
 |    normal     |  Ctrl + b  | toggle NERDTree                               |
 |    normal     | comma + t  | open NERDTree based on current file           |
 |    normal     | comma + e  | show list error (syntastic checker)           |
@@ -87,12 +79,7 @@ Here are some information about mappings:
 |    normal     | comma + G  | tags (symbols) in all files finder (ctrlp)    |
 |    normal     | comma + f  | general code finder in all files (ctrlp)      |
 |    normal     | comma + m  | recent files finder (ctrlp)                   |
-|    normal     | comma + c  | commands finder (ctrlp)                       |
-|    normal     | comma + ms | show (minimap)                                |
-|    normal     | comma + mu | update (minimap)                              |
-|    normal     | comma + gc | close (minimap)                               |
-|    normal     | comma + gt | toggle (minimap)                              |
-|    normal     | comma + tl | toggle on tab (tabman)                        |
-|    normal     | comma + tf | focus on tab (tabman)                         |
-|    normal     |     -      | choose split windows buffer by letter         |
 |    normal     |  Ctrl + E  | triggering emmet                              |
+|    normal     |  Ctrl + t  | run :ALEDetail                                |
+|    normal     | comma + k  | ale previous wrap                             |
+|    normal     | comma + j  | ale next wrap                                 |

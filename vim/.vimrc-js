@@ -37,63 +37,48 @@ set wrap                                                                    " Wr
 " PLUGINS
 " ************************************************************************
 " set the runtime path to include VUndle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Install vim-plug if we don't already have it
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" :PlugInstall    - installs plugins; to update :PlugUpdate
+" :PlugClean      - confirms removal of unused plugins;
 
-Plugin 'flazz/vim-colorschemes'
-Plugin 'elzr/vim-json'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'severin-lemaignan/vim-minimap'
-Plugin 'airblade/vim-gitgutter'
+Plug 'elzr/vim-json'
+Plug 'plasticboy/vim-markdown'
+Plug 'airblade/vim-gitgutter'
 
 " Icon files
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 " Airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'leafgarland/typescript-vim'                                         " Typescript syntax files for Vim
-Plugin 'neoclide/coc.nvim'                                                  " Intellisense engine
-Plugin 'scrooloose/nerdtree'                                                " Better file browser
-Plugin 'scrooloose/nerdcommenter'                                           " Code commenter
-Plugin 'majutsushi/tagbar'                                                  " Class/module browser
-Plugin 'ctrlpvim/ctrlp.vim'                                                 " Code and files fuzzy finder
-Plugin 'mattn/emmet-vim'                                                    " Zen coding, use emmet
-Plugin 'kien/tabman.vim'                                                    " Tab list panel
-Plugin 'Townk/vim-autoclose'                                                " Autoclose chars
-Plugin 'fisadev/dragvisuals.vim'                                            " Drag visual blocks arround (it is like Ctrl+d arrow up/down on sublime)
-Plugin 't9md/vim-choosewin'                                                 " Land on window like tmux's 'display-pane'
-Plugin 'tpope/vim-fugitive'                                                 " Git integration
-Plugin 'google/vim-searchindex'                                             " display number of search matches & index of a current match
-Plugin 'ap/vim-css-color'                                                   " Paint css colors with the real color
-Plugin 'tpope/vim-surround'                                                 " Surround
-Plugin 'vim-scripts/matchit.zip'                                            " XML/HTML tags navigation
-Plugin 'vim-scripts/YankRing.vim'                                           " Yank history navigation
-Plugin 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
-Plugin 'w0rp/ale'                                                           " Check syntax in Vim asynchronously and fix files
-Plugin 'MaxMEllon/vim-jsx-pretty'                                           " JSX syntax pretty highlighting
-Plugin 'styled-components/vim-styled-components'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                           " Intellisense engine
+Plug 'preservim/nerdtree'                                                 " Better file browser
+Plug 'preservim/nerdcommenter'                                            " Code commenter
+Plug 'majutsushi/tagbar'                                                  " Class/module browser
+Plug 'ctrlpvim/ctrlp.vim'                                                 " Code and files fuzzy finder
+Plug 'mattn/emmet-vim'                                                    " Zen coding, use emmet
+Plug 'ap/vim-css-color'                                                   " Paint css colors with the real color
+Plug 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
+Plug 'w0rp/ale'                                                           " Check syntax in Vim asynchronously and fix files
+Plug 'MaxMEllon/vim-jsx-pretty'                                           " JSX syntax pretty highlighting
 
-" theme plugins
-Plugin 'nightsense/office'
-Plugin 'fatih/molokai'
-Plugin 'nightsense/cosmic_latte'
-Plugin 'ErichDonGubler/vim-sublime-monokai'
-Plugin 'Nequo/vim-allomancer'
+" theme Plugins
+Plug 'nightsense/cosmic_latte'
+Plug 'Nequo/vim-allomancer'
 
 " All of your Plugins must be added before the following line
-call vundle#end()                                                           " required
-filetype plugin indent on              " required
+filetype plugin indent on                                               " required
+call plug#end()                                                         " required
 
 " OTHER BASIC SETUP (TWEAKS)
 " ***************************************************************************
@@ -159,27 +144,6 @@ nmap <silent> <c-l> :wincmd l<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-" Commenting
-" comma-1 insert "!" commenting
-nnoremap <leader>1 :norm i!<cr>
-vnoremap <leader>1 :norm i!<cr>
-
-" comma-' insert """ commenting
-nnoremap <leader>' :norm i"<cr>
-vnoremap <leader>' :norm i"<cr>
-
-" comma-3 insert "#" commenting
-nnoremap <leader>3 :norm i#<cr>
-vnoremap <leader>3 :norm i#<cr>
-
-" comma-- insert "--" commenting
-nnoremap <leader>- :norm i--<cr>
-vnoremap <leader>- :norm i--<cr>
-
-" comma-6 uncomment
-nnoremap <leader>6 :norm ^x<cr>
-vnoremap <leader>6 :norm ^x<cr>
-
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
@@ -196,38 +160,6 @@ noremap Y y$
 " autocompletion of files and commands behaves like shell
 " (complete only the common part, list the options that match)
 set wildmode=list:longest
-
-" FINDING FILES: **********************************************************
-" search down into subfolders
-" provides tab-completion for all file-related tasks
-" set path+=**
-
-" display all matching files when we tab complete
-" set wildmenu
-" set wildmode=list:longest,full
-" set lazyredraw
-
-" NOW WE CAN:
-" - hit tab to :find by partial match
-" - use * to make it fuzzy
-" THINGS TO CONSIDER:
-" - :b lets you autocomplete any open buffer
-" END FINDING FILES: **********************************************************
-
-" FILE BROWSING: *********************************************************
-" tweaks for browsing
-" let g:netrw_banner=0                                    " disable annoying banner
-" let g:netrw_browse_split=4                              " open in prior window
-" let g:netrw_altv=1                                      " open splits to the right
-" let g:netrw_liststyle=3                                 " tree view
-" let g:netrw_list_hide=netrw_gitignore#Hide()
-" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-
-" NOW WE CAN:
-" - :edit a folder to open a file browser
-" - <CR>/v/t to open in an h-split/v-split/tab
-" - check |netrw-browse-maps| for more mappings
-" END FILE BROWSING: *********************************************************
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
@@ -249,23 +181,6 @@ endtry
 
 set background=dark
 
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-    set cursorcolumn!
-
-    " Set up the gui cursor to look nice
-    set guicursor=n-v-c:block-Cursor-blinkon0
-    set guicursor+=ve:ver35-Cursor
-    set guicursor+=o:hor50-Cursor
-    set guicursor+=i-ci:ver25-Cursor
-    set guicursor+=r-cr:hor20-Cursor
-    set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
-endif
-
 " better backup, swap and undos storage
 set directory=~/.vim/dirs/tmp     " directory to place swap files in
 set backup                        " make backup files
@@ -273,8 +188,6 @@ set backupdir=~/.vim/dirs/backups " where to put backup files
 set undofile                      " persistent undos - undo after you re-open the file
 set undodir=~/.vim/dirs/undos
 set viminfo+=n~/.vim/dirs/viminfo
-" store yankring history file there too
-let g:yankring_history_dir = '~/.vim/dirs/'
 
 " create needed directories if they don't exist
 if !isdirectory(&backupdir)
@@ -300,8 +213,7 @@ let g:NERDTreeMouseMode = 3
 let NERDTreeShowLineNumbers = 1
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
-let NERDTreeIgnore=['\.pyc$', '\~$']         "ignore files in NERDTree
-"autocmd BufWinEnter * call timer_start(50, { tid -> execute('NERDTreeMirror')})    " open the new tab in NERDTree's buffer
+let NERDTreeIgnore=['\.pyc$', '\~$', '^node_modules$', '^vendor$']         "ignore files in NERDTree
 
 " Tagbar -----------------------------
 " toggle tagbar display
@@ -315,9 +227,7 @@ let g:airline_theme = 'distinguished'
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
-let g:Powerline_symbols = "fancy"
-let g:Powerline_dividers_override = ["\Ue0b0","\Ue0b1","\Ue0b2","\Ue0b3"]
-let g:Powerline_symbols_override = {'BRANCH': "\Ue0a0", 'LINE': "\Ue0a1", 'RO': "\Ue0a2"}
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " to use fancy symbols for airline
 if !exists('g:airline_symbols')
@@ -336,13 +246,6 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" vim-minimap -----------------------------
-let g:minimap_highlight='Visual'
-let g:minimap_show='<leader>ms'
-let g:minimap_update='<leader>mu'
-let g:minimap_close='<leader>gc'
-let g:minimap_toggle='<leader>gt'
-
 " CtrlP -----------------------------
 " file finder mapping
 let g:ctrlp_map = '<leader>ee'
@@ -354,8 +257,6 @@ nmap <leader>G :CtrlPBufTagAll<CR>
 nmap <leader>f :CtrlPLine<CR>
 " recent files finder mapping
 nmap <leader>m :CtrlPMRUFiles<CR>
-" commands finder mapping
-nmap <leader>c :CtrlPCmdPalette<CR>
 " to be able to call CtrlP with default search text
 function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     execute ':CtrlP' . a:ctrlp_command_end
@@ -368,7 +269,6 @@ nmap <leader>wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
 nmap <leader>we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
 nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
 nmap <leader>wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-nmap <leader>wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " don't change working directory
 let g:ctrlp_working_path_mode = 0
 " ignore these files and folders on file finder
@@ -379,30 +279,6 @@ let g:ctrlp_custom_ignore = {
 
 " vim emmet trigger key, prest ctrl + e + comma -----------------------------
 let g:user_emmet_leader_key='<C-E>'
-
-" TabMan ------------------------------
-" mappings to toggle display, and to focus on it
-let g:tabman_toggle = 'tl'
-let g:tabman_focus  = 'tf'
-
-" Autoclose ------------------------------
-" Fix to let ESC work as espected with Autoclose plugin
-let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
-
-" DragVisuals ------------------------------
-" mappings to move blocks in 4 directions
-vmap <expr> <S-M-LEFT> DVB_Drag('left')
-vmap <expr> <S-M-RIGHT> DVB_Drag('right')
-vmap <expr> <S-M-DOWN> DVB_Drag('down')
-vmap <expr> <S-M-UP> DVB_Drag('up')
-" mapping to duplicate block
-vmap <expr> D DVB_Duplicate()
-
-" choosewin  ------------------------------
-" mapping
-nmap  -  <Plug>(choosewin)
-" show big letters
-let g:choosewin_overlay_enable = 1
 
 " vim-javascript --------------------------
 " set conceallevel=1
@@ -437,11 +313,9 @@ let g:ale_list_window_size = 5                " Show 5 lines of errors (default:
 nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>j <Plug>(ale_next_wrap)
 let g:ale_linters = {
-  \  'sh': ['shell'],
   \  'javascript': ['eslint'],
   \}
 let g:ale_fixers = {
-  \  'sh': ['shfmt'],
   \  'javascript': ['prettier', 'eslint'],
   \  'json': ['prettier'],
   \  'markdown': ['prettier'],
@@ -453,7 +327,7 @@ let g:ale_fixers = {
 let g:vim_jsx_pretty_colorful_config = 1
 
 " coc.nvim -----------------------------
-let g:coc_node_path = '/home/habil/.nvm/versions/node/v12.13.0/bin/node'
+let g:coc_node_path = '/home/bill/.nvm/versions/node/v12.13.0/bin/node'
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -472,7 +346,3 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" typescript-vim -----------------------
-let g:typescript_compiler_binary = 'tsc'
-autocmd FileType typescript :set makeprg=tsc
