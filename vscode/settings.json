@@ -1,9 +1,12 @@
 {
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "editor.cursorBlinking": "smooth",
   "editor.fontLigatures": true,
   "editor.fontFamily": "Source Code Pro",
   "editor.fontSize": 11.5,
-  "editor.fontWeight": "500",
+  "editor.fontWeight": "500", // medium
   // disable if eslint autoFixOnSave is true
   // "editor.formatOnPaste": true,
   // "editor.formatOnSave": true,
@@ -13,7 +16,6 @@
   "editor.renderWhitespace": "all",
   "editor.rulers": [80, 120],
   "editor.snippetSuggestions": "top",
-  "editor.tabSize": 2,
   "editor.acceptSuggestionOnEnter": "on",
   "editor.tabCompletion": "on",
   "emmet.includeLanguages": {
@@ -21,14 +23,15 @@
     "vue-html": "html"
   },
   "emmet.triggerExpansionOnTab": true,
-  "eslint.autoFixOnSave": true,
+  // "eslint.autoFixOnSave": true, <= deprecated
   "eslint.alwaysShowStatus": true,
-  "eslint.nodePath": "~/.nvm/versions/node/v10.16.3/bin/eslint",
+  "eslint.nodePath": "/home/bill/.nvm/versions/node/v12.16.1/bin/eslint",
   "eslint.packageManager": "npm",
   "eslint.validate": ["javascript", "javascriptreact", "html"],
   "files.trimTrailingWhitespace": true,
   "files.autoSave": "afterDelay",
   "html.format.indentInnerHtml": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "npm.enableScriptExplorer": true,
   "npm-intellisense.scanDevDependencies": true,
   "npm-intellisense.showBuildInLibs": true,
@@ -36,14 +39,13 @@
   "npm-intellisense.importQuotes": "'",
   "npm-intellisense.importLinebreak": ";\r\n",
   "npm-intellisense.importDeclarationType": "const",
-  "javascript.updateImportsOnFileMove.enabled": "always",
   "prettier.singleQuote": true,
   "prettier.printWidth": 200,
-  "python.formatting.autopep8Path": "~/.local/bin/autopep8",
+  "python.formatting.autopep8Path": "/home/bill/.local/bin/autopep8",
   "python.formatting.provider": "autopep8",
-  "python.linting.pylintPath": "~/.local/bin/pylint",
+  "python.linting.pylintPath": "/home/bill/.local/bin/pylint",
   "python.linting.pylintEnabled": false,
-  "python.linting.flake8Path": "~/.local/bin/flake8",
+  "python.linting.flake8Path": "/home/bill/.local/bin/flake8",
   "python.linting.flake8Enabled": true,
   "python.linting.ignorePatterns": [".vscode/*.py", "**/site-packages/**/*.py"],
   "[python]": {
@@ -62,17 +64,19 @@
     "statusBar.noFolderBackground": "#212121",
     "statusBar.debuggingBackground": "#263238"
   },
-  "workbench.colorTheme": "Monokai",
+  "workbench.colorTheme": "One Monokai",
   "workbench.activityBar.visible": false,
   "workbench.startupEditor": "newUntitledFile",
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.iconTheme": "vscode-icons",
-  "search.location": "panel",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.editor.highlightModifiedTabs": true,
-  "todo-tree.highlights.enabled": true
+  "todo-tree.highlights.enabled": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "kite.showWelcomeNotificationOnStartup": false,
+  "todo-tree.tree.showScanModeButton": false
 }
