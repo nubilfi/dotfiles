@@ -112,3 +112,5 @@ export PATH=$PATH:/home/habil/bin/flutter/bin
 # vimrc file
 export MYVIMRC=$MYVIMRC:~/.vimrc
 
+
+alias vimvue='vim -u ~/.vimrc-vue'

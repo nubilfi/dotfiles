@@ -15,3 +15,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # Composer
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
+alias vimvue='vim -u ~/.vimrc-vue'

@@ -109,4 +109,5 @@ stty -ixon
 # Virtualenv
 export PATH=$PATH:$HOME/.local/bin
 
+alias vimvue='vim -u ~/.vimrc-vue'
 
