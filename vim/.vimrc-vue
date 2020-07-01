@@ -328,7 +328,7 @@ let g:coc_node_path = '/home/bill/.nvm/versions/node/v12.16.1/bin/node'
 "let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " vim-vue-plugin ----------------------
-let g:vim_vue_plugin_highlight_vue_attr	= 1
+let g:vim_vue_plugin_highlight_vue_attr = 1
 let g:vim_vue_plugin_debug = 1
 
 " Use tab for trigger completion with characters ahead and navigate.
