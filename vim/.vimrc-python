@@ -6,42 +6,51 @@
 " set editing-mode vi
 " ***************************************************************************
 
+syntax enable                                                               " enable syntax highlighting and plugin (for netrw)
+
 set autoread                                                                " Set to auto read when a file is changed from the outside
 set backspace=indent,eol,start                                              " more powerful backspacing
 set clipboard=unnamed                                                       " access your system clipboard
+set conceallevel=0                                                          " See `` in markdown files
 set cmdheight=2                                                             " Height of the command bar
-syntax enable                                                               " enable syntax highlighting and plugin (for netrw)
+set backspace=indent,eol,start                                              " more powerful backspacing
 set encoding=utf8                                                           " Set utf8 as standard encoding and en_US as the standard language
 set expandtab                                                               " convert tabs into spaces
 set ffs=unix,dos,mac                                                        " Use Unix as the standard file type
 set foldmethod=indent                                                       " Code folding
 set foldlevel=99
+set hidden
 set history=500                                                             " Sets how many lines of history VIM has to remember
 set incsearch                                                               " incremental search
 set laststatus=2                                                            " Always show the status line
+set linespace=15
 set list                                                                    " Show trailing white space
 set listchars=tab:>·,trail:~,extends:>,precedes:<,space:.                   " eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.
 set mouse=nicr
 set magic                                                                   " For regular expressions turn magic on
 set nocompatible                                                            " enter the current millenium
+set nobackup                                                                " coc recommendation
+set nowritebackup                                                           " coc recommendation
 set number                                                                  " always show line numbers
-set hidden
 set ruler                                                                   " Always show current position
 set scrolloff=3                                                             " when scrolling, keep cursor 3 lines away from screen border
 set shiftwidth=2                                                            " amount of block indenting
 set smarttab                                                                " uses the shiftwidth instead of tabstop to delete indented line
 set synmaxcol=200                                                           " performance ???
+set scrolloff=3                                                             " when scrolling, keep cursor 3 lines away from screen border
 set tabstop=2                                                               " press tab, 2 spaces forward, 1 tab == 2 spaces
+set timeoutlen=500                                                          " Default timeoutlen is 1000 ms
+set updatetime=300                                                          " Faster completion
 set wrap                                                                    " Wrap lines
+
 
 " PLUGINS
 " ************************************************************************
-" set the runtime path to include VUndle and initialize
 " Install vim-plug if we don't already have it
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -54,6 +63,18 @@ Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'airblade/vim-gitgutter'
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                           " Intellisense engine
+Plug 'scrooloose/nerdtree'                                                " Better file browser
+Plug 'scrooloose/nerdcommenter'                                           " Code commenter
+Plug 't9md/vim-choosewin'                                                 " Land on window like tmux's 'display-pane'
+Plug 'scrooloose/syntastic'                                               " Languages code checker
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Plugins == FOR PYTHON ==
+Plug 'Chiel92/vim-autoformat'
+Plug 'nvie/vim-flake8'
+
 " Icon files
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -61,32 +82,15 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}                           " Intellisense engine
-Plug 'preservim/nerdtree'                                                 " Better file browser
-Plug 'preservim/nerdcommenter'                                            " Code commenter
-Plug 'majutsushi/tagbar'                                                  " Class/module browser
-Plug 'ctrlpvim/ctrlp.vim'                                                 " Code and files fuzzy finder
-Plug 'mattn/emmet-vim'                                                    " Zen coding, use emmet
-Plug 't9md/vim-choosewin'                                                 " Land on window like tmux's 'display-pane'
-Plug 'scrooloose/syntastic'                                               " Languages code checker
-Plug 'ap/vim-css-color'                                                   " Paint css colors with the real color
-Plug 'ervandew/supertab'                                                  " vim insert mode completions with Tab
-
-" Plugins == FOR PYTHON ==
-Plug 'Chiel92/vim-autoformat'
-Plug 'nvie/vim-flake8'
-Plug 'davidhalter/jedi-vim'                                               " Python autocompletion, go to definition.
-if has('python')
-    "Plug 'pignacio/vim-yapf-format'                                      " YAPF formatter for Python
-endif
-
 " theme plugins
 Plug 'nightsense/cosmic_latte'
 Plug 'Nequo/vim-allomancer'
+Plug 'franbach/miramare'
+Plug 'tomasr/molokai'
 
 " All of your Plugins must be added before the following line
-filetype plugin indent on                                               " required
-call plug#end()                                                         " required
+call plug#end()                                                           " required
+filetype plugin indent on                                                 " required
 
 " OTHER BASIC SETUP (TWEAKS)
 " ***************************************************************************
@@ -95,6 +99,9 @@ let maplocalleader = ","
 set termguicolors
 nnoremap <leader>N :setlocal number!<cr>            " Toggle line numbers
 
+let g:python3_host_prog = '/usr/bin/python3'        " support python3.x
+let g:python_host_prog  = '/usr/bin/python2.7'      " support python2.x
+
 " 1 comma+s to save
 " 2 comma+q to quit (does not save, watch out!)
 " 3 quit all without saving
@@ -102,11 +109,17 @@ nnoremap <leader>ss :w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>qa :qa!<cr>
 
-let $MYVIMRC="/home/bill/.vimrc"
+autocmd cursorhold * set nohlsearch
+autocmd cursormoved * set hlsearch
+
+" Remove search results
+command! H let @/=""
+
+let $MYVIMRC="/home/habil/.vimrc-python"
 " Reload vimrc
 nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
 " Edit vimrc
-nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " Copy & paste to clipboard
 noremap <Leader>Y "+y
@@ -127,18 +140,6 @@ nnoremap <leader>0 :bf<cr>
 nnoremap <leader>9 :bl<cr>
 nnoremap <leader>dd :bd<cr>
 
-" tab length exceptions on some file types
-" autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4
-" autocmd FileType htmldjango setlocal shiftwidth=4 tabstop=4 softtabstop=4
-" autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
-" PEP 8 indentation for python (== FOR PYTHON ==)
-au BufNewFile,BufRead *.py
-            \ set tabstop=4
-            \ softtabstop=4
-            \ shiftwidth=4
-            \ textwidth=79
-            \ autoindent
-
 " Managing tabs
 nnoremap tn :tabnew<Space>
 nnoremap tk :tabnext<CR>
@@ -147,11 +148,23 @@ nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 nnoremap tc :tabclose<CR>
 
+" Open splits
+nmap vs :vsplit<cr>
+nmap sp :split<cr>
+
 " navigate split screens easily
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+
+" PEP 8 indentation for python (== FOR PYTHON ==)
+au BufNewFile,BufRead *.py
+            \ set tabstop=4
+            \ softtabstop=4
+            \ shiftwidth=4
+            \ textwidth=79
+            \ autoindent
 
 " Stay in visual mode when indenting. You will never have to run gv after
 " performing an indentation.
@@ -165,7 +178,7 @@ set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
     set wildignore+=.git\*,.hg\*,.svn\*
 else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store,*/venv/,*/__pycache__
 endif
 
 " Make Y yank everything from the cursor to the end of the line. This makes Y
@@ -177,16 +190,12 @@ noremap Y y$
 " (complete only the common part, list the options that match)
 set wildmode=list:longest
 
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
-
 try
     " Choose colorscheme
     " *********************************************
     if strftime('%H') >= 7 && strftime('%H') < 20
-        colorscheme sublimemonokai
+        colorscheme molokai
+        let g:airline_theme = 'miramare'
     else
         colorscheme allomancer
         let g:airline_theme='cosmic_latte_dark'
@@ -195,25 +204,6 @@ catch
 endtry
 
 set background=dark
-
-" better backup, swap and undos storage
-set directory=~/.vim/dirs/tmp     " directory to place swap files in
-set backup                        " make backup files
-set backupdir=~/.vim/dirs/backups " where to put backup files
-set undofile                      " persistent undos - undo after you re-open the file
-set undodir=~/.vim/dirs/undos
-set viminfo+=n~/.vim/dirs/viminfo
-
-" create needed directories if they don't exist
-if !isdirectory(&backupdir)
-    call mkdir(&backupdir, "p")
-endif
-if !isdirectory(&directory)
-    call mkdir(&directory, "p")
-endif
-if !isdirectory(&undodir)
-    call mkdir(&undodir, "p")
-endif
 
 " PLUGINS SETUP
 " ********************************************************************************
@@ -228,13 +218,7 @@ let g:NERDTreeMouseMode = 3
 let NERDTreeShowLineNumbers = 1
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
-let NERDTreeIgnore=['\.pyc$', '\~$', '^node_modules$', '^vendor$']         "ignore files in NERDTree
-
-" Tagbar -----------------------------
-" toggle tagbar display
-map <F4> :TagbarToggle<CR>
-" autofocus on tagbar open
-let g:tagbar_autofocus = 1
+let NERDTreeIgnore=['\.pyc$', '\~$', '^__pycache__$', '^venv$']   "ignore files or dirs in NERDTree
 
 " Syntastic -----------------------------
 " show list of errors and warnings on the current file
@@ -247,27 +231,11 @@ let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 "let g:syntastic_style_error_symbol = '✗'
 "let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_python_checkers = ['pylint']
 "let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_pylint_post_args="--max-line-length=79"
 let g:syntastic_python_flake8_args='--ignore=E501,W504,C0114,D103,D100,D104'
 let g:syntastic_aggregate_errors = 1
-
-" Jedi-vim (== FOR PYTHON ==) -----------------------------
-" All these mappings work only for python code:
-" Go to definition
-let g:jedi#goto_command = '<leader>d'
-" Find ocurrences
-let g:jedi#usages_command = '<leader>o'
-" Find assignments
-let g:jedi#goto_assignments_command = '<leader>a'
-" Go to definition in new tab
-nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
-" jedi Vim split
-let g:jedi#use_splits_not_buffers = "left"
-" better typing flow
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = "2"
 
 " Airline -----------------------------
 let g:airline_powerline_fonts = 1
@@ -294,40 +262,6 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" ctrlp.vim -----------------------------
-" file finder mapping
-let g:ctrlp_map = '<leader>ee'
-" tags (symbols) in current file finder mapping
-nmap <leader>g :CtrlPBufTag<CR>
-" tags (symbols) in all files finder mapping
-nmap <leader>G :CtrlPBufTagAll<CR>
-" general code finder in all files mapping
-nmap <leader>f :CtrlPLine<CR>
-" recent files finder mapping
-nmap <leader>m :CtrlPMRUFiles<CR>
-" to be able to call CtrlP with default search text
-function! CtrlPWithSearchText(search_text, ctrlp_command_end)
-    execute ':CtrlP' . a:ctrlp_command_end
-    call feedkeys(a:search_text)
-endfunction
-" same as previous mappings, but calling with current word as default text
-nmap <leader>wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-nmap <leader>wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-nmap <leader>wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-nmap <leader>we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
-nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap <leader>wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-" don't change working directory
-let g:ctrlp_working_path_mode = 0
-" ignore these files and folders on file finder
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|vendor)$',
-            \ 'file': '\.pyc$\|\.pyo$\|\.sh$\|\.so$',
-            \ }
-
-" vim emmet trigger key, prest ctrl + e + comma -----------------------------
-let g:user_emmet_leader_key='<C-E>'
-
 " vim-autoformat --------------------------
 " let g:formatter_yapf_style = 'pep8' (style.yapf or a setup.cfg file is required)
 "let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
@@ -335,10 +269,45 @@ let g:autoformat_verbosemode=1
 let g:formatters_python = ['autopep8']
 au BufWrite *.py :Autoformat
 
-" Supertab
-" completion from top-bottom --------------
-let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" coc.nvim -------------------------------
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 " vim-flake8 ------------------------------
-let g:flake8_cmd="/home/bill/.local/bin/flake8"
+let g:flake8_cmd="/home/habil/.local/bin/flake8"
 autocmd BufWritePost *.py call flake8#Flake8()
+
+" fzf -------------------------------------
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>.
+" requires silversearcher-ag
+" used to ignore gitignore files
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'

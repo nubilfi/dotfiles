@@ -5,11 +5,6 @@
 # run arbitrary code.
 extension-pkg-whitelist=
 
-disable=
-	C0114, # missing-module-docstring
-	C0115, # missing-class-docstring
-	C0116 # missing-function-docstring
-	
 # Add files or directories to the blacklist. They should be base names, not
 # paths.
 ignore=CVS
@@ -143,6 +138,7 @@ disable=print-statement,
         xreadlines-attribute,
         deprecated-sys-function,
         exception-escape,
+        C0114, # missing-module-docstring
         comprehension-escape
 
 # Enable the message, report, category or checker with the given id(s). You can

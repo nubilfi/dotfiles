@@ -1,29 +1,31 @@
 # Nubilfi's dotfiles
 
-### Vim 8+ as Python or Javascript IDE
+### Vim/Neovim as Python & Javascript IDE
 
-I used Vundle as plugins manager, follow the instructions from the [Vundle](https://github.com/VundleVim/Vundle.vim) official documentation for setup and installation.
+I used Vim-Plug for the plugins manager, follow the instructions from the [Plug](https://github.com/junegunn/vim-plug) official documentation for setup and installation.
 
-As an addition to this config (optional), please install these packages: `exuberant-ctags git ack-grep`. Find that packages name according to your Linux distro, it might be different for each distro.
+As an addition to this config (optional), please install these packages: `exuberant-ctags git ack-grep fzf python2-pip python-pynvim xclip xsel wl-clipboard the_silver_searcher`. Find that packages name according to your Linux distro, it might be different on each distro (I'll keep Python2.x support).
 
-The next step is to install the following dependencies: `pip install pep8 flake8 pyflakes isort yapf`, and don't forget to patch icon to be able to show the icon files, please follow [vim-devicons](https://github.com/ryanoasis/vim-devicons) instructions.
+Next step is to install the following dependencies (for Python support): `pip install pep8 flake8 pyflakes isort yapf jedi`, `pip2 install pynvim jedi` (specific for Python2.x support), and also don't forget to patch icon to be able to show the icon files, please follow [vim-devicons](https://github.com/ryanoasis/vim-devicons) instructions.
 
-I'm using [coc.nvim](https://github.com/neoclide/coc.nvim) for `.vimrc-js` file, so please check on that link for more details about installation. And here are the list of `coc.nvim` extensions that i used:
+Also, please install neovim javascript package globally: `npm i -g neovim`.
+
+I'm using [coc.nvim](https://github.com/neoclide/coc.nvim) for `intellisense engine`, so please check on that link for more details about the installation. And here are the list of `coc.nvim` extensions that i used:
 
 - coc-tsserver
+- coc-snippets
+- coc-pairs
+- coc-python
+- coc-json
+- coc-html
+- coc-highlight
+- coc-css
+- coc-markdownlint (optional)
+- coc-import-cost (optionnal)
+- coc-docker (optional)
 - coc-yank (optional)
 - coc-styled-components (optional)
 - coc-sql (optional)
-- coc-snippets
-- coc-python (optional)
-- coc-pairs
-- coc-markdownlint
-- coc-json
-- coc-import-cost
-- coc-html
-- coc-highlight
-- coc-docker (optional)
-- coc-css
 
 Brief help:
 
@@ -74,12 +76,11 @@ Here are some information about mappings:
 |    normal     |  Ctrl + b  | toggle NERDTree                               |
 |    normal     | comma + t  | open NERDTree based on current file           |
 |    normal     | comma + e  | show list error (syntastic checker)           |
-|    normal     | comma + ee | find file (ctrlp)                             |
-|    normal     | comma + g  | tags (symbols) in current file finder (ctrlp) |
-|    normal     | comma + G  | tags (symbols) in all files finder (ctrlp)    |
-|    normal     | comma + f  | general code finder in all files (ctrlp)      |
-|    normal     | comma + m  | recent files finder (ctrlp)                   |
+|    normal     | comma + p  | find file (fzf)                               |
+|    normal     | comma + f  | fastest `grep`                                |
 |    normal     |  Ctrl + E  | triggering emmet                              |
 |    normal     |  Ctrl + t  | run :ALEDetail                                |
 |    normal     | comma + k  | ale previous wrap                             |
 |    normal     | comma + j  | ale next wrap                                 |
+|    insert     | tab        | navigate the completion (down)                |
+|    insert     | shift + tab| navigate the completion (up)                  |

@@ -5,44 +5,54 @@
 " and any other tool that uses GNU Readline, add the following line to ~/.inputrc
 " set editing-mode vi
 " ***************************************************************************
-" filetype off
+
 if &filetype ==# 'vue'
   set filetype=html
 endif
 
+syntax enable                                                               " enable syntax highlighting and plugin (for netrw)
+
 set autoread                                                                " Set to auto read when a file is changed from the outside
 set backspace=indent,eol,start                                              " more powerful backspacing
 set clipboard=unnamed                                                       " access your system clipboard
+set conceallevel=0                                                          " See `` in markdown files
 set cmdheight=2                                                             " Height of the command bar
-syntax enable                                                               " enable syntax highlighting and plugin (for netrw)
+set backspace=indent,eol,start                                              " more powerful backspacing
 set encoding=utf8                                                           " Set utf8 as standard encoding and en_US as the standard language
 set expandtab                                                               " convert tabs into spaces
 set ffs=unix,dos,mac                                                        " Use Unix as the standard file type
 set foldmethod=indent                                                       " Code folding
 set foldlevel=99
+set hidden
 set history=500                                                             " Sets how many lines of history VIM has to remember
 set incsearch                                                               " incremental search
 set laststatus=2                                                            " Always show the status line
+set linespace=15
 set list                                                                    " Show trailing white space
 set listchars=tab:>·,trail:~,extends:>,precedes:<,space:.                   " eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.
 set mouse=nicr
 set magic                                                                   " For regular expressions turn magic on
 set nocompatible                                                            " enter the current millenium
+set nobackup                                                                " coc recommendation
+set nowritebackup                                                           " coc recommendation
 set number                                                                  " always show line numbers
-set hidden
 set ruler                                                                   " Always show current position
 set scrolloff=3                                                             " when scrolling, keep cursor 3 lines away from screen border
 set shiftwidth=2                                                            " amount of block indenting
 set smarttab                                                                " uses the shiftwidth instead of tabstop to delete indented line
 set synmaxcol=200                                                           " performance ???
+set scrolloff=3                                                             " when scrolling, keep cursor 3 lines away from screen border
 set tabstop=2                                                               " press tab, 2 spaces forward, 1 tab == 2 spaces
+set timeoutlen=500                                                          " Default timeoutlen is 1000 ms
+set updatetime=300                                                          " Faster completion
 set wrap                                                                    " Wrap lines
+
 
 " PLUGINS
 " ************************************************************************
 " Install vim-plug if we don't already have it
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
 endif
@@ -57,6 +67,19 @@ Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'airblade/vim-gitgutter'
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                           " Intellisense engine
+Plug 'scrooloose/nerdtree'                                                " Better file browser
+Plug 'scrooloose/nerdcommenter'                                           " Code commenter
+Plug 't9md/vim-choosewin'                                                 " Land on window like tmux's 'display-pane'
+Plug 'scrooloose/syntastic'                                               " Languages code checker
+Plug 'mattn/emmet-vim'                                                    " Zen coding, use emmet
+Plug 'ap/vim-css-color'                                                   " Paint css colors with the real color
+Plug 'w0rp/ale'                                                           " Check syntax in Vim asynchronously and fix files
+Plug 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
+Plug 'leafOfTree/vim-vue-plugin'                                          " syntax and indent plugin for vue files
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " Icon files
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -64,26 +87,11 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}                           " Intellisense engine
-Plug 'scrooloose/nerdtree'                                                " Better file browser
-Plug 'scrooloose/nerdcommenter'                                           " Code commenter
-Plug 'ctrlpvim/ctrlp.vim'                                                 " Code and files fuzzy finder
-Plug 'mattn/emmet-vim'                                                    " Zen coding, use emmet
-Plug 'ap/vim-css-color'                                                   " Paint css colors with the real color
-Plug 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
-Plug 'w0rp/ale'                                                           " Check syntax in Vim asynchronously and fix files
-Plug 'leafOfTree/vim-vue-plugin'                                          " syntax and indent plugin for vue files
-"Plug 'ervandew/supertab'                                                  " vim insert mode completions with Tab
-"Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-fugitive'
-
 " theme plugins
-Plug 'nightsense/office'
 Plug 'nightsense/cosmic_latte'
 Plug 'Nequo/vim-allomancer'
 Plug 'franbach/miramare'
 Plug 'tomasr/molokai'
-
 
 " All of your Plugins must be added before the following line
 call plug#end()                                                           " required
@@ -103,7 +111,13 @@ nnoremap <leader>ss :w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>qa :qa!<cr>
 
-let $MYVIMRC="/home/bill/.vimrc-vue"
+autocmd cursorhold * set nohlsearch
+autocmd cursormoved * set hlsearch
+
+" Remove search results
+command! H let @/=""
+
+let $MYVIMRC="/home/habil/.vimrc-vue"
 " Reload vimrc
 nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
 " Edit vimrc
@@ -136,6 +150,10 @@ nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 nnoremap tc :tabclose<CR>
 
+" Open splits
+nmap vs :vsplit<cr>
+nmap sp :split<cr>
+
 " navigate split screens easily
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
@@ -166,16 +184,11 @@ noremap Y y$
 " (complete only the common part, list the options that match)
 set wildmode=list:longest
 
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
-
 try
     " Choose colorscheme
     " *********************************************
     if strftime('%H') >= 7 && strftime('%H') < 20
-      colorscheme molokai
+        colorscheme molokai
         let g:airline_theme = 'miramare'
     else
         colorscheme allomancer
@@ -185,24 +198,6 @@ catch
 endtry
 
 set background=dark
-
-" better backup, swap and undos storage
-set directory=~/.vim/dirs/tmp     " directory to place swap files in
-set backup                        " make backup files
-set backupdir=~/.vim/dirs/backups " where to put backup files
-set undodir=~/.vim/dirs/undos
-set viminfo+=n~/.vim/dirs/viminfo
-
-" create needed directories if they don't exist
-if !isdirectory(&backupdir)
-    call mkdir(&backupdir, "p")
-endif
-if !isdirectory(&directory)
-    call mkdir(&directory, "p")
-endif
-if !isdirectory(&undodir)
-    call mkdir(&undodir, "p")
-endif
 
 " PLUGINS SETUP
 " ********************************************************************************
@@ -219,8 +214,21 @@ let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\.pyc$', '\~$', '^node_modules$', '^vendor$']         "ignore files in NERDTree
 
+" Syntastic -----------------------------
+" show list of errors and warnings on the current file
+nmap <leader>e :Errors<CR>
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_signs = 0
+" custom icons (enable them if you use a patched font)
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_aggregate_errors = 1
+
 " Airline -----------------------------
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'distinguished'
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
@@ -232,10 +240,10 @@ if !exists('g:airline_symbols')
 endif
 
 " Airline unicode symbols
-"let g:airline_left_sep = '»'
-"let g:airline_right_sep = '«'
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_alt_sep = ''
+let g:airline_left_sep = '»'
+let g:airline_right_sep = '«'
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = ''
 
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
@@ -243,55 +251,10 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" CtrlP -----------------------------
-" file finder mapping
-let g:ctrlp_map = '<leader>ee'
-" tags (symbols) in current file finder mapping
-nmap <leader>g :CtrlPBufTag<CR>
-" tags (symbols) in all files finder mapping
-nmap <leader>G :CtrlPBufTagAll<CR>
-" general code finder in all files mapping
-nmap <leader>f :CtrlPLine<CR>
-" recent files finder mapping
-nmap <leader>m :CtrlPMRUFiles<CR>
-" to be able to call CtrlP with default search text
-function! CtrlPWithSearchText(search_text, ctrlp_command_end)
-    execute ':CtrlP' . a:ctrlp_command_end
-    call feedkeys(a:search_text)
-endfunction
-" same as previous mappings, but calling with current word as default text
-nmap <leader>wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-nmap <leader>wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-nmap <leader>wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-nmap <leader>we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
-nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap <leader>wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-" don't change working directory
-let g:ctrlp_working_path_mode = 0
-" ignore these files and folders on file finder
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|vendor)$',
-            \ 'file': '\.pyc$\|\.pyo$\|\.sh$\|\.so$',
-            \ }
+let g:coc_node_path = '/home/habil/.nvm/versions/node/v12.14.1/bin/node'
 
 " vim emmet trigger key, prest ctrl + e + comma -----------------------------
 let g:user_emmet_leader_key='<C-E>'
-
-" vim-javascript --------------------------
-" set conceallevel=1
-map <leader>co :exec &conceallevel ? "set conceallevel=0" : "set conceallevel=1"<CR>
-let g:javascript_conceal_function             = "ƒ"
-let g:javascript_conceal_null                 = "ø"
-let g:javascript_conceal_this                 = "@"
-let g:javascript_conceal_return               = "⇚"
-let g:javascript_conceal_undefined            = "¿"
-let g:javascript_conceal_NaN                  = "ℕ"
-let g:javascript_conceal_prototype            = "¶"
-let g:javascript_conceal_static               = "•"
-let g:javascript_conceal_super                = "Ω"
-let g:javascript_conceal_arrow_function       = "⇒"
-let g:javascript_conceal_noarg_arrow_function = "🞅"
-let g:javascript_conceal_underscore_arrow_function = "🞅"
 
 " ALE (eslint)  -------------------------
 map <C-t> :ALEDetail<CR>
@@ -322,15 +285,7 @@ let g:ale_fixers = {
   \  'css': ['prettier'],
   \}
 
-let g:coc_node_path = '/home/bill/.nvm/versions/node/v12.16.1/bin/node'
-
-" Supertab completion from top-bottom
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" vim-vue-plugin ----------------------
-let g:vim_vue_plugin_highlight_vue_attr = 1
-let g:vim_vue_plugin_debug = 1
-
+" coc.nvim -------------------------------
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -338,7 +293,7 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -346,7 +301,11 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
@@ -357,15 +316,16 @@ else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-"command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" fix braces indentation
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-"let g:airline_theme = 'miramare'
+" vim-vue-plugin ----------------------
+let g:vim_vue_plugin_highlight_vue_attr = 1
+let g:vim_vue_plugin_debug = 1
 
-"let g:indentLine_setColors = 1
-"let g:indentLine_color_term = 10
-"let g:indentLine_bgcolor_term = 202
-"let g:indentLine_char = '|'
-"let g:indentLine_concealcursor = 'inc'
-"let g:indentLine_conceallevel = 2
-
-nnoremap <C-x> :let curwd='\\\<<C-R>=expand("<cword>")<CR>\\\>'<CR> :let @/=curwd<CR>:call histadd("search", curwd)<CR>:set hls<CR>
+" fzf -------------------------------------
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+" requires silversearcher-ag
+" used to ignore gitignore files
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'

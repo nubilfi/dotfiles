@@ -109,5 +109,6 @@ stty -ixon
 # Virtualenv
 export PATH=$PATH:$HOME/.local/bin
 
-alias vimvue='vim -u ~/.vimrc-vue'
-
+alias nvimvue='nvim -u ~/.vimrc-vue'
+alias nvimreact='nvim -u ~/.vimrc-react'
+alias nvimpython='nvim -u ~/.vimrc-python'
