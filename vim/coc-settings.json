@@ -9,5 +9,6 @@
   },
   "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "typescriptreact", "json", "javascriptreact", "typescript.tsx"],
   "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
+  "emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact"},
   "coc.preferences.diagnostic.virtualText": true
 }

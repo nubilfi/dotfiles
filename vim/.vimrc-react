@@ -68,7 +68,6 @@ Plug 'scrooloose/nerdtree'                                                " Bett
 Plug 'scrooloose/nerdcommenter'                                           " Code commenter
 Plug 't9md/vim-choosewin'                                                 " Land on window like tmux's 'display-pane'
 Plug 'scrooloose/syntastic'                                               " Languages code checker
-Plug 'mattn/emmet-vim'                                                    " Zen coding, use emmet
 Plug 'ap/vim-css-color'                                                   " Paint css colors with the real color
 Plug 'w0rp/ale'                                                           " Check syntax in Vim asynchronously and fix files
 Plug 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
@@ -250,9 +249,6 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
 let g:coc_node_path = '/home/habil/.nvm/versions/node/v12.14.1/bin/node'
-
-" vim emmet trigger key, prest ctrl + e + comma -----------------------------
-let g:user_emmet_leader_key='<C-E>'
 
 " ALE (eslint)  -------------------------
 map <C-t> :ALEDetail<CR>

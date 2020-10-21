@@ -78,7 +78,6 @@ Here are some information about mappings:
 |    normal     | comma + e  | show list error (syntastic checker)           |
 |    normal     | comma + p  | find file (fzf)                               |
 |    normal     | comma + f  | fastest `grep`                                |
-|    normal     |  Ctrl + E  | triggering emmet                              |
 |    normal     |  Ctrl + t  | run :ALEDetail                                |
 |    normal     | comma + k  | ale previous wrap                             |
 |    normal     | comma + j  | ale next wrap                                 |
