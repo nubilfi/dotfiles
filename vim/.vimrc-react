@@ -69,7 +69,6 @@ Plug 'scrooloose/nerdcommenter'                                           " Code
 Plug 't9md/vim-choosewin'                                                 " Land on window like tmux's 'display-pane'
 Plug 'scrooloose/syntastic'                                               " Languages code checker
 Plug 'ap/vim-css-color'                                                   " Paint css colors with the real color
-Plug 'w0rp/ale'                                                           " Check syntax in Vim asynchronously and fix files
 Plug 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
 Plug 'MaxMEllon/vim-jsx-pretty'                                           " JSX syntax pretty highlighting
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }      " styled components
@@ -250,37 +249,6 @@ let g:airline_symbols.whitespace = 'Ξ'
 
 let g:coc_node_path = '/home/habil/.nvm/versions/node/v12.14.1/bin/node'
 
-" ALE (eslint)  -------------------------
-map <C-t> :ALEDetail<CR>
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
-let g:ale_open_list = 1
-let g:ale_set_loclist = 0
-let g:ale_lint_on_enter = 0
-let g:ale_set_quickfix = 1
-let g:ale_keep_list_window_open = 0
-let g:ale_lint_delay = 960000                 " 16 minutes
-let g:ale_lint_on_text_changed= "never"
-let g:ale_list_window_size = 5                " Show 5 lines of errors (default: 10)
-nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>j <Plug>(ale_next_wrap)
-let b:ale_linter_aliases = ['javascript', 'jsx', 'javascriptreact']
-let g:ale_linters = {
-  \  'javascript': ['eslint'],
-  \  'javascriptreact': ['eslint'],
-  \  'jsx': ['eslint'],
-  \}
-let g:ale_fixers = {
-  \  'javascript': ['eslint'],
-  \  'javascriptreact': ['prettier', 'eslint'],
-  \  'json': ['prettier'],
-  \  'jsx': ['prettier', 'eslint'],
-  \  'markdown': ['prettier'],
-  \  'yaml': ['prettier'],
-  \  'css': ['prettier'],
-  \}
-
 " vim jsx pretty -----------------------
 let g:vim_jsx_pretty_colorful_config = 1
 
@@ -314,6 +282,8 @@ if has('patch8.1.1068')
 else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
+
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 
 " fix braces indentation
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"

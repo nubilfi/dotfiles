@@ -273,11 +273,9 @@ let g:ale_linters = {
   \  'vue': ['eslint'],
   \}
 let g:ale_fixers = {
-  \  'javascript': ['eslint'],
   \  'json': ['prettier'],
   \  'vue': ['prettier', 'eslint'],
   \  'markdown': ['prettier'],
-  \  'yaml': ['prettier'],
   \  'css': ['prettier'],
   \}
 
