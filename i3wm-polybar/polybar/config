@@ -1,0 +1,308 @@
+[bar/i3wm_bar]
+width = 100%
+height = 27
+radius = 0
+fixed-center = false
+
+background = #1f1f1f
+foreground = #c6c6c6
+
+line-size = 3
+line-color =
+
+border-size = 0
+border-color =
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "Source Code Pro Semibold:size=10;1"
+font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
+font-2 = "Font Awesome 5 Brands:size=10;1"
+font-3 = "Material Icons:style=Regular:pixelsize=13;2"
+font-4 = "Weather Icons:size=12;1"
+font-5 = "Font Awesome 5 Pro:style=Solid:size=10;1"
+font-6 = "Fantasque Sans Mono:pixelsize=10;3"
+font-7 = "Iosevka Nerd Font:pixelsize=13;3"
+
+modules-left = i3
+modules-right = system-usb-udev spotify redshift pkg pulse weather network battery date powermenu
+
+;tray-position =
+;tray-padding =
+;wm-restack = i3
+;override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[color]
+
+base-mode-fg = #828282
+base-fg = #66
+base-bg = #1f1f1f
+base-bg-2 = #8abeb7
+base-urgent-bg = #BA2922
+base-focus-bg = #5A9B92
+base-white-txt = #fff
+
+spotify-color = #1db954
+
+[module/network]
+type = custom/script
+exec = ~/.config/polybar/scripts/check-network
+;format-background = ${color.base-bg-2}
+format-foreground = ${color.base-white-txt}
+;format-padding = 2
+click-left = networkmanager_dmenu &
+click-right = networkmanager_dmenu &
+tail = true
+
+[module/applist]
+type = custom/text
+content = 
+;alt icons = 
+content-padding = 1
+content-background = ${color.base-bg}
+content-foreground = ${color.base-white-txt}
+click-left = ~/.config/polybar/scripts/menu_full
+
+[module/pkg]
+type = custom/script
+exec = ~/.config/polybar/scripts/updates.sh
+format-background = ${color.base-bg}
+;format-padding = 1
+tail = true
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-mode-padding = 2
+label-mode-foreground = ${color.base-mode-fg}
+label-mode-background = ${color.base-bg}
+
+label-focused = %index%
+label-focused-background = ${color.base-focus-bg}
+label-focused-foreground = ${color.base-bg}
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-background = ${color.base-bg-2}
+label-unfocused-foreground = ${color.base-bg}
+label-unfocused-padding = 2
+
+label-visible = %index%
+label-visible-background = ${color.base-bg-2}
+label-visible-foreground = ${color.base-bg}
+label-visible-padding = 2
+
+label-urgent = %index%
+label-urgent-background = ${color.base-urgent-bg}
+label-urgent-padding = 2
+
+[module/wlan]
+type = internal/network
+interface = wlp4s0
+interval = 3.0
+
+format-connected = %{A1:terminator -e nmtui &:} <ramp-signal> <label-connected>%{A}
+format-connected-foreground = ${color.base-bg}
+format-connected-background = ${color.base-bg-2}
+format-connected-padding = 1
+label-connected = %downspeed%
+
+format-disconnected = %{A1:terminator -e nmtui &:} %{A}
+label-disconnected-foreground = ${color.base-fg}
+label-connected-foreground = ${color.base-white-txt}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${color.base-bg}
+
+[module/eth]
+type = internal/network
+interface = enp0s25
+interval = 3.0
+
+format-connected-padding = 1
+format-connected-foreground = ${color.base-bg}
+format-connected-background = ${color.base-bg-2}
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${color.base-bg}
+label-connected = %downspeed%
+
+format-disconnected = %{A1:terminator -e nmtui &:} %{A}
+label-disconnected-foreground = ${color.base-fg}
+
+[module/system-usb-udev]
+type = custom/script
+exec = ~/.config/polybar/scripts/system-usb-udev.sh
+tail = true
+click-left = ~/.config/polybar/scripts/system-usb-udev.sh --mount &
+click-right = ~/.config/polybar/scripts/system-usb-udev.sh --unmount &
+
+[module/redshift]
+type = custom/script
+exec = ~/.config/polybar/scripts/info-reshift-temp.sh
+interval = 90
+format-underline = #D08770
+click-left = ~/.config/polybar/scripts/info-reshift-temp.sh display
+click-right = ~/.config/polybar/scripts/info-reshift-temp.sh kill
+
+[module/weather]
+type = custom/script
+exec = ~/.config/polybar/scripts/openweathermap-simple.sh
+interval = 600
+format-prefix = " "
+;label-font = 5 => conflict with other font
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = " %Y-%m-%d"
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix = 
+format-foreground = ${color.base-bg}
+format-background = ${color.base-bg-2}
+format-padding = 2
+
+label = %date% %time%
+
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python ~/.config/polybar/scripts/spotify_status.py -f '{artist} - {song}'
+format-underline = ${color.spotify-color}
+
+[module/pulse]
+; run pacmd --list-sinks to get sink name =======
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1b.0.analog-stereo
+use-ui-max = true
+
+interval = 5
+
+format-volume = <ramp-volume> <label-volume>
+
+label-muted =  Muted
+label-muted-foreground = #666
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+format-underline = ${color.base-bg-2}
+;label-padding = 2
+label-foreground = ${color.base-white-txt}
+
+# Icons mixed from Font Awesome 5 and Material Icons
+# You can copy-paste your options for each possible action, which is more
+# trouble-free but repetitive, or apply only the relevant ones (for example
+# --sink-blacklist is only needed for next-sink).
+exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nickname "alsa_output.pci-0000_00_1b.0.analog-stereo:" listen
+;exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_00_1b.0.analog-stereo:  Vol" --sink-nickname "alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo:  Headphones" listen
+click-right = exec pavucontrol &
+click-left = pulseaudio-control togmute
+click-middle = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
+scroll-up = pulseaudio-control --volume-max 130 up
+scroll-down = pulseaudio-control --volume-max 130 down
+
+[module/battery]
+type = internal/battery
+full-at = 98
+
+format-charging = "<label-charging> <animation-charging>"
+format-discharging = "<label-discharging> <ramp-capacity>"
+format-full = " <label-full> <ramp-capacity>"
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+;bar-capacity-fill = █
+bar-capacity-fill = 
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+;bar-capacity-empty = █
+bar-capacity-empty = 
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${color.base-bg-2}
+label-close =  cancel
+label-close-foreground = ${color.base-bg-2}
+label-separator = |
+label-separator-foreground = ${color.base-bg-2}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+menu-0-2 = log off
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = reboot
+
+menu-2-0 = power off
+menu-2-0-exec = poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+menu-3-0 = log off
+menu-3-0-exec = i3 exit logout
+menu-3-1 = cancel
+menu-3-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+
