@@ -7,7 +7,7 @@ SEPARATOR="#1F1F1F"
 FOREGROUND="#A9ABB0"
 BACKGROUND="#1F1F1F"
 BACKGROUND_ALT="#252525"
-HIGHLIGHT_BACKGROUND="#FF6F00"
+HIGHLIGHT_BACKGROUND="#8abeb7"
 HIGHLIGHT_FOREGROUND="#FFFFFF"
 
 BLACK="#000000"
@@ -34,19 +34,20 @@ LIGHT_BLUE="#039be5"
 LIGHT_GREEN="#7cb342"
 
 # Launch Rofi
-rofi -no-lazy-grab -show drun \
+rofi -modi drun -no-lazy-grab -show drun \
 -display-drun "Applications :" -drun-display-format "{name}" \
 -hide-scrollbar true \
 -bw 0 \
 -lines 10 \
--line-padding 10 \
--padding 20 \
+-line-padding 15 \
+-padding 60 \
 -width 30 \
--xoffset 27 -yoffset 60 \
+-xoffset 10 -yoffset 40 \
 -location 1 \
--columns 2 \
+-fullscreen \
+-columns 4 \
 -show-icons -icon-theme "Papirus" \
--font "Fantasque Sans Mono 10" \
+-font "Droid Sans 10" \
 -color-enabled true \
 -color-window "$BACKGROUND,$BORDER,$SEPARATOR" \
 -color-normal "$BACKGROUND_ALT,$FOREGROUND,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
