@@ -9,7 +9,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
-font xft:URWGothic-Book 11
+font xft:Droid Sans 11
 
 floating_modifier $mod
 
@@ -281,4 +281,4 @@ bindsym XF86TouchpadOff exec --no-startup-id synclient Touchpadoff=1
 
 # lunch screenshooter app
 # get bindcode value by command: xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
-bindcode 107 exec --no-startup-id xfce4-screenshooter 
+bindcode 107 exec --no-startup-id xfce4-screenshooter

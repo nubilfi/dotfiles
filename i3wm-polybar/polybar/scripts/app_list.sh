@@ -46,7 +46,7 @@ rofi -modi drun -no-lazy-grab -show drun \
 -location 1 \
 -fullscreen \
 -columns 4 \
--show-icons -icon-theme "Papirus" \
+-show-icons -icon-theme "Adwaita" \
 -font "Droid Sans 10" \
 -color-enabled true \
 -color-window "$BACKGROUND,$BORDER,$SEPARATOR" \
