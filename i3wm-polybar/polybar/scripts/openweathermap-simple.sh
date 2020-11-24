@@ -42,9 +42,9 @@ get_icon() {
     echo $icon
 }
 
-KEY="f97d76313e53a45f2534f195f680cb01"
-CITY="Yogyakarta"
-ID="1621176"
+KEY=""
+CITY=""
+ID=""
 UNITS="metric"
 SYMBOL="°"
 
