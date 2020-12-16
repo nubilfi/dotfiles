@@ -22,6 +22,9 @@ bindsym $mod+Shift+q kill
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -show run
 
+# logout
+bindsym Ctrl+$mod+Delete exec --no-startup-id i3 exit logout
+
 # launch app list window
 bindsym $mod+Shift+comma exec sh ~/.config/polybar/scripts/app_list.sh
 
