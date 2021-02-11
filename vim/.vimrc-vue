@@ -76,6 +76,7 @@ Plug 'ap/vim-css-color'                                                   " Pain
 Plug 'w0rp/ale'                                                           " Check syntax in Vim asynchronously and fix files
 Plug 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
 Plug 'leafOfTree/vim-vue-plugin'                                          " syntax and indent plugin for vue files
+Plug 'codota/tabnine-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
