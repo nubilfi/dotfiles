@@ -68,7 +68,7 @@ Plug 'scrooloose/nerdtree'                                                " Bett
 Plug 'scrooloose/nerdcommenter'                                           " Code commenter
 Plug 't9md/vim-choosewin'                                                 " Land on window like tmux's 'display-pane'
 Plug 'scrooloose/syntastic'                                               " Languages code checker
-Plug 'codota/tabnine-vim'
+" Plug 'codota/tabnine-vim'  (optional plugin)
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 

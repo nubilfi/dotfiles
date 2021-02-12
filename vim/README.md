@@ -8,7 +8,7 @@ As an addition to this config (optional), please install these packages: `exuber
 
 Next step is to install the following dependencies (for Python support): `pip install pep8 flake8 pyflakes isort yapf jedi`, `pip2 install pynvim jedi` (specific for Python2.x support), and also don't forget to patch icon to be able to show the icon files, please follow [vim-devicons](https://github.com/ryanoasis/vim-devicons) instructions.
 
-Also, please install neovim javascript package globally: `npm i -g neovim typescript typescript-language-server`.
+Also, please install neovim javascript package globally: `npm i -g neovim`. Optionally, if you want to use `codota/tabnine-vim` you'd like to install additional package `npm i -g typescript-language-server`.
 
 I'm using [coc.nvim](https://github.com/neoclide/coc.nvim) for `intellisense engine`, so please check on that link for more details about the installation. And here are the list of `coc.nvim` extensions that i used:
 

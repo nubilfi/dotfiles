@@ -72,7 +72,7 @@ Plug 'ap/vim-css-color'                                                   " Pain
 Plug 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
 Plug 'MaxMEllon/vim-jsx-pretty'                                           " JSX syntax pretty highlighting
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }      " styled components
-Plug 'codota/tabnine-vim'
+" Plug 'codota/tabnine-vim'  (optional plugin)
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
