@@ -108,9 +108,6 @@ nnoremap <leader>ss :w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>qa :qa!<cr>
 
-autocmd cursorhold * set nohlsearch
-autocmd cursormoved * set hlsearch
-
 " Remove search results
 command! H let @/=""
 
