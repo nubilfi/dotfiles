@@ -5,7 +5,6 @@
 " and any other tool that uses GNU Readline, add the following line to ~/.inputrc
 " set editing-mode vi
 " ***************************************************************************
-
 if &filetype ==# 'vue'
   set filetype=html
 endif
@@ -17,7 +16,6 @@ set backspace=indent,eol,start                                              " mo
 set clipboard=unnamed                                                       " access your system clipboard
 set conceallevel=0                                                          " See `` in markdown files
 set cmdheight=2                                                             " Height of the command bar
-set backspace=indent,eol,start                                              " more powerful backspacing
 set encoding=utf8                                                           " Set utf8 as standard encoding and en_US as the standard language
 set expandtab                                                               " convert tabs into spaces
 set ffs=unix,dos,mac                                                        " Use Unix as the standard file type
@@ -33,8 +31,8 @@ set listchars=tab:>·,trail:~,extends:>,precedes:<,space:.                   " e
 set mouse=nicr
 set magic                                                                   " For regular expressions turn magic on
 set nocompatible                                                            " enter the current millenium
-set nobackup                                                                " coc recommendation
-set nowritebackup                                                           " coc recommendation
+"set nobackup                                                                " coc recommendation
+"set nowritebackup                                                           " coc recommendation
 set number                                                                  " always show line numbers
 set ruler                                                                   " Always show current position
 set scrolloff=3                                                             " when scrolling, keep cursor 3 lines away from screen border
@@ -43,10 +41,9 @@ set smarttab                                                                " us
 set synmaxcol=200                                                           " performance ???
 set scrolloff=3                                                             " when scrolling, keep cursor 3 lines away from screen border
 set tabstop=2                                                               " press tab, 2 spaces forward, 1 tab == 2 spaces
-set timeoutlen=500                                                          " Default timeoutlen is 1000 ms
+set timeoutlen=500                                                          " Default timeoutlen is 1000 ms 
 set updatetime=300                                                          " Faster completion
 set wrap                                                                    " Wrap lines
-
 
 " PLUGINS
 " ************************************************************************
@@ -79,6 +76,8 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'scrooloose/nerdtree'                                                " Better file browser
 Plug 'scrooloose/nerdcommenter'                                           " Code commenter
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'w0rp/ale'                                                           " Check syntax in Vim asynchronously and fix files
 Plug 'ap/vim-css-color'                                                   " Paint css colors with the real color
 Plug 'leafOfTree/vim-vue-plugin'                                          " syntax and indent plugin for vue files
 Plug 'pangloss/vim-javascript'                                            " Javascript indentation and syntax support
@@ -86,9 +85,7 @@ Plug 'MaxMEllon/vim-jsx-pretty'                                           " JSX 
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }      " styled components
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
-Plug 'Chiel92/vim-autoformat'
-Plug 'nvie/vim-flake8'
+Plug 'tweekmonster/startuptime.vim'
 
 " theme plugins
 Plug 'nightsense/cosmic_latte'
@@ -99,6 +96,7 @@ Plug 'tomasr/molokai'
 " All of your Plugins must be added before the following line
 filetype plugin indent on                                               " required
 call plug#end()                                                         " required
+
 
 " OTHER BASIC SETUP (TWEAKS)
 " ***************************************************************************
@@ -117,6 +115,9 @@ nnoremap <leader>ss :w<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>qa :qa!<cr>
 
+"autocmd cursorhold * set nohlsearch
+"autocmd cursormoved * set hlsearch
+
 " Remove search results
 command! H let @/=""
 
@@ -124,7 +125,7 @@ let $MYVIMRC="~/.vimrc"
 " Reload vimrc
 nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
 " Edit vimrc
-nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " Copy & paste to clipboard
 noremap <Leader>Y "+y
@@ -223,7 +224,7 @@ let g:NERDTreeMouseMode = 3
 let NERDTreeShowLineNumbers = 1
 let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
-let NERDTreeIgnore=['\.pyc$', '\~$', '^node_modules$', '^vendor$', '^__pycache__$']         "ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$', '^node_modules$', '^vendor$', '^__pycache__$', '\.vscode$']         "ignore files in NERDTree
 
 " Airline -----------------------------
 let g:airline_powerline_fonts = 1
@@ -250,19 +251,37 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
+" ALE (eslint)  -------------------------
+map <C-t> :ALEDetail<CR>
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+let g:ale_open_list = 1
+let g:ale_set_loclist = 0
+let g:ale_lint_on_enter = 0
+let g:ale_set_quickfix = 1
+let g:ale_keep_list_window_open = 0
+let g:ale_lint_delay = 960000                 " 16 minutes
+let g:ale_lint_on_text_changed= "never"
+let g:ale_list_window_size = 5                " Show 5 lines of errors (default: 10)
+nmap <silent> <Leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>j <Plug>(ale_next_wrap)
+let b:ale_linter_aliases = ['javascript', 'javascriptreact', 'vue']
+let g:ale_linters = {
+  \  'javascript': ['eslint'],
+  \  'javascriptreact': ['eslint'],
+  \  'vue': ['eslint'],
+  \}
+let g:ale_fixers = {
+  \  'json': ['prettier'],
+  \  'javascriptreact': ['prettier', 'eslint'],
+  \  'vue': ['prettier', 'eslint'],
+  \  'markdown': ['prettier'],
+  \  'css': ['prettier'],
+  \}
+
 " vim jsx pretty -----------------------
 let g:vim_jsx_pretty_colorful_config = 1
-
-" vim-autoformat --------------------------
-" let g:formatter_yapf_style = 'pep8' (style.yapf or a setup.cfg file is required)
-"let g:formatdef_autopep8 = "'autopep8 - --range '.a:firstline.' '.a:lastline"
-let g:autoformat_verbosemode=1
-let g:formatters_python = ['autopep8']
-au BufWrite *.py :Autoformat
-
-" vim-flake8 ------------------------------
-let g:flake8_cmd="/home/bill/.local/bin/flake8"
-autocmd BufWritePost *.py call flake8#Flake8()
 
 " fzf -------------------------------------
 nnoremap <silent> <C-f> :Files<CR>
@@ -279,7 +298,6 @@ set completeopt=menuone,noinsert,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 lua << EOF
-require'lspconfig'.pyright.setup{}
+require'lspconfig'.pyright.setup{on_attach=require'completion'.on_attach}
 require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
 EOF
-
