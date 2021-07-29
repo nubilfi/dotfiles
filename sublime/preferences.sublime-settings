@@ -6,12 +6,12 @@
 	"color_scheme": "Packages/User/Flatland_Monokai (Flake8Lint).tmTheme",
 	"draw_white_space": "all",
 	"font_face": "Source Code Pro",
-	"font_size": 10.6,
+	"font_size": 9.6,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
 	],
 	"line_padding_bottom": 5,
 	"line_padding_top": 1,
@@ -20,6 +20,7 @@
 	"tab_size": 2,
 	"theme": "Adaptive.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true
+	"trim_trailing_white_space_on_save": true,
+	"update_check": false,
 }
 

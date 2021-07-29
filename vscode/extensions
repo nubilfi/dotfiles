@@ -1,24 +1,22 @@
 advanced new file
 all autocomplete
+babel javascript
 bracket pair colorizer 2
 color highlight
 docker
-exports autocomplete
 es7 react/redux/graphql/react-native
 eslint
-import cost
-jinja
-live server
-markdown all in one
-material icon theme
-mypy (do not understand)
+exports autocomplete
+expo tools
+jupyter
+markdownlint / markdown all in one
 npm
 npm intellisense
 one monokai theme
 prettier
+prisma
 python
-sqltools
+python docstring
 sublime text keymap
-sublime babel
 todo tree
 vscode-icons
