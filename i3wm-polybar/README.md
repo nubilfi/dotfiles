@@ -2,7 +2,7 @@
 
 First of all, install the requirement packages, I'm using Archlinux, so please find all related packages name according to your Linux distro.
 
-`sudo pacman -Sy i3 dunst ranger jq udisks2 nitrogen rofi dmenu redshift mpv ffmpegthumbnailer`, after all those packages installed, we need to install another package from AUR, which is `Polybar`. I'm going to use `Polybar` for creating status bars. `yay -S Polybar networkmanager-dmenu-git pulseaudio-control`.
+`sudo pacman -Sy i3 dunst ranger jq udisks2 nitrogen rofi dmenu redshift mpv ffmpegthumbnailer drun3`, after all those packages installed, we need to install another package from AUR, which is `Polybar`. I'm going to use `Polybar` for creating status bars. `yay -S Polybar networkmanager-dmenu-git pulseaudio-control`.
 
 There are some modifications for polybar scripts to work properly, here are some of them:
 
