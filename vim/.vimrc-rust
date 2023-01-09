@@ -11,7 +11,7 @@ set autoread                                                                " Se
 set backspace=indent,eol,start                                              " more powerful backspacing
 set clipboard=unnamed                                                       " access your system clipboard
 set conceallevel=0                                                          " See `` in markdown files
-set cmdheight=2                                                             " Height of the command bar
+"set cmdheight=2                                                             " Height of the command bar
 set encoding=utf8                                                           " Set utf8 as standard encoding and en_US as the standard language
 set expandtab                                                               " convert tabs into spaces
 set ffs=unix,dos,mac                                                        " Use Unix as the standard file type
@@ -63,37 +63,33 @@ Plug 'airblade/vim-gitgutter'
 " Icon files
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+
+" Status line
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-cmp'                                                   " Completion framework
-Plug 'hrsh7th/cmp-nvim-lsp'                                               " LSP completion source for nvim-cmp
-Plug 'hrsh7th/cmp-vsnip'                                                  " Snippet completion source for nvim-cmp
 
-" Other usefull completion sources
+" Other usefull completion sources (Rust)
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'                                               " LSP completion source for nvim-cmp
+Plug 'hrsh7th/nvim-cmp'                                                   " Completion framework
+Plug 'hrsh7th/vim-vsnip'                                                  " Snippet completion source for nvim-cmp
 Plug 'simrat39/rust-tools.nvim'                                           " To enable more of the features of rust-analyzer, such as inlay hints and more!
-Plug 'hrsh7th/vim-vsnip'                                                  " Snippet engine
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'scrooloose/nerdtree'                                                " Better file browser
-Plug 'scrooloose/nerdcommenter'                                           " Code commenter
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-"Plug 'tweekmonster/startuptime.vim'
 
 " theme plugins
-Plug 'nightsense/cosmic_latte'
 Plug 'Nequo/vim-allomancer'
-Plug 'franbach/miramare'
 Plug 'tomasr/molokai'
 
 " All of your Plugins must be added before the following line
@@ -189,10 +185,8 @@ try
     " *********************************************
     if strftime('%H') >= 7 && strftime('%H') < 20
         colorscheme molokai
-        let g:airline_theme = 'miramare'
     else
         colorscheme allomancer
-        let g:airline_theme='cosmic_latte_dark'
     endif
 catch
 endtry
@@ -214,31 +208,6 @@ let NERDTreeShowHidden = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeIgnore=['\~$', '^target$', '\.vscode$']         "ignore files in NERDTree
 
-" Airline -----------------------------
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'distinguished'
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-
-" to use fancy symbols for airline
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" Airline unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_right_sep = '«'
-let g:airline_left_alt_sep = ''
-let g:airline_right_alt_sep = ''
-
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-
 " fzf -------------------------------------
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <Leader>f :Rg<CR>
@@ -255,8 +224,8 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 " Avoid showing extra messages when using completion
 set shortmess+=c
 
+" Lua Configs ===========================================================
 lua <<EOF
-
 require'nvim-treesitter.configs'.setup {
   highlight = {
       enable = true
@@ -284,6 +253,8 @@ local function on_attach(client, buffer)
   -- Goto previous/next diagnostic warning/error
   vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, keymap_opts)
   vim.keymap.set("n", "g]", vim.diagnostic.goto_next, keymap_opts)
+  -- nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
+  -- nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
 end
 
 -- Show diagnostic popup on cursor hover
@@ -312,7 +283,8 @@ vim.wo.signcolumn = "yes"
 local nvim_lsp = require'lspconfig'
 
 local opts = {
-    tools = { -- rust-tools options
+    tools = { 
+        -- rust-tools options
         --on_initialized = nil,
         runnables = {
           use_telescope = true,
@@ -346,7 +318,6 @@ local opts = {
 }
 
 require('rust-tools').setup(opts)
-
 
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
@@ -383,4 +354,9 @@ cmp.setup({
     { name = 'buffer' },
   },
 })
+
+require'lualine'.setup {
+    options = { theme = 'everforest' }
+}
 EOF
+" End Lua Configs ===========================================================
