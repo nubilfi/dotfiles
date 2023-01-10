@@ -1,0 +1,59 @@
+Terminator Preferences
+
+@Global
+# Behavior
+- Window state: Normal
+- Mouse focus: Click to focus
+- Broadcast default: Group
+- PuTTY style paste: PRIMARY
+- Smart copy
+
+# Appearrance
+- Extra Styling
+- Terminal separator size: 1
+- Unfocused terminal font brightness: 80%
+- Tab position: Top
+- Tabs homogeneous
+- Window borders
+- Cell Width: 1.0
+- Cell Height: 1.0
+
+@Profiles
+#Default
+- General
+	- Font: Source Code Pro Regular 11
+	- Allow bold text
+	- Select-by-word characters: -,./?%&#:_
+	- Shape: Block
+	- Titlebar icon
+	- Use default colors
+	- Blink
+- Command
+	- Custom command: env TERM=xterm-256color bash
+	- When command exits: Exit the terminal
+- Colors
+	- Fg and Bg - Built-in schemes: Custom
+	- Palette - Built-in schemes: Ambience
+-Background
+	- Solid color
+	- Shade background: 0.50
+- Scrolling
+	- Scrollbar is: Disabled
+	- Scroll on keystroke
+	- Scrollback: 1500
+- Compatibility
+	- Backspace key generates: ASCII DEL
+	- Delete key generates: Escape sequence
+- Titlebar
+	- Use the system font
+
+@Layouts (Default)
+
+@Keybindings (Default)
+
+@Plugins
+- InactivityWatch
+- TerminalShot
+- LauncpadBugURLHandler
+- LaunchpadCodeURLHandler
+- APTURLHandler
