@@ -64,6 +64,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 
+" Tabline
+Plug 'kdheepak/tabline.nvim'
+
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -355,8 +358,20 @@ cmp.setup({
   },
 })
 
+require'tabline'.setup {
+  enable = false
+}
+
 require'lualine'.setup {
-    options = { theme = 'everforest' }
+    options = { theme = 'papercolor_dark' },
+    tabline = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = { require'tabline'.tabline_buffers },
+      lualine_x = { require'tabline'.tabline_tabs },
+      lualine_y = {},
+      lualine_z = {},
+    },
 }
 EOF
 " End Lua Configs ===========================================================
