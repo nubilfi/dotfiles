@@ -34,7 +34,7 @@ LIGHT_BLUE="#039be5"
 LIGHT_GREEN="#7cb342"
 
 # Launch Rofi
-rofi -modi drun -no-lazy-grab -show drun \
+rofi -no-lazy-grab -show drun \
 -display-drun "Applications :" -drun-display-format "{name}" \
 -hide-scrollbar true \
 -bw 0 \
@@ -47,7 +47,7 @@ rofi -modi drun -no-lazy-grab -show drun \
 -fullscreen \
 -columns 4 \
 -show-icons -icon-theme "Adwaita" \
--font "Droid Sans 10" \
+-font "Droid Sans Mono 10" \
 -color-enabled true \
 -color-window "$BACKGROUND,$BORDER,$SEPARATOR" \
 -color-normal "$BACKGROUND_ALT,$FOREGROUND,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \

@@ -29,7 +29,7 @@ font-6 = "Fantasque Sans Mono:pixelsize=10;3"
 font-7 = "Iosevka Nerd Font:pixelsize=13;3"
 
 modules-left = i3
-modules-right = system-usb-udev spotify redshift pkg pulse weather network battery date powermenu
+modules-right = system-usb-udev redshift pkg pulse weather network battery date powermenu
 
 ;tray-position =
 ;tray-padding =
@@ -60,6 +60,15 @@ format-foreground = ${color.base-white-txt}
 click-left = networkmanager_dmenu &
 click-right = networkmanager_dmenu &
 tail = true
+
+[module/calendar]
+type = custom/script
+exec = ~/.config/polybar/scripts/popup-calendar.sh
+interval = 5
+click-left = ~/.config/polybar/scripts/popup-calendar.sh --popup
+format-background = ${color.base-bg}
+format-foreground = ${color.base-white-txt}
+label = %output:25%
 
 [module/applist]
 type = custom/text
@@ -108,7 +117,7 @@ label-urgent-padding = 2
 
 [module/wlan]
 type = internal/network
-interface = wlp4s0
+interface = wlo1
 interval = 3.0
 
 format-connected = %{A1:terminator -e nmtui &:} <ramp-signal> <label-connected>%{A}
@@ -167,7 +176,7 @@ format-prefix = " "
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 date =
 date-alt = " %Y-%m-%d"
@@ -305,4 +314,5 @@ screenchange-reload = true
 margin-top = 5
 margin-bottom = 5
 
+;command: $ rofi -no-lazy-grab -combi-modi drun -theme solarized -font "Fantasque Sans Mono" -show drun -icon-theme "Papirus" -show-icons
 

@@ -24,11 +24,15 @@ run_app() {
 }
 
 if [ "$1" = "display" ]; then
-  exec redshift &
-  notify-send "Activating redshift..."
+  if [ "$(pgrep -x redshift)" ]; then
+    notify-send "Redshift is still active."
+  else
+    exec redshift &
+    notify-send "Activating redshift..."
+  fi
 elif [ "$1" = "kill" ]; then
-  notify-send "Deactivating redshift..."
   exec killall redshift
+  notify-send "Deactivating redshift..."
 else
   echo ""
 fi
