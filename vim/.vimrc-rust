@@ -65,7 +65,8 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 
 " Tabline
-Plug 'kdheepak/tabline.nvim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
@@ -83,6 +84,7 @@ Plug 'simrat39/rust-tools.nvim'                                           " To e
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'j-hui/fidget.nvim'                                                  " nvim-lsp progress
 
 Plug 'scrooloose/nerdtree'                                                " Better file browser
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -92,6 +94,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " theme plugins
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'Nequo/vim-allomancer'
 Plug 'tomasr/molokai'
 
@@ -187,7 +190,7 @@ try
     " Choose colorscheme
     " *********************************************
     if strftime('%H') >= 7 && strftime('%H') < 20
-        colorscheme molokai
+        colorscheme PaperColor
     else
         colorscheme allomancer
     endif
@@ -198,6 +201,11 @@ set background=dark
 
 " PLUGINS SETUP
 " ********************************************************************************
+
+" Airline -----------------------------
+let g:airline_theme = 'distinguished'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " NERDTree -----------------------------
 map <C-b> :NERDTreeToggle<CR>
@@ -340,8 +348,7 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
     ['<Tab>'] = cmp.mapping.select_next_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4), ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
@@ -358,20 +365,11 @@ cmp.setup({
   },
 })
 
-require'tabline'.setup {
-  enable = false
-}
-
 require'lualine'.setup {
     options = { theme = 'papercolor_dark' },
-    tabline = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = { require'tabline'.tabline_buffers },
-      lualine_x = { require'tabline'.tabline_tabs },
-      lualine_y = {},
-      lualine_z = {},
-    },
 }
+require"fidget".setup{}
 EOF
+
+highlight FidgetTitle ctermfg=110 guifg=#5f8787
 " End Lua Configs ===========================================================
