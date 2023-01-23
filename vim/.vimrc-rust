@@ -65,6 +65,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 
 " Tabline
+"Plug 'kdheepak/tabline.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -84,7 +85,8 @@ Plug 'simrat39/rust-tools.nvim'                                           " To e
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'j-hui/fidget.nvim'                                                  " nvim-lsp progress
+Plug 'j-hui/fidget.nvim'
+Plug 'windwp/nvim-autopairs'
 
 Plug 'scrooloose/nerdtree'                                                " Better file browser
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -369,6 +371,7 @@ require'lualine'.setup {
     options = { theme = 'papercolor_dark' },
 }
 require"fidget".setup{}
+require"nvim-autopairs".setup {}
 EOF
 
 highlight FidgetTitle ctermfg=110 guifg=#5f8787
