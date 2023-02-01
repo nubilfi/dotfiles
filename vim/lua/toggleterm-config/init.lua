@@ -1,8 +1,8 @@
 require("toggleterm").setup({
 	open_mapping = [[<c-\>]],
-	size = 55,
+	size = 15,
 	shade_terminals = true,
-	direction = "vertical",
+	direction = "horizontal",
 	-- float_opts = {
 	-- 	border = "double",
 	-- },
