@@ -1,6 +1,6 @@
 # Nubilfi's dotfiles
 
-### Vim/Neovim as Python & Javascript IDE
+### Neovim setup for Rust & Javascript
 
 I used Packer for the plugins manager, follow the instructions from the [Packer](https://github.com/wbthomason/packer.nvim) official documentation for setup and installation.
 
