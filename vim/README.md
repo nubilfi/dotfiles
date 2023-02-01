@@ -2,35 +2,52 @@
 
 ### Vim/Neovim as Python & Javascript IDE
 
-I used Vim-Plug for the plugins manager, follow the instructions from the [Plug](https://github.com/junegunn/vim-plug) official documentation for setup and installation.
+I used Packer for the plugins manager, follow the instructions from the [Packer](https://github.com/wbthomason/packer.nvim) official documentation for setup and installation.
 
-As an addition to this config (optional), please install these packages: `exuberant-ctags git ack-grep fzf python2-pip python-pynvim xclip xsel wl-clipboard the_silver_searcher`. Find that packages name according to your Linux distro, it might be different on each distro (I'll keep Python2.x support).
+As an addition to this config (optional), please install these packages: `exuberant-ctags git ack-grep fzf xclip xsel wl-clipboard`. Find that packages name according to your Linux distro, it might be different on each distro.
 
-Next step is to install the following dependencies (for Python support): `pip install pep8 flake8 pyflakes isort yapf jedi`, `pip2 install pynvim jedi` (specific for Python2.x support), and also don't forget to patch icon to be able to show the icon files, please follow [vim-devicons](https://github.com/ryanoasis/vim-devicons) instructions.
+I'm using [lua_lsp](https://github.com/sumneko/lua-language-server) for `intellisense engine`, so please check on that link for more details about the installation. Finally, here are the list of the `packages` that I installed:
 
-Also, please install neovim javascript package globally: `npm i -g neovim`. Optionally, if you want to use `codota/tabnine-vim` you'd like to install additional package `npm i -g typescript-language-server`.
-
-I'm using [coc.nvim](https://github.com/neoclide/coc.nvim) for `intellisense engine`, so please check on that link for more details about the installation. And here are the list of `coc.nvim` extensions that i used:
-
-- coc-tsserver
-- coc-snippets
-- coc-pairs
-- coc-python
-- coc-json
-- coc-html
-- coc-highlight
-- coc-css
-- coc-markdownlint (optional)
-- coc-import-cost (optionnal)
-- coc-docker (optional)
-- coc-yank (optional)
-- coc-styled-components (optional)
-- coc-sql (optional)
+- [nvim-colorizer](https://github.com/norcalli/nvim-colorizer.lua): Color highlighter
+- [fidget](https://github.com/j-hui/fidget.nvim): Progress info
+- [vim-gitgutter](https://github.com/airblade/vim-gitgutter): Git diff markes
+- [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme): Colorscheme
+- [allomancer](https://github.com/Nequo/vim-allomancer): Colorscheme
+- [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua): File explorer
+- [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): Icons
+- [lualine](https://github.com/nvim-lualine/lualine.nvim): Status line
+- [autopairs](https://github.com/windwp/nvim-autopairs): Autopairs
+- [plenary](https://github.com/nvim-lua/plenary.nvim): Lua functions
+- [telescope](https://github.com/nvim-telescope/telescope.nvim): Find, filter, preview files
+- [notify](https://github.com/rcarriga/nvim-notify): Notification manager
+- [barbar](https://github.com/romgrk/barbar.nvim): Tabs for vim
+- [treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Abstraction layer
+- [textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects): Syntax aware
+- [refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor): Treesitter refactor module
+- [rainbow](https://github.com/p00f/nvim-ts-rainbow): Rainbow pairs
+- [playground](https://github.com/nvim-treesitter/playground): Vim Integrated playground
+- [commenting](https://github.com/JoosepAlviste/nvim-ts-context-commentstring): Commenting
+- [smart-comment](https://github.com/numToStr/Comment.nvim): Smart comment
+- [indent](https://github.com/lukas-reineke/indent-blankline.nvim): Indentation
+- [debug](https://github.com/mfussenegger/nvim-dap): Debug
+- [terminal](https://github.com/akinsho/toggleterm.nvim): Terminal
+- [motion](https://github.com/ggandor/lightspeed.nvim): Motion plugin
+- [startup-screen](https://github.com/startup-nvim/startup.nvim): Vim startup screen
+- [lspconfig](https://github.com/neovim/nvim-lspconfig): Configure built-in LSP client
+- [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim): Diagnostics, formatting, etc.
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): Autocompletion plugin
+- [cmp-lsp](https://github.com/hrsh7th/cmp-nvim-lsp): LSP sourec for nvim-cmp
+- [cmp-luasnip](https://github.com/saadparwaiz1/cmp_luasnip): Snippets for nvim-cmp
+- [luasnip](https://github.com/L3MON4D3/LuaSnip): Snippets plugin
+- [lspsaga](https://github.com/kkharji/lspsaga.nvim): Icons for LSP diagnostics
+- [lspkind](https://github.com/onsails/lspkind.nvim): pictograms LSP completion
+- [mason](https://github.com/williamboman/mason.nvim): Manage LSP server
+- []()
 
 Brief help:
 
-- :PlugInstall    - installs plugins; to update :PlugUpdate
-- :PlugClean      - confirms removal of unused plugins
+- :PackerInstall - installs plugins
+- :PackerClean - confirms removal of unused plugins
 
 Here are some information about mappings:
 
@@ -43,43 +60,34 @@ Here are some information about mappings:
 - c: command-line
 - l: insert, command-line, regexp-search (and others. Collectively called "Lang-Arg" pseudo-mode)
 
-|     MODE      | SHORTCUTS  | DESCRIPTIONS                                  |
-| :-----------: | :--------: | --------------------------------------------- |
-|    normal     | comma + N  | toggle line numbers                           |
-|    normal     | comma + ss | to save                                       |
-|    normal     | comma + q  | quit without saving                           |
-|    normal     | comma + qa | quit all without saving                       |
-|    normal     | comma + rv | reload vimrc                                  |
-|    normal     | comma + ev | edit vimrc                                    |
-|    normal     | comma + Y  | copy to clipboard                             |
-|    normal     | comma + q  | back to normal mode                           |
-|    insert     | comma + jj | back to normal mode                           |
-|    normal     | comma + z  | to fold                                       |
-|    normal     |     tn     | new tab                                       |
-|    normal     |     tk     | next tab                                      |
-|    normal     |     tj     | previous tab                                  |
-|    normal     |     th     | first tab                                     |
-|    normal     |     tl     | last tab                                      |
-|    normal     |     tc     | close tab                                     |
-|    normal     | comma + l  | navigate to the next buffer                   |
-|    normal     | comma + h  | navigate to the previous buffer               |
-|    normal     | comma + 0  | navigate to the first buffer                  |
-|    normal     | comma + dd | delete current buffer                         |
-|    normal     |  Ctrl + k  | navigate to the up split screen               |
-|    normal     |  Ctrl + j  | navigate to the down split screen             |
-|    normal     |  Ctrl + l  | navigate to the left split screen             |
-|    normal     |  Ctrl + h  | navigate to the right split screen            |
-|    normal     | Shift + >> | indent line to the right                      |
-|    normal     | Shift + << | indent line to the left                       |
-|    normal     | Shift + Y  | yank to the end of line                       |
-|    normal     |   Y + p    | Duplicate line (Sublime like Ctrl+d)          |
-|    normal     |  Ctrl + b  | toggle NERDTree                               |
-|    normal     | comma + t  | open NERDTree based on current file           |
-|    normal     | comma + e  | show list error (syntastic checker)           |
-|    normal     | comma + p  | find file (fzf)                               |
-|    normal     | comma + f  | fastest `grep`                                |
-|    normal     |  Ctrl + t  | run :ALEDetail                                |
-|    normal     | comma + k  | ale previous wrap                             |
-|    normal     | comma + j  | ale next wrap                                 |
-|    insert     | tab        | navigate the completion (down)                |
-|    insert     | shift + tab| navigate the completion (up)                  |
+|  MODE  | SHORTCUTS  | DESCRIPTIONS                         |
+| :----: | :--------: | ------------------------------------ |
+| normal | comma + N  | toggle line numbers                  |
+| normal | comma + ss | to save                              |
+| normal | comma + q  | quit without saving                  |
+| normal | comma + qa | quit all without saving              |
+| normal | comma + Y  | copy to clipboard                    |
+| normal | comma + q  | back to normal mode                  |
+| insert | comma + jj | back to normal mode                  |
+| normal | comma + a  | to fold                              |
+| normal |     tn     | new tab                              |
+| normal |     tk     | next tab                             |
+| normal |     tj     | previous tab                         |
+| normal |     th     | first tab                            |
+| normal |     tl     | last tab                             |
+| normal |     tc     | close tab                            |
+| normal | comma + l  | navigate to the next buffer          |
+| normal | comma + h  | navigate to the previous buffer      |
+| normal | comma + 0  | navigate to the first buffer         |
+| normal | comma + dd | delete current buffer                |
+| normal |  Ctrl + k  | navigate to the up split screen      |
+| normal |  Ctrl + j  | navigate to the down split screen    |
+| normal |  Ctrl + l  | navigate to the left split screen    |
+| normal |  Ctrl + h  | navigate to the right split screen   |
+| normal | Shift + >> | indent line to the right             |
+| normal | Shift + << | indent line to the left              |
+| normal | Shift + Y  | yank to the end of line              |
+| normal |   Y + p    | Duplicate line (Sublime like Ctrl+d) |
+| normal |  Ctrl + b  | toggle sidebar                       |
+| normal | comma + ff | find file (fzf)                      |
+| insert |    tab     | navigate the completion (down)       |
