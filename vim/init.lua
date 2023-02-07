@@ -2,7 +2,7 @@ require("packer-config")
 require("options")
 
 require("autopairs-config")
-require("barbar-config")
+require("tabline-config")
 require("comment-nvim-config")
 require("colorizer-config")
 require("indent-blankline-config")

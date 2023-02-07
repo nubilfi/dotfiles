@@ -25,7 +25,7 @@ set.laststatus = 2 -- Always show the status line
 set.linespace = 15
 set.list = true --  Show trailing white space
 set.listchars = "tab:>·,trail:~,extends:>,precedes:<,space:.,eol:↴" -- eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.
-set.mouse = "nicr"
+-- set.mouse = "nicr"
 --set.mouse = "a"
 set.magic = true -- For regular expressions turn magic on
 --BROKEN set.nocompatible = true -- enter the current millenium
@@ -56,3 +56,6 @@ vim.notify = require("notify")
 -- have a fixed column for the diagnostics to appear in
 -- this removes the jitter when warnings/errors flow in
 vim.wo.signcolumn = "yes"
+
+-- Avoid showing extra messages when using completion
+vim.opt.shortmess:append("c")

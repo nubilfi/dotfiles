@@ -20,7 +20,7 @@ I'm using [lua_lsp](https://github.com/sumneko/lua-language-server) for `intelli
 - [plenary](https://github.com/nvim-lua/plenary.nvim): Lua functions
 - [telescope](https://github.com/nvim-telescope/telescope.nvim): Find, filter, preview files
 - [notify](https://github.com/rcarriga/nvim-notify): Notification manager
-- [barbar](https://github.com/romgrk/barbar.nvim): Tabs for vim
+- [tabline](https://github.com/kdheepak/tabline.nvim): Tabs for vim
 - [treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Abstraction layer
 - [textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects): Syntax aware
 - [refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor): Treesitter refactor module
@@ -42,7 +42,7 @@ I'm using [lua_lsp](https://github.com/sumneko/lua-language-server) for `intelli
 - [lspsaga](https://github.com/kkharji/lspsaga.nvim): Icons for LSP diagnostics
 - [lspkind](https://github.com/onsails/lspkind.nvim): pictograms LSP completion
 - [mason](https://github.com/williamboman/mason.nvim): Manage LSP server
-- []()
+
 
 Brief help:
 

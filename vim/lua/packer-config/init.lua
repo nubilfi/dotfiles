@@ -14,7 +14,7 @@ return require("packer").startup(function()
 	use("nvim-lua/plenary.nvim")
 	use("nvim-telescope/telescope.nvim") --> Find, Filter, Preview, Pick. 
 	use("rcarriga/nvim-notify")
-	use("romgrk/barbar.nvim") --> tabs for neovim
+	use("kdheepak/tabline.nvim") --> tabs for neovim
 
 	--> treesitter & treesitter modules/plugins
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) --> treesitter
