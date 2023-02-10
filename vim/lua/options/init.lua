@@ -51,6 +51,14 @@ set.wildmode = "list:longest" -- autocompletion of files and commands behaves li
 -- set.background = "dark"
 
 vim.cmd("colorscheme PaperColor")
+
+if not os.getenv("TMUX") then
+  local Normal = vim.api.nvim_get_hl_by_name("Normal", true)
+  local bg = string.format("#%06x", Normal["background"])
+
+  os.execute('printf "\\033]11;' .. bg .. '\\007"')
+end
+
 vim.notify = require("notify")
 
 -- have a fixed column for the diagnostics to appear in
