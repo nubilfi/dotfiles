@@ -57,3 +57,44 @@ Terminator Preferences
 - LauncpadBugURLHandler
 - LaunchpadCodeURLHandler
 - APTURLHandler
+
+
+Install terminator, then set the following configuration into ~/.config/terminator/config file
+
+[global_config]
+  dbus = False
+  enabled_plugins = InactivityWatch, TerminalShot, LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler
+  suppress_multiple_term_dialog = True
+[keybindings]
+[profiles]
+  [[default]]
+    background_color = "#2e3436"
+    font = Source Code Pro 11
+    foreground_color = "#d8d8d8"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 1500
+    use_custom_command = True
+    custom_command = env TERM=xterm-256color bash
+    use_system_font = False
+  [[Bill]]
+    background_color = "#2e3436"
+    font = Source Code Pro 11
+    foreground_color = "#d8d8d8"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 1500
+    use_custom_command = True
+    custom_command = env TERM=xterm-256color bash
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+[plugins]
+
