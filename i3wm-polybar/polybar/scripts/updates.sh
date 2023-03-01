@@ -39,7 +39,7 @@ while true; do
     # when no updates are available, use a longer loop, this saves on CPU
     # and network uptime, only checking once every 12 hours for new updates
     while (( UPDATES == 0 )); do
-        echo $BAR_ICON
+        echo "$BAR_ICON $UPDATES"
         sleep 43200 # 12 hours
         get_total_updates
     done

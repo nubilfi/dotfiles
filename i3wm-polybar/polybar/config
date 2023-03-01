@@ -14,22 +14,22 @@ border-size = 0
 border-color =
 
 padding-left = 0
-padding-right = 2
+padding-right = 0
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
 
 font-0 = "Source Code Pro Semibold:size=10;1"
-font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
-font-2 = "Font Awesome 5 Brands:size=10;1"
+font-1 = "Font Awesome 6 Free:style=Solid:size=10;1"
+font-2 = "Font Awesome 6 Brands:size=10;1"
 font-3 = "Material Icons:style=Regular:pixelsize=13;2"
 font-4 = "Weather Icons:size=12;1"
-font-5 = "Font Awesome 5 Pro:style=Solid:size=10;1"
+font-5 = "Font Awesome 6 Pro:style=Solid:size=10;1"
 font-6 = "Fantasque Sans Mono:pixelsize=10;3"
 font-7 = "Iosevka Nerd Font:pixelsize=13;3"
 
 modules-left = i3
-modules-right = system-usb-udev redshift pkg pulse weather network battery date powermenu
+modules-right = system-usb-udev redshift pkg pulse weather network temperature cpu battery powermenu date
 
 ;tray-position =
 ;tray-padding =
@@ -40,7 +40,6 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [color]
-
 base-mode-fg = #828282
 base-fg = #66
 base-bg = #1f1f1f
@@ -54,9 +53,7 @@ spotify-color = #1db954
 [module/network]
 type = custom/script
 exec = ~/.config/polybar/scripts/check-network
-;format-background = ${color.base-bg-2}
 format-foreground = ${color.base-white-txt}
-;format-padding = 2
 click-left = networkmanager_dmenu &
 click-right = networkmanager_dmenu &
 tail = true
@@ -73,7 +70,6 @@ label = %output:25%
 [module/applist]
 type = custom/text
 content = 
-;alt icons = 
 content-padding = 1
 content-background = ${color.base-bg}
 content-foreground = ${color.base-white-txt}
@@ -83,7 +79,6 @@ click-left = ~/.config/polybar/scripts/menu_full
 type = custom/script
 exec = ~/.config/polybar/scripts/updates.sh
 format-background = ${color.base-bg}
-;format-padding = 1
 tail = true
 
 [module/i3]
@@ -120,13 +115,11 @@ type = internal/network
 interface = wlo1
 interval = 3.0
 
-format-connected = %{A1:terminator -e nmtui &:} <ramp-signal> <label-connected>%{A}
-format-connected-foreground = ${color.base-bg}
-format-connected-background = ${color.base-bg-2}
-format-connected-padding = 1
+format-connected = %{A1:terminator -e networkmanager_dmenu &:} <ramp-signal> <label-connected>%{A}
+format-connected-foreground = ${color.base-white-txt}
 label-connected = %downspeed%
 
-format-disconnected = %{A1:terminator -e nmtui &:} %{A}
+format-disconnected = %{A1:terminator -e networkmanager_dmenu &:} 睊%{A}
 label-disconnected-foreground = ${color.base-fg}
 label-connected-foreground = ${color.base-white-txt}
 
@@ -135,7 +128,7 @@ ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
-ramp-signal-foreground = ${color.base-bg}
+ramp-signal-foreground = ${color.base-white-txt}
 
 [module/eth]
 type = internal/network
@@ -171,8 +164,10 @@ click-right = ~/.config/polybar/scripts/info-reshift-temp.sh kill
 type = custom/script
 exec = ~/.config/polybar/scripts/openweathermap-simple.sh
 interval = 600
-format-prefix = " "
+;format-prefix = " "
+;label-active-font = 5
 ;label-font = 5 => conflict with other font
+tail = true
 
 [module/date]
 type = internal/date
@@ -181,13 +176,13 @@ interval = 1
 date =
 date-alt = " %Y-%m-%d"
 
-time = %H:%M
+time = %a, %H:%M %p
 time-alt = %H:%M:%S
 
 format-prefix = 
 format-foreground = ${color.base-bg}
 format-background = ${color.base-bg-2}
-format-padding = 2
+format-padding = 1
 
 label = %date% %time%
 
@@ -239,7 +234,7 @@ scroll-down = pulseaudio-control --volume-max 130 down
 
 [module/battery]
 type = internal/battery
-full-at = 98
+full-at = 95
 
 format-charging = "<label-charging> <animation-charging>"
 format-discharging = "<label-discharging> <ramp-capacity>"
@@ -276,14 +271,16 @@ type = custom/menu
 
 expand-right = true
 
-format-spacing = 1
+;format-spacing = 1
+;format-margin = 2
 
-label-open = 
+label-open =
 label-open-foreground = ${color.base-bg-2}
 label-close =  cancel
 label-close-foreground = ${color.base-bg-2}
 label-separator = |
 label-separator-foreground = ${color.base-bg-2}
+label-active-font = 2
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
@@ -306,6 +303,36 @@ menu-3-0 = log off
 menu-3-0-exec = i3 exit logout
 menu-3-1 = cancel
 menu-3-1-exec = menu-open-0
+
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+warn-percentage = 80
+format = <label>
+label = %percentage%%
+format-prefix = %{T10} %{T-}
+label-warn = %percentage%%
+
+[module/temperature]
+type = internal/temperature
+interval = 0.5
+thermal-zone = 1
+hwmon-path = /sys/devices/virtual/thermal/thermal_zone0/hwmon1/temp1_input
+base-temperature = 20
+warn-temperature = 60
+
+units = true
+format = <label>
+format-prefix = %{T10} %{T-}
+format-warn = <label-warn>
+
+label = %temperature-c%
+label-warn =  %temperature-c%
+label-warn-foreground = #f00
+
+ramp-foreground = #55
+
 
 [settings]
 screenchange-reload = true
