@@ -176,7 +176,7 @@ interval = 1
 date =
 date-alt = " %Y-%m-%d"
 
-time = %a, %H:%M %p
+time = %a, %I:%M %p
 time-alt = %H:%M:%S
 
 format-prefix = 
