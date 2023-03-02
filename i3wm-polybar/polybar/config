@@ -29,7 +29,7 @@ font-6 = "Fantasque Sans Mono:pixelsize=10;3"
 font-7 = "Iosevka Nerd Font:pixelsize=13;3"
 
 modules-left = i3
-modules-right = system-usb-udev redshift pkg pulse weather network temperature cpu battery powermenu date
+modules-right = system-usb-udev docker redshift pkg pulse weather network temperature cpu battery powermenu date
 
 ;tray-position =
 ;tray-padding =
@@ -320,7 +320,7 @@ interval = 0.5
 thermal-zone = 1
 hwmon-path = /sys/devices/virtual/thermal/thermal_zone0/hwmon1/temp1_input
 base-temperature = 20
-warn-temperature = 60
+warn-temperature = 92
 
 units = true
 format = <label>
@@ -333,6 +333,12 @@ label-warn-foreground = #f00
 
 ramp-foreground = #55
 
+
+[module/docker]
+type = custom/script
+format-foreground = ${color.base-bg-2}
+exec = ~/.config/polybar/scripts/docker.sh
+tail = true
 
 [settings]
 screenchange-reload = true
