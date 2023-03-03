@@ -215,6 +215,8 @@ exec --no-startup-id xfce4-power-manager
 # exec_always --no-startup-id ff-theme-util
 # exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id $HOME/.config/polybar/i3wm_bar_launch.sh
+#exec --no-startup-id /usr/lib/polkit-1/polkit-agent-helper-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Theme colors
 client.focused #c6c6c6 #1f1f1f #c6c6c6 #8abeb7 #8abeb7
