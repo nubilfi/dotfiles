@@ -20,11 +20,11 @@ module-margin-left = 1
 module-margin-right = 1
 
 font-0 = "Source Code Pro Semibold:size=10;1"
-font-1 = "Font Awesome 6 Free:style=Solid:size=10;1"
-font-2 = "Font Awesome 6 Brands:size=10;1"
-font-3 = "Material Icons:style=Regular:pixelsize=13;2"
-font-4 = "Weather Icons:size=12;1"
-font-5 = "Font Awesome 6 Pro:style=Solid:size=10;1"
+font-1 = "Weather Icons:size=10;1"
+font-2 = "Font Awesome 6 Free:style=Solid:size=10;1"
+font-3 = "Font Awesome 6 Brands:size=10;1"
+font-4 = "Material Icons:style=Regular:pixelsize=13;2"
+font-5 = "Font Awesome 5 Pro:style=Solid:size=10;1"
 font-6 = "Fantasque Sans Mono:pixelsize=10;3"
 font-7 = "Iosevka Nerd Font:pixelsize=13;3"
 
@@ -163,10 +163,12 @@ click-right = ~/.config/polybar/scripts/info-reshift-temp.sh kill
 [module/weather]
 type = custom/script
 exec = ~/.config/polybar/scripts/openweathermap-simple.sh
-interval = 600
+
+; Update every 10 minutes
+interval = 600 
 ;format-prefix = " "
-;label-active-font = 5
-;label-font = 5 => conflict with other font
+;label-active-font = 4
+label-font = 2 => conflict with other font
 tail = true
 
 [module/date]
@@ -179,7 +181,7 @@ date-alt = " %Y-%m-%d"
 time = %a, %I:%M %p
 time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = %{T3}%{T-}
 format-foreground = ${color.base-bg}
 format-background = ${color.base-bg-2}
 format-padding = 1
@@ -274,13 +276,12 @@ expand-right = true
 ;format-spacing = 1
 ;format-margin = 2
 
-label-open =
+label-open = %{T3}%{T-}
 label-open-foreground = ${color.base-bg-2}
 label-close =  cancel
 label-close-foreground = ${color.base-bg-2}
 label-separator = |
 label-separator-foreground = ${color.base-bg-2}
-label-active-font = 2
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1

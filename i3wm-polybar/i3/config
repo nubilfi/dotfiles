@@ -9,7 +9,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
-font xft:Droid Sans 11
+font xft:Source Code Pro 11
 
 floating_modifier $mod
 
@@ -146,9 +146,10 @@ for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Thunar"] floating enable border normal
+for_window [class="Thunar"] floating enable
 for_window [class="Xfburn"] floating enable
-for_window [class="^mpv$"] floating enable
+for_window [class="^mpv$"] fullscreen disable, floating enable, resize set 640 480, move position center
+for_window [title="Recorder"] floating enable border normal
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -228,7 +229,7 @@ client.background #1f1f1f
 gaps inner 10
 gaps outer -4
 
-smart_gaps on
+smart_gaps off
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -270,6 +271,9 @@ mode "$mode_gaps_outer" {
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2db- unmute
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
+
+# toggle tiling / floating mpv, copied youtube link is required
+bindsym $mod+p exec --no-startup-id youtube-watch.sh
 
 # touchpad on and off controller on laptop with Fn+<touchpad control functional key>
 bindsym XF86TouchpadOn exec --no-startup-id synclient Touchpadoff=0

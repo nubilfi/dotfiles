@@ -6,7 +6,7 @@ First of all, install the requirement packages, I'm using Archlinux, so please f
 
 There are some modifications for polybar scripts to work properly, here are some of them:
 
-- Extract fonts to `~/.config/local/share/fonts` and run command `fc-cache -f -v` (Only install the font based on polybar config).
+- Extract fonts to `~/.config/local/share/fonts` or `~/.fonts` and run command `fc-cache -f -v` (Please buy your own fonts).
 
 - Copy dunst, i3, nitrogen, ranger, polybar directory to `~/.config/`.
 
