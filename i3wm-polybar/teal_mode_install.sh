@@ -12,6 +12,8 @@ YOUTUBE_SCRIPT="youtube-watch.sh"
 YOUTUBE_SCRIPT_SRC="./i3/scripts/$YOUTUBE_SCRIPT"
 YOUTUBE_SYMLINK_DEST="/usr/local/bin/$YOUTUBE_SCRIPT"
 
+chmod +x "$YOUTUBE_SCRIPT_SRC"
+
 # Check for internet connectivity
 if ! ping -q -c 1 -W 1 archlinux.org &> /dev/null
 then
@@ -29,6 +31,11 @@ fi
 
 cp "$XRESOURCES_FILE" "$XRESOURCES_DEST/$XRESOURCES_FILE"
 
+# Remove existing symlink for youtube-watch.sh if it exists
+if [ -L "$YOUTUBE_SYMLINK_DEST" ]; then
+  sudo rm "$YOUTUBE_SYMLINK_DEST"
+fi
+
 # Display message to inform user about root privileges and show contents of youtube-watch.sh
 echo "+-------------------------------------------------------------------------------+"
 echo "| Root privileges are required to create a symlink to youtube-watch.sh in        |"
@@ -44,7 +51,6 @@ echo ""
 
 # Create symlink for youtube-watch.sh and make it executable with root privileges
 sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
-sudo chmod +x "$YOUTUBE_SYMLINK_DEST"
 
 # Install required packages
 if ! sudo pacman -Sy --noconfirm git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
@@ -76,7 +82,7 @@ then
 fi
 
 # Install additional packages
-yay -S --noconfirm Polybar networkmanager-dmenu-git pulseaudio-control drun3
+yay -S --noconfirm networkmanager-dmenu-git pulseaudio-control drun3
 
 # Create .config directory if it doesn't exist
 if [ ! -d "$CONFIG_DIR" ]; then
@@ -84,7 +90,7 @@ if [ ! -d "$CONFIG_DIR" ]; then
 fi
 
 # Copy contents of i3wm-polybar directory to ~/.config directory
-cp -r i3wm-polybar/* "$CONFIG_DIR/"
+cp -r * "$CONFIG_DIR/"
 
 # Additional instructions
 echo "+------------------------------------------------------------+"
