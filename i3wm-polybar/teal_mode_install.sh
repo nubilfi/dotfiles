@@ -47,7 +47,7 @@ sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
 sudo chmod +x "$YOUTUBE_SYMLINK_DEST"
 
 # Install required packages
-if ! sudo pacman -Sy --noconfirm git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool urxvt-unicode rofi dmenu jq udisks2 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+if ! sudo pacman -Sy --noconfirm git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
     echo "Failed to install packages."
     exit 1
 fi
