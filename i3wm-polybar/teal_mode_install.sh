@@ -29,12 +29,28 @@ fi
 
 cp "$XRESOURCES_FILE" "$XRESOURCES_DEST/$XRESOURCES_FILE"
 
-# Create symlink for youtube-watch.sh and make it executable
-ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
-chmod +x "$YOUTUBE_SYMLINK_DEST"
+# Display message to inform user about root privileges and show contents of youtube-watch.sh
+echo "+-------------------------------------------------------------------------------+"
+echo "| Root privileges are required to create a symlink to youtube-watch.sh in        |"
+echo "| /usr/local/bin and make it executable.                                        |"
+echo "| Please enter your password when prompted.                                      |"
+echo "+-------------------------------------------------------------------------------+"
+echo ""
+echo "Contents of youtube-watch.sh:"
+echo "+-------------------------------------------------------------------------------+"
+cat "$YOUTUBE_SCRIPT_SRC" | sed 's/^/| /'
+echo "+-------------------------------------------------------------------------------+"
+echo ""
+
+# Create symlink for youtube-watch.sh and make it executable with root privileges
+sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
+sudo chmod +x "$YOUTUBE_SYMLINK_DEST"
 
 # Install required packages
-sudo pacman -Sy --noconfirm git terminator python polkit dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool urxvt rofi dmenu jq udisks2
+if ! sudo pacman -Sy --noconfirm git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool urxvt-unicode rofi dmenu jq udisks2 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+    echo "Failed to install packages."
+    exit 1
+fi
 
 # Check if yay is installed
 if ! command -v yay &> /dev/null
@@ -42,9 +58,19 @@ then
     # Install yay if it's not installed
     cd
     sudo pacman -S --needed base-devel --noconfirm
-    git clone https://aur.archlinux.org/yay-bin.git
-    cd yay-bin
-    makepkg -si
+	
+	if ! git clone https://aur.archlinux.org/yay-bin.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+		echo "Failed to clone Yay repository."
+		exit 1
+	fi
+
+	cd yay-bin
+
+	if ! makepkg -si 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+		echo "Failed to install Yay."
+		exit 1
+	fi
+
     cd ..
     rm -rf yay-bin
 fi
