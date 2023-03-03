@@ -31,11 +31,6 @@ fi
 
 cp "$XRESOURCES_FILE" "$XRESOURCES_DEST/$XRESOURCES_FILE"
 
-# Remove existing symlink for youtube-watch.sh if it exists
-if [ -L "$YOUTUBE_SYMLINK_DEST" ]; then
-  sudo rm "$YOUTUBE_SYMLINK_DEST"
-fi
-
 # Display message to inform user about root privileges and show contents of youtube-watch.sh
 echo "+-------------------------------------------------------------------------------+"
 echo "| Root privileges are required to create a symlink to youtube-watch.sh in        |"
@@ -48,6 +43,11 @@ echo "+-------------------------------------------------------------------------
 cat "$YOUTUBE_SCRIPT_SRC" | sed 's/^/| /'
 echo "+-------------------------------------------------------------------------------+"
 echo ""
+
+# Remove existing symlink for youtube-watch.sh if it exists
+if [ -L "$YOUTUBE_SYMLINK_DEST" ]; then
+  sudo rm "$YOUTUBE_SYMLINK_DEST"
+fi
 
 # Create symlink for youtube-watch.sh and make it executable with root privileges
 sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
