@@ -81,12 +81,12 @@ then
     aur_helper="yay"
 # Prompt user to select AUR manager if neither Paru nor Yay is installed
 else
-    echo "Neither Paru nor Yay is installed. Please select an AUR manager:"
-    options=("Paru" "Yay")
+    PS3="Neither Paru nor Yay is installed. Please select an AUR manager: "
+    options=("paru" "yay")
     select aur_helper in "${options[@]}"
     do
         case $aur_helper in
-            "Paru")
+            "paru")
                 sudo pacman -S --needed base-devel --noconfirm
                 if ! git clone https://aur.archlinux.org/paru.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
                     echo "Failed to clone Paru repository."
@@ -101,9 +101,9 @@ else
                 rm -rf paru
                 break
                 ;;
-            "Yay")
+            "yay")
                 sudo pacman -S --needed base-devel --noconfirm
-                if ! git clone https://aur.archlinux.org/yay-bin.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+                if ! git clone https://aur.archlinux.org/yay.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
                     echo "Failed to clone Yay repository."
                     exit 1
                 fi
@@ -113,7 +113,7 @@ else
                     exit 1
                 fi
                 cd ..
-                rm -rf yay-bin
+                rm -rf yay
                 break
                 ;;
             *)
