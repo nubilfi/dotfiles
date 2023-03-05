@@ -53,36 +53,78 @@ fi
 sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
 
 # Install required packages
-if ! sudo pacman -Sy --noconfirm git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2"
+
+echo "The following packages will be installed:"
+echo -e "\033[1m$packages\033[0m"
+
+read -p "Do you want to continue with the installation? [Y/n] " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ || $REPLY == "" ]]; then
+  if ! sudo pacman -Sy --noconfirm $packages 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2); then
     echo "Failed to install packages."
     exit 1
+  fi
+else
+  echo "Installation cancelled by user."
+  exit 1
 fi
 
-# Check if yay is installed
-if ! command -v yay &> /dev/null
+# Check if Paru is installed
+if command -v paru &> /dev/null
 then
-    # Install yay if it's not installed
-    cd
-    sudo pacman -S --needed base-devel --noconfirm
-	
-	if ! git clone https://aur.archlinux.org/yay-bin.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
-		echo "Failed to clone Yay repository."
-		exit 1
-	fi
-
-	cd yay-bin
-
-	if ! makepkg -si 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
-		echo "Failed to install Yay."
-		exit 1
-	fi
-
-    cd ..
-    rm -rf yay-bin
+    aur_helper="paru"
+# Check if Yay is installed
+elif command -v yay &> /dev/null
+then
+    aur_helper="yay"
+# Prompt user to select AUR manager if neither Paru nor Yay is installed
+else
+    echo "Neither Paru nor Yay is installed. Please select an AUR manager:"
+    options=("Paru" "Yay")
+    select aur_helper in "${options[@]}"
+    do
+        case $aur_helper in
+            "Paru")
+                sudo pacman -S --needed base-devel --noconfirm
+                if ! git clone https://aur.archlinux.org/paru.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+                    echo "Failed to clone Paru repository."
+                    exit 1
+                fi
+                cd paru
+                if ! makepkg -si 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+                    echo "Failed to install Paru."
+                    exit 1
+                fi
+                cd ..
+                rm -rf paru
+                break
+                ;;
+            "Yay")
+                sudo pacman -S --needed base-devel --noconfirm
+                if ! git clone https://aur.archlinux.org/yay-bin.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+                    echo "Failed to clone Yay repository."
+                    exit 1
+                fi
+                cd yay-bin
+                if ! makepkg -si 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+                    echo "Failed to install Yay."
+                    exit 1
+                fi
+                cd ..
+                rm -rf yay-bin
+                break
+                ;;
+            *)
+                echo "Invalid option. Please select 1 or 2."
+                ;;
+        esac
+    done
 fi
 
 # Install additional packages
-yay -S --noconfirm networkmanager-dmenu-git pulseaudio-control drun3
+$aur_helper -S --noconfirm networkmanager-dmenu-git pulseaudio-control drun3
 
 # Create .config directory if it doesn't exist
 if [ ! -d "$CONFIG_DIR" ]; then
