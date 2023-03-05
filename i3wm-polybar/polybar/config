@@ -197,7 +197,7 @@ exec = python ~/.config/polybar/scripts/spotify_status.py -f '{artist} - {song}'
 format-underline = ${color.spotify-color}
 
 [module/pulse]
-; run pacmd --list-sinks to get sink name =======
+; run pacmd list-sink-inputs to get sink name =======
 type = internal/pulseaudio
 sink = alsa_output.pci-0000_00_1b.0.analog-stereo
 use-ui-max = true

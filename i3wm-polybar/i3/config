@@ -148,6 +148,8 @@ for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="Thunar"] floating enable
 for_window [class="Xfburn"] floating enable
+for_window [class="Viewnior"] floating enable border normal
+for_window [title="VLC"] fullscreen disable, floating enable border normal, resize set 640 480, move position center
 for_window [class="^mpv$"] fullscreen disable, floating enable, resize set 640 480, move position center
 for_window [title="Recorder"] floating enable border normal
 
