@@ -89,8 +89,24 @@ if [ ! -d "$CONFIG_DIR" ]; then
     mkdir -p "$CONFIG_DIR"
 fi
 
-# Copy contents of i3wm-polybar directory to ~/.config directory
-cp -r * "$CONFIG_DIR/"
+# loop through the directories inside the i3wm-polybar directory
+for dir in nitrogen polybar i3 dunst ranger terminator; do
+    # check if the directory exists in the destination directory
+    if [ -d "$CONFIG_DIR/$dir" ]; then
+        bak_suffix="-bak"
+        count=1
+        # check if a -bak directory with a similar name exists
+        while [ -d "$CONFIG_DIR/${dir}${bak_suffix}" ]; do
+            # if it exists, increment the count and update the bak_suffix
+            count=$((count+1))
+            bak_suffix="-bak$count"
+        done
+        # rename the existing directory with the bak_suffix
+        mv "$CONFIG_DIR/$dir" "$CONFIG_DIR/${dir}${bak_suffix}"
+    fi
+    # Copy contents of i3wm-polybar directory to the destination directory ~/.config
+    cp -r "./$dir" "$CONFIG_DIR"
+done
 
 # Additional instructions
 echo "+------------------------------------------------------------+"
