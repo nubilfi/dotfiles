@@ -79,9 +79,9 @@ then
 elif command -v yay &> /dev/null
 then
     aur_helper="yay"
-# Prompt user to select AUR manager if neither Paru nor Yay is installed
+# Prompt user to select AUR helper if neither Paru nor Yay is installed
 else
-    PS3="Neither Paru nor Yay is installed. Please select an AUR manager: "
+    PS3="Neither Paru nor Yay is installed. Please select an AUR helper: "
     options=("paru" "yay")
     select aur_helper in "${options[@]}"
     do
@@ -150,6 +150,18 @@ for dir in nitrogen polybar i3 dunst ranger terminator; do
     cp -r "./$dir" "$CONFIG_DIR"
 done
 
+# Define the function to display the font values
+display_font_values() {
+	# Get the font suffixes from the polybar config
+	fonts=$(grep -oP '(?<=font-[0-9] = ")[^:"]*' ./polybar/config)
+
+	# Remove duplicate font families and format the output
+	formatted_fonts=$(echo $fonts | awk '!seen[$0]++' | tr '\n' ' ')
+
+	# Echo the formatted fonts in bold text
+	echo -e "\033[1m$formatted_fonts\033[0m"
+}
+
 # Additional instructions
 echo "+------------------------------------------------------------+"
 echo "|                                                            |"
@@ -160,7 +172,9 @@ echo ""
 echo "Please perform the following additional steps:"
 echo ""
 echo "1. Check the system-fonts.zip files, please install manually, you can download it on the internet."
-echo -e "\033[1m   I'm using Source Code Pro in .Xresources file, you might want to install it or change it.\033[0m"
+echo "   Here's the list: $(display_font_values)"
+echo
+echo -e "   I'm using \033[1mSource Code Pro\033[0m in .Xresources file, you might want to install it or change it."
 echo ""
 echo "2. Modify pulse config /etc/pulse/default.pa and add status false (if you want to use pulseaudio-control module)."
 echo "   load-module module-stream-restore [restore-device=false]"
