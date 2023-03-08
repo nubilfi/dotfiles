@@ -10,7 +10,7 @@ else
     if [ "$rtt" -lt 50 ]; then
         icon="%{F#8abeb7}%{T3}%{T-}%{F-}"
     elif [ "$rtt" -lt 150 ]; then
-        icon="%{F#faeb04}%{T3}%{T-}%{F-}"
+        icon="%{F#b5af63}%{T3}%{T-}%{F-}"
     else
         icon="%{F#BA2922}%{T3}%{T-}%{F-}"
     fi
