@@ -29,7 +29,7 @@ font-6 = "Fantasque Sans Mono:pixelsize=10;3"
 font-7 = "Iosevka Nerd Font:pixelsize=13;3"
 
 modules-left = i3
-modules-right = system-usb-udev docker redshift pkg pulse weather network temperature cpu battery powermenu date
+modules-right = system-usb-udev docker redshift pkg pulse weather ping network temperature cpu battery powermenu calendar
 
 ;tray-position =
 ;tray-padding =
@@ -50,6 +50,11 @@ base-white-txt = #fff
 
 spotify-color = #1db954
 
+[module/ping]
+type = custom/script
+exec = ~/.config/polybar/scripts/ping.sh
+interval = 360
+
 [module/network]
 type = custom/script
 exec = ~/.config/polybar/scripts/check-network
@@ -62,9 +67,9 @@ tail = true
 type = custom/script
 exec = ~/.config/polybar/scripts/popup-calendar.sh
 interval = 5
-click-left = ~/.config/polybar/scripts/popup-calendar.sh --popup
-format-background = ${color.base-bg}
-format-foreground = ${color.base-white-txt}
+click-left = ~/.config/polybar/scripts/popup.sh --popup
+format-foreground = ${color.base-bg}
+format-background = ${color.base-bg-2}
 label = %output:25%
 
 [module/applist]
