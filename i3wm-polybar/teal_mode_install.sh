@@ -20,6 +20,15 @@ I3EXIT_SYMLINK_DEST="/usr/local/bin/$I3EXIT_SYMLINK_DEST"
 # Set execute permission on both scripts
 chmod +x "$YOUTUBE_SCRIPT_SRC" "$I3EXIT_SCRIPT_SRC"
 
+# Define function to exit script if Ctrl+C is pressed
+function exit_on_ctrl_c() {
+  echo "Script canceled by user"
+  exit 1
+}
+
+# Trap Ctrl+C signal
+trap exit_on_ctrl_c INT
+
 # Check for internet connectivity
 if ! ping -q -c 1 -W 1 archlinux.org &> /dev/null
 then
@@ -54,7 +63,9 @@ echo ""
 echo "+-------------------------------------------------------------------------------+"
 echo "| Contents of i3exit:                                                           |"
 echo "+-------------------------------------------------------------------------------+"
-cat "$I3EXIT_SCRIPT_SRC" | sed 's/^/| /'
+head -n 5 "$I3EXIT_SCRIPT_SRC" | sed 's/^/| /'
+echo "| ..."
+echo "| Check the full script at: $I3EXIT_SCRIPT_SRC"
 echo "+-------------------------------------------------------------------------------+"
 echo ""
 
