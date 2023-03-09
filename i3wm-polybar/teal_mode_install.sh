@@ -46,11 +46,11 @@ fi
 
 cp "$XRESOURCES_FILE" "$XRESOURCES_DEST/$XRESOURCES_FILE"
 
-# Display message to inform user about root privileges and show contents of youtube-watch.sh
+# Display message to inform user about root privileges and show contents of additional scripts
 echo "+-------------------------------------------------------------------------------+"
-echo "| Root privileges are required to create a symlink to youtube-watch.sh in        |"
-echo "| /usr/local/bin and make it executable.                                        |"
-echo "| Please enter your password when prompted.                                      |"
+echo "| Root privileges are required to create a symlink to in                        |"
+echo -e "| \033[1m/usr/local/bin\033[0m and make it executable.                          |"
+echo "| Please enter your password when prompted.                                     |"
 echo "+-------------------------------------------------------------------------------+"
 echo ""
 # Show contents of scripts
@@ -191,6 +191,12 @@ display_font_values() {
 	echo -e "\033[1m$formatted_fonts\033[0m"
 }
 
+echo "+------------------------------------------------------------+"
+echo "|                    Set new wallpaper...                    |"
+echo "+------------------------------------------------------------+"
+nitrogen --set-zoom-fill ./nitrogen/teal-mountain.jpg
+echo
+
 # Additional instructions
 echo "+------------------------------------------------------------+"
 echo "|                                                            |"
@@ -234,8 +240,6 @@ echo ""
 echo "7. Also change openweathermap attributes (KEY, UNITS, ID, CITY, SYMBOL) inside ~/.config/polybar/scripts/openweathermap-simple.sh file."
 echo ""
 echo "8. Run command: $ pacmd list-sink-inputs, you'll get the sink output for your machine then change the sink value for [module/pulse] inside ~/.config/polybar/config file and don't forget to change the sink name for [module/pulseaudio-control]"
-echo ""
-echo "9. Change the wallpaper from nitrogen config file, restart Laptop/Computer, select i3 from display manager. That's it."
 echo ""
 echo "Thank you for using this setup script. Enjoy your i3wm-polybar setup!"
 echo ""
