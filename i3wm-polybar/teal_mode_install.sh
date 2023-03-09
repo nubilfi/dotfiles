@@ -15,7 +15,7 @@ YOUTUBE_SYMLINK_DEST="/usr/local/bin/$YOUTUBE_SCRIPT"
 # Define variables i3exit script
 I3EXIT_SCRIPT="i3exit"
 I3EXIT_SCRIPT_SRC="./i3/scripts/$I3EXIT_SCRIPT"
-I3EXIT_SYMLINK_DEST="/usr/local/bin/$I3EXIT_SYMLINK_DEST"
+I3EXIT_TARGET_DIR="/usr/local/bin/$I3EXIT_SCRIPT"
 
 # Set execute permission on both scripts
 chmod +x "$YOUTUBE_SCRIPT_SRC" "$I3EXIT_SCRIPT_SRC"
@@ -73,13 +73,13 @@ echo ""
 if [ -L "$YOUTUBE_SYMLINK_DEST" ]; then
   sudo rm "$YOUTUBE_SYMLINK_DEST"
 fi
-if [ -L "$I3EXIT_SYMLINK_DEST" ]; then
-  sudo rm "$I3EXIT_SYMLINK_DEST"
+if [ -L "$I3EXIT_TARGET_DIR" ]; then
+  sudo rm "$I3EXIT_TARGET_DIR"
 fi
 
 # Create symlinks for scripts
 sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
-sudo ln -sf "$I3EXIT_SCRIPT_SRC" "$I3EXIT_SYMLINK_DEST"
+sudo cp -R "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
 
 # Install required packages
 packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2"
@@ -191,10 +191,10 @@ display_font_values() {
 	echo -e "\033[1m$formatted_fonts\033[0m"
 }
 
-echo "+------------------------------------------------------------+"
-echo "|                    Set new wallpaper...                    |"
-echo "+------------------------------------------------------------+"
+echo
+echo "Activate your new wallpaper..."
 nitrogen --set-zoom-fill ./nitrogen/teal-mountain.jpg
+echo "Done."
 echo
 
 # Additional instructions
@@ -243,5 +243,3 @@ echo "8. Run command: $ pacmd list-sink-inputs, you'll get the sink output for y
 echo ""
 echo "Thank you for using this setup script. Enjoy your i3wm-polybar setup!"
 echo ""
-
-echo "Done."
