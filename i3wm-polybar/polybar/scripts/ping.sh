@@ -2,6 +2,14 @@
 
 HOST=google.com
 
+# Check for internet connectivity
+if ! ping -q -c 1 -W 1 $HOST &> /dev/null
+then
+    # Display 0 ms with icon if there's no internet access
+    icon="%{F#BA2922}%{T3}%{T-}%{F-}"
+    echo "$icon 0 ms"
+fi
+
 if ! ping=$(ping -n -c 1 -W 1 $HOST); then
     echo "%{F#BA2922}%{T3}%{T-}%{F-} 0 ms"
 else
