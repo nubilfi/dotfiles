@@ -10,8 +10,8 @@ map("n", "<leader>ss", ":w<cr>", opts) -- comma+ss to save
 map("n", "<leader>q", ":q!<cr>", opts) -- comma+q to quit (does not save, watch out!)
 map("n", "<leader>qa", ":qa!<cr>", opts) -- quit all without saving
 map("n", "<leader>N", ":setlocal number!<cr>", opts) -- Toggle line numbers
-map("n", "<Leader>Y", "+y", opts) -- Copy to clipboard
-map("n", "<Leader>P", "+p", opts) -- paste from clipboard
+map('n', ',Y', '"+y', opts) -- Copy to clipboard
+map('n', ',P', '"+p', opts) -- paste from clipboard
 map("n", "Y", "y$", opts) -- yank from the cursor to the end of the line
 map("n", ";", ":", { noremap = true }) -- enter command mode
 

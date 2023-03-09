@@ -4,7 +4,7 @@ set.autoread = true -- Set to auto read when a file is changed from the outside
 set.backspace = "indent,eol,start" -- more powerful backspacing
 --set.breakindent = true
 --set.cursorline = true
-set.clipboard = "unnamed" -- access your system clipboard
+--set.clipboard = "unnamed" -- access your system clipboard
 --set.conceallevel = 0 -- See `` in markdown files
 set.conceallevel = 2
 set.completeopt = "menuone,noinsert,noselect"
@@ -67,3 +67,5 @@ vim.wo.signcolumn = "yes"
 
 -- Avoid showing extra messages when using completion
 vim.opt.shortmess:append("c")
+
+vim.opt.clipboard:append('unnamedplus')
