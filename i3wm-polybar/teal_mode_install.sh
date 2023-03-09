@@ -12,7 +12,13 @@ YOUTUBE_SCRIPT="youtube-watch.sh"
 YOUTUBE_SCRIPT_SRC="./i3/scripts/$YOUTUBE_SCRIPT"
 YOUTUBE_SYMLINK_DEST="/usr/local/bin/$YOUTUBE_SCRIPT"
 
-chmod +x "$YOUTUBE_SCRIPT_SRC"
+# Define variables i3exit script
+I3EXIT_SCRIPT="i3exit"
+I3EXIT_SCRIPT_SRC="./i3/scripts/$I3EXIT_SCRIPT"
+I3EXIT_SYMLINK_DEST="/usr/local/bin/$I3EXIT_SYMLINK_DEST"
+
+# Set execute permission on both scripts
+chmod +x "$YOUTUBE_SCRIPT_SRC" "$I3EXIT_SCRIPT_SRC"
 
 # Check for internet connectivity
 if ! ping -q -c 1 -W 1 archlinux.org &> /dev/null
@@ -38,19 +44,31 @@ echo "| /usr/local/bin and make it executable.                                  
 echo "| Please enter your password when prompted.                                      |"
 echo "+-------------------------------------------------------------------------------+"
 echo ""
-echo "Contents of youtube-watch.sh:"
+# Show contents of scripts
+echo "+-------------------------------------------------------------------------------+"
+echo "| Contents of youtube-watch.sh:                                                 |"
 echo "+-------------------------------------------------------------------------------+"
 cat "$YOUTUBE_SCRIPT_SRC" | sed 's/^/| /'
 echo "+-------------------------------------------------------------------------------+"
 echo ""
+echo "+-------------------------------------------------------------------------------+"
+echo "| Contents of i3exit:                                                           |"
+echo "+-------------------------------------------------------------------------------+"
+cat "$I3EXIT_SCRIPT_SRC" | sed 's/^/| /'
+echo "+-------------------------------------------------------------------------------+"
+echo ""
 
-# Remove existing symlink for youtube-watch.sh if it exists
+# Remove existing symlinks for scripts if they exist
 if [ -L "$YOUTUBE_SYMLINK_DEST" ]; then
   sudo rm "$YOUTUBE_SYMLINK_DEST"
 fi
+if [ -L "$I3EXIT_SYMLINK_DEST" ]; then
+  sudo rm "$I3EXIT_SYMLINK_DEST"
+fi
 
-# Create symlink for youtube-watch.sh and make it executable with root privileges
+# Create symlinks for scripts
 sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
+sudo ln -sf "$I3EXIT_SCRIPT_SRC" "$I3EXIT_SYMLINK_DEST"
 
 # Install required packages
 packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2"
