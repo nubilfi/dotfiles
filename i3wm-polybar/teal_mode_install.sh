@@ -173,7 +173,7 @@ read -p "Do you want to enable the tray configuration? (y/n, default: n) " enabl
 # Check if the user wants to enable the tray configuration
 if [ "$enable_tray" = "y" ] || [ "$enable_tray" = "Y" ]; then
   # Remove the semicolon from the tray configuration
-  sed -i 's/^;//' "$config_file"
+  sed -i 's/^;tray-/tray-/' "$config_file"
 fi
 
 # loop through the directories inside the i3wm-polybar directory
