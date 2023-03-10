@@ -86,6 +86,7 @@ packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archi
 
 echo "The following packages will be installed:"
 echo -e "\033[1m$packages\033[0m"
+echo
 
 read -p "Do you want to continue with the installation? [Y/n] " -n 1 -r
 echo
@@ -160,8 +161,11 @@ if [ ! -d "$CONFIG_DIR" ]; then
     mkdir -p "$CONFIG_DIR"
 fi
 
+# remove screenshot directory
+rm -rf ./ss
+
 # loop through the directories inside the i3wm-polybar directory
-for dir in nitrogen polybar i3 dunst ranger terminator; do
+for dir in nitrogen polybar i3 dunst ranger redshift rofi terminator; do
     # check if the directory exists in the destination directory
     if [ -d "$CONFIG_DIR/$dir" ]; then
         bak_suffix="-bak"
