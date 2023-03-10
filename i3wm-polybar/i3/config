@@ -28,6 +28,9 @@ bindsym Ctrl+$mod+Delete exec --no-startup-id i3 exit logout
 # launch app list window
 bindsym $mod+Shift+comma exec sh ~/.config/polybar/scripts/app_list.sh
 
+# Open thunar
+bindsym $mod+t exec thunar
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -212,6 +215,7 @@ exec --no-startup-id nitrogen --restore
 exec --no-startup-id notify-send
 exec --no-startup-id dunst
 exec --no-startup-id xfce4-power-manager
+exec --no-startup-id blueman-applet
 # exec --no-startup-id pamac-tray
 # exec --no-startup-id clipit
 # exec_always --no-startup-id ff-theme-util
