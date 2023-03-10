@@ -164,6 +164,18 @@ fi
 # remove screenshot directory
 rm -rf ./ss
 
+# Define the path to the polybar config file
+config_file="./polybar/config.ini"
+
+# Prompt the user to enable the tray configuration
+read -p "Do you want to enable the tray configuration? (y/n, default: n) " enable_tray
+
+# Check if the user wants to enable the tray configuration
+if [ "$enable_tray" = "y" ] || [ "$enable_tray" = "Y" ]; then
+  # Remove the semicolon from the tray configuration
+  sed -i 's/^\( *tray-.*\) *;/\1/' "$config_file"
+fi
+
 # loop through the directories inside the i3wm-polybar directory
 for dir in nitrogen polybar i3 dunst ranger redshift rofi terminator; do
     # check if the directory exists in the destination directory
