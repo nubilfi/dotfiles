@@ -82,7 +82,7 @@ sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
 sudo cp -R "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
 
 # Install required packages
-packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2"
+packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m"
 
 echo "The following packages will be installed:"
 echo -e "\033[1m$packages\033[0m"
