@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>logviewer</icon>
+	<name>Find files</name>
+	<unique-id>1635515982111053-1</unique-id>
+	<command>catfish --hidden --path=%f</command>
+	<description>Search for files with Catfish</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>Terminal</icon>
+	<name>Open Terminal Here</name>
+	<unique-id>1367866030392833-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description></description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>org.xfce.terminalemulator</icon>
+	<name>Open root terminal here</name>
+	<unique-id>1635516155530254-2</unique-id>
+	<command>pkexec terminator --working-directory %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>stock_folder</icon>
+	<name>Open as root</name>
+	<unique-id>1367866030392883-2</unique-id>
+	<command>pkexec thunar %f</command>
+	<description>Open directory as root</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>geany</icon>
+	<name>Open as root</name>
+	<unique-id>1635516394051260-3</unique-id>
+	<command>pkexec geany %f</command>
+	<description>Open text file as root</description>
+	<patterns>*</patterns>
+	<text-files/>
+</action>
+<action>
+	<icon>/opt/sublime_text/Icon/48x48/sublime-text.png</icon>
+	<name>Open Sublime Here</name>
+	<unique-id>1367866030392913-3</unique-id>
+	<command>subl -n %f</command>
+	<description>Sublime text editor</description>
+	<patterns>*</patterns>
+	<directories/>
+	<text-files/>
+</action>
+<action>
+	<icon>visual-studio-code</icon>
+	<name>Open VSCode Here</name>
+	<unique-id>1635516504056017-4</unique-id>
+	<command>code .</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<text-files/>
+</action>
+</actions>

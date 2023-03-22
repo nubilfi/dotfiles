@@ -4,8 +4,8 @@
 CONFIG_DIR="/home/$USER/.config"
 POLYBAR_SCRIPTS_DIR="$CONFIG_DIR/polybar/scripts"
 XRESOURCES_FILE=".Xresources"
-XRESOURCES_DEST="/home/$USER"
-XRESOURCES_BACKUP="$XRESOURCES_DEST/$XRESOURCES_FILE-bak"
+USERHOME_DEST="/home/$USER"
+XRESOURCES_BACKUP="$USERHOME_DEST/$XRESOURCES_FILE-bak"
 
 # Define variables for mpv (watch youtube from mpv)
 YOUTUBE_SCRIPT="youtube-watch.sh"
@@ -17,8 +17,14 @@ I3EXIT_SCRIPT="i3exit"
 I3EXIT_SCRIPT_SRC="./i3/scripts/$I3EXIT_SCRIPT"
 I3EXIT_TARGET_DIR="/usr/local/bin/$I3EXIT_SCRIPT"
 
+# Define variables tumblerd_cpu script
+# https://wiki.archlinux.org/title/Thunar#Tumblerd_hangs_up,_uses_too_much_CPU
+TUMBLERD_SCRIPT="tumblerd_cpu"
+TUMBLERD_SCRIPT_SRC="./i3/scripts/$TUMBLERD_SCRIPT"
+TUMBLERD_TARGET_DIR="/usr/local/bin/$TUMBLERD_SCRIPT"
+
 # Set execute permission on both scripts
-chmod +x "$YOUTUBE_SCRIPT_SRC" "$I3EXIT_SCRIPT_SRC"
+chmod +x "$YOUTUBE_SCRIPT_SRC" "$I3EXIT_SCRIPT_SRC" "$TUMBLERD_SCRIPT_SRC"
 
 # Define function to exit script if Ctrl+C is pressed
 function exit_on_ctrl_c() {
@@ -40,11 +46,11 @@ then
 fi
 
 # Copy .Xresources to destination directory with backup if file already exists
-if [ -f "$XRESOURCES_DEST/$XRESOURCES_FILE" ]; then
-  mv "$XRESOURCES_DEST/$XRESOURCES_FILE" "$XRESOURCES_BACKUP"
+if [ -f "$USERHOME_DEST/$XRESOURCES_FILE" ]; then
+  mv "$USERHOME_DEST/$XRESOURCES_FILE" "$XRESOURCES_BACKUP"
 fi
 
-cp "$XRESOURCES_FILE" "$XRESOURCES_DEST/$XRESOURCES_FILE"
+cp "$XRESOURCES_FILE" "$USERHOME_DEST/$XRESOURCES_FILE"
 
 # Display message to inform user about root privileges and show contents of additional scripts
 echo "+-------------------------------------------------------------------------------+"
@@ -76,10 +82,14 @@ fi
 if [ -L "$I3EXIT_TARGET_DIR" ]; then
   sudo rm "$I3EXIT_TARGET_DIR"
 fi
+if [ -L "$TUMBLERD_TARGET_DIR" ]; then
+  sudo rm "$TUMBLERD_TARGET_DIR"
+fi
 
 # Create symlinks for scripts
 sudo ln -sf "$YOUTUBE_SCRIPT_SRC" "$YOUTUBE_SYMLINK_DEST"
-sudo cp -R "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
+sudo cp "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
+sudo cp "$TUMBLERD_SCRIPT_SRC" "$TUMBLERD_TARGET_DIR"
 
 # Install required packages
 packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m"
@@ -177,7 +187,7 @@ if [ "$enable_tray" = "y" ] || [ "$enable_tray" = "Y" ]; then
 fi
 
 # loop through the directories inside the i3wm-polybar directory
-for dir in nitrogen polybar i3 dunst ranger redshift rofi terminator; do
+for dir in nitrogen polybar i3 dunst ranger redshift rofi terminator Thunar; do
     # check if the directory exists in the destination directory
     if [ -d "$CONFIG_DIR/$dir" ]; then
         bak_suffix="-bak"
@@ -200,18 +210,30 @@ display_font_values() {
 	# Get the font suffixes from the polybar config
 	fonts=$(grep -oP '(?<=font-[0-9] = ")[^:"]*' ./polybar/config)
 
-	# Remove duplicate font families and format the output
-	formatted_fonts=$(echo $fonts | awk '!seen[$0]++' | tr '\n' ' ')
+	# Format the output with commas between the fonts
+	formatted_fonts=$(echo "$fonts" | tr '\n' ',' | sed 's/,$//')
 
 	# Echo the formatted fonts in bold text
 	echo -e "\033[1m$formatted_fonts\033[0m"
 }
 
+
 echo
-echo "Activate your new wallpaper..."
+echo "Activating your new wallpaper..."
 nitrogen --set-zoom-fill ./nitrogen/teal-mountain.jpg
 echo "Done."
 echo
+
+# check if either .bashrc or .zshrc exists in USERHOME_DEST directory
+if [ -f "$USERHOME_DEST/.bashrc" ]; then
+  # append alias to .bashrc with new line
+  echo -e "\nalias pkexec='pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY'" >> "$USERHOME_DEST/.bashrc"
+fi
+
+if [ -f "$USERHOME_DEST/.zshrc" ]; then
+  # append alias to .zshrc with new line
+  echo -e "\nalias pkexec='pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY'" >> "$USERHOME_DEST/.zshrc"
+fi
 
 # Additional instructions
 echo "+------------------------------------------------------------+"
@@ -256,6 +278,8 @@ echo ""
 echo "7. Also change openweathermap attributes (KEY, UNITS, ID, CITY, SYMBOL) inside ~/.config/polybar/scripts/openweathermap-simple.sh file."
 echo ""
 echo "8. Run command: $ pacmd list-sink-inputs, you'll get the sink output for your machine then change the sink value for [module/pulse] inside ~/.config/polybar/config file and don't forget to change the sink name for [module/pulseaudio-control]"
+echo ""
+echo "9. You might want to update your thunar settings, you can check it in ~/.config/Thunar directory."
 echo ""
 echo "Thank you for using this setup script. Enjoy your i3wm-polybar setup!"
 echo ""
