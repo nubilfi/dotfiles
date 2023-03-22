@@ -6,6 +6,7 @@ POLYBAR_SCRIPTS_DIR="$CONFIG_DIR/polybar/scripts"
 XRESOURCES_FILE=".Xresources"
 USERHOME_DEST="/home/$USER"
 XRESOURCES_BACKUP="$USERHOME_DEST/$XRESOURCES_FILE-bak"
+ALIAS_LINE="alias pkexec='pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY'"
 
 # Define variables for mpv (watch youtube from mpv)
 YOUTUBE_SCRIPT="youtube-watch.sh"
@@ -54,7 +55,7 @@ cp "$XRESOURCES_FILE" "$USERHOME_DEST/$XRESOURCES_FILE"
 
 # Display message to inform user about root privileges and show contents of additional scripts
 echo "+-------------------------------------------------------------------------------+"
-echo "| Root privileges are required to create a symlink to in                        |"
+echo "| Root privileges are required to create a symlink in                           |"
 echo -e "| \033[1m/usr/local/bin\033[0m and make it executable.                          |"
 echo "| Please enter your password when prompted.                                     |"
 echo "+-------------------------------------------------------------------------------+"
@@ -227,12 +228,20 @@ echo
 # check if either .bashrc or .zshrc exists in USERHOME_DEST directory
 if [ -f "$USERHOME_DEST/.bashrc" ]; then
   # append alias to .bashrc with new line
-  echo -e "\nalias pkexec='pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY'" >> "$USERHOME_DEST/.bashrc"
+  # Check if the line already exists in the file
+  if ! grep -qF "$ALIAS_LINE" "$USERHOME_DEST/.bashrc"; then
+    # Append the line to the file
+    echo -e "\n$ALIAS_LINE" >> "$USERHOME_DEST/.bashrc"
+  fi
 fi
 
 if [ -f "$USERHOME_DEST/.zshrc" ]; then
   # append alias to .zshrc with new line
-  echo -e "\nalias pkexec='pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY'" >> "$USERHOME_DEST/.zshrc"
+  # Check if the line already exists in the file
+  if ! grep -qF "$ALIAS_LINE" "$USERHOME_DEST/.zshrc"; then
+    # Append the line to the file
+    echo -e "\n$ALIAS_LINE" >> "$USERHOME_DEST/.zshrc"
+  fi
 fi
 
 # Additional instructions
