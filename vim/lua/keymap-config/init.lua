@@ -14,6 +14,7 @@ map('n', ',Y', '"+y', opts) -- Copy to clipboard
 map('n', ',P', '"+p', opts) -- paste from clipboard
 map("n", "Y", "y$", opts) -- yank from the cursor to the end of the line
 map("n", ";", ":", { noremap = true }) -- enter command mode
+map("n", "<leader>c", ":nohlsearch<CR>", opts) -- clear the search
 
 map("n", "<leader>lt", ":colorscheme PaperColor<cr>", opts) -- change colorscheme for daylight
 map("n", "<leader>dt", ":colorscheme allomancer<cr>", opts) -- change colorscheme for night
