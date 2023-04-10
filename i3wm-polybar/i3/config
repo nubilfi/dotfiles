@@ -215,6 +215,7 @@ exec --no-startup-id notify-send
 exec --no-startup-id dunst
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id blueman-applet
+exec --no-startup-id picom &
 exec_always --no-startup-id $HOME/.config/polybar/i3wm_bar_launch.sh
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
