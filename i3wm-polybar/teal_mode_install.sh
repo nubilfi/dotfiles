@@ -165,7 +165,7 @@ else
 fi
 
 # Install additional packages
-$aur_helper -S --noconfirm networkmanager-dmenu-git pulseaudio-control drun3
+$aur_helper -S --noconfirm networkmanager-dmenu-git pulseaudio-control drun3 picom-jonaburg-git
 
 # Create .config directory if it doesn't exist
 if [ ! -d "$CONFIG_DIR" ]; then
@@ -188,7 +188,7 @@ if [ "$enable_tray" = "y" ] || [ "$enable_tray" = "Y" ]; then
 fi
 
 # loop through the directories inside the i3wm-polybar directory
-for dir in nitrogen polybar i3 dunst ranger redshift rofi terminator Thunar; do
+for dir in nitrogen polybar i3 dunst ranger redshift rofi terminator picom Thunar; do
     # check if the directory exists in the destination directory
     if [ -d "$CONFIG_DIR/$dir" ]; then
         bak_suffix="-bak"
