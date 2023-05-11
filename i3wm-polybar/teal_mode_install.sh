@@ -188,7 +188,7 @@ if [ "$enable_tray" = "y" ] || [ "$enable_tray" = "Y" ]; then
 fi
 
 # loop through the directories inside the i3wm-polybar directory
-for dir in nitrogen polybar i3 dunst ranger redshift rofi terminator picom Thunar; do
+for dir in nitrogen polybar i3 dunst ranger redshift rofi terminator picom networkmanager-dmenu Thunar; do
     # check if the directory exists in the destination directory
     if [ -d "$CONFIG_DIR/$dir" ]; then
         bak_suffix="-bak"
