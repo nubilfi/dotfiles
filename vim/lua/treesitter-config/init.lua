@@ -7,9 +7,7 @@ require("nvim-treesitter.configs").setup({
 		"markdown",
 		"bash",
 		"rust",
-		"javascript",
 		"lua",
-		"typescript",
 	},
 	sync_install = false,
 	highlight = {

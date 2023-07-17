@@ -3,20 +3,23 @@ local null_ls = require("null-ls")
 local formatting = null_ls.builtins.formatting
 local code_actions = null_ls.builtins.code_actions
 local diagnostics = null_ls.builtins.diagnostics
+local gitsigns_actions = null_ls.builtins.code_actions.gitsigns
 
 local sources = {
 	--[[ formatting ]]
-	formatting.eslint_d,
+	-- formatting.eslint_d,
+	-- formatting.stylelint, (for css etc.)
 	formatting.stylua,
-	formatting.stylelint,
-	formatting.prettier,
+	--formatting.prettier, -- use it for json & markdown
 	formatting.rustfmt,
+	formatting.taplo,
 
 	--[[ code actions ]]
-	code_actions.eslint_d,
+	code_actions.ltrs,
+	gitsigns_actions,
 
 	--[[ diagnostics ]]
-	diagnostics.eslint_d,
+	diagnostics.ltrs,
 }
 
 local lsp_formatting = function(bufnr)

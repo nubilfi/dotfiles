@@ -1,3 +1,3 @@
 require'lualine'.setup({
-    options = { theme = 'papercolor_dark' },
+    options = { theme = 'itabyss' },
 })
