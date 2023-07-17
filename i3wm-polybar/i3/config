@@ -150,6 +150,7 @@ for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="Thunar"] floating enable
+#for_window [class="Terminator"] floating enable, resize set 960 680, move position center
 for_window [class="Xfburn"] floating enable
 for_window [class="Viewnior"] floating enable border normal
 for_window [title="VLC"] fullscreen disable, floating enable border normal, resize set 640 480, move position center
@@ -211,22 +212,29 @@ mode "resize" {
 
 # Autostart applications
 exec --no-startup-id nitrogen --restore
+# exec --no-startup-id nm-applet
 exec --no-startup-id notify-send
 exec --no-startup-id dunst
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id blueman-applet
 exec --no-startup-id picom &
-exec_always --no-startup-id $HOME/.config/polybar/i3wm_bar_launch.sh
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-# You might want to enable it
-# exec --no-startup-id nm-applet
 # exec --no-startup-id pamac-tray
 # exec --no-startup-id clipit
 # exec_always --no-startup-id ff-theme-util
-# exec_always --no-startup-id fix_xcursor 
-# exec --no-startup-id /usr/lib/polkit-1/polkit-agent-helper-1
-# exec --no-startup-id tumblerd_cpu
+# exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id $HOME/.config/polybar/i3wm_bar_launch.sh
+
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+#exec --no-startup-id /usr/lib/polkit-1/polkit-agent-helper-1 &
+#exec --no-startup-id /usr/lib/polkit-1/polkitd &
+
+#exec --no-startup-id tumblerd_cpu
+exec --no-startup-id setup-monitor
+
+exec_always --no-startup-id $HOME/.config/polybar/extend_polybar.sh
+
+# activate monitor by shortcut
+bindsym $mod+m setup-monitor
 
 # Theme colors
 client.focused #c6c6c6 #1f1f1f #c6c6c6 #8abeb7 #8abeb7
