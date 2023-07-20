@@ -4,8 +4,10 @@
 CONFIG_DIR="/home/$USER/.config"
 POLYBAR_SCRIPTS_DIR="$CONFIG_DIR/polybar/scripts"
 XRESOURCES_FILE=".Xresources"
+TMUX_FILE=".tmux.conf"
 USERHOME_DEST="/home/$USER"
 XRESOURCES_BACKUP="$USERHOME_DEST/$XRESOURCES_FILE-bak"
+TMUX_BACKUP="$USERHOME_DEST/$TMUX_FILE-bak"
 ALIAS_LINE="alias pkexec='pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY'"
 
 # Define variables for mpv (watch youtube from mpv)
@@ -53,6 +55,13 @@ fi
 
 cp "$XRESOURCES_FILE" "$USERHOME_DEST/$XRESOURCES_FILE"
 
+# Copy .tmux.conf to destination directory with backup if file already exists
+if [ -f "$USERHOME_DEST/$TMUX_FILE" ]; then
+  mv "$USERHOME_DEST/$TMUX_FILE" "$TMUX_BACKUP"
+fi
+
+cp "$TMUX_FILE" "$USERHOME_DEST/$TMUX_FILE"
+
 # Display message to inform user about root privileges and show contents of additional scripts
 echo "+-------------------------------------------------------------------------------+"
 echo "| Root privileges are required to create a symlink in                           |"
@@ -93,7 +102,7 @@ sudo cp "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
 sudo cp "$TUMBLERD_SCRIPT_SRC" "$TUMBLERD_TARGET_DIR"
 
 # Install required packages
-packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m"
+packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux"
 
 echo "The following packages will be installed:"
 echo -e "\033[1m$packages\033[0m"
