@@ -14,7 +14,7 @@ map('n', ',Y', '"+y', opts) -- Copy to clipboard
 map('n', ',P', '"+p', opts) -- paste from clipboard
 map("n", "Y", "y$", opts) -- yank from the cursor to the end of the line
 map("n", ";", ":", { noremap = true }) -- enter command mode
-map("n", "<leader>c", ":nohlsearch<CR>", opts) -- clear the search
+map("n", "\\", ":noh<return>", opts) -- clear the search
 
 map("i", "<leader>q", "<Esc>", opts) -- change escape key behaviour
 map("i", "jj", "<Esc>", opts) -- change escape key behaviour
@@ -57,3 +57,17 @@ map("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
 map("n", "<leader>ff", ":Telescope find_files hidden=true<cr>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>fb", ":Telescope buffers<cr>", opts)
+
+--> spectre mappings <--
+map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+    desc = "Toggle Spectre"
+})
+map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "Search current word"
+})
+map('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = "Search current word"
+})
+map('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+    desc = "Search on current file"
+})

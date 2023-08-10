@@ -9,8 +9,11 @@ return require("packer").startup(function()
 	
 	--> misc
 	use("lewis6991/gitsigns.nvim") --> Git integration for buffers 
+	use("nvim-tree/nvim-web-devicons") --> file icons
 	use("nvim-tree/nvim-tree.lua") --> file explorer
-	--use("dstein64/vim-startuptime") --> file explorer
+	--use("dstein64/vim-startuptime")
+	use("nvim-lua/plenary.nvim") --> Lua functions
+	use("nvim-pack/nvim-spectre") --> find and replace
 	use {
 	  'nvim-lualine/lualine.nvim',
 	  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -18,9 +21,8 @@ return require("packer").startup(function()
 	use("windwp/nvim-autopairs") --> ({["''"]})
 	use {
 	  "nvim-telescope/telescope.nvim", branch = "0.1.x",
-	  requires = { {"nvim-lua/plenary.nvim"} } --> Lua functions
-	}
-	--use("nvim-telescope/telescope.nvim") --> Find, Filter, Preview, Pick. 
+	  requires = { {"nvim-lua/plenary.nvim"} }
+	} --> Find, Filter, Preview, Pick. 
 	use("rcarriga/nvim-notify") --> notification manager
 	use("akinsho/bufferline.nvim") --> tabs for neovim
 
@@ -31,6 +33,10 @@ return require("packer").startup(function()
 	use("nvim-treesitter/playground") --> playground integrated
 
 	use("simrat39/rust-tools.nvim") --> better development in rust
+	use {
+		'saecki/crates.nvim',
+	    requires = { 'nvim-lua/plenary.nvim' }
+	} --> managing crates.io dependencies
 	use("numToStr/Comment.nvim") --> easy for comment
 	use("mfussenegger/nvim-dap") --> debug adapter protocol
 
