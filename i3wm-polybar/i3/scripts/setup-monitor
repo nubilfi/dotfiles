@@ -1,0 +1,35 @@
+#!/bin/bash
+
+PRIMARY_MONITOR=""
+MONITOR=""
+MODE=""
+
+# Get connected primary monitor
+PRIMARY_MONITOR=$(xrandr --query | awk '/ primary/{print $1}')
+
+# Get connected secondary monitor
+MONITOR=$(xrandr --query | awk '/ connected/{print $1}' | grep -v "$PRIMARY_MONITOR")
+
+if [ -n "$MONITOR" ]; then
+  # Get the highest available resolution for the secondary monitor
+  MODE=$(xrandr --query | awk -v monitor="$MONITOR" '/ connected/ && $1 == monitor {found=1; next} found && /^[[:space:]]+[0-9]+x[0-9]+/ {print $1; exit}' | sort -r | head -n 1)
+
+  xrandr --output "$MONITOR" --off
+
+  if [ -n "$MODE" ]; then
+    xrandr --dpi 96 --output "$MONITOR" --mode "$MODE" --right-of "$PRIMARY_MONITOR" --scale 1x1
+  else
+    xrandr --dpi 96 --output "$MONITOR" --auto --right-of "$PRIMARY_MONITOR" --scale 1x1
+  fi
+
+  # Set wallpaper using Nitrogen
+  sleep 3
+  nitrogen --head=0 --set-scaled ~/Downloads/wallpaper/teal-mountain.jpg --save
+
+  if [ -n "$MODE" ]; then
+	sleep 3
+    nitrogen --head=1 --set-scaled ~/Downloads/wallpaper/teal-mountain.jpg --save
+  fi
+
+  i3-msg restart
+fi

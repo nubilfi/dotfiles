@@ -26,8 +26,13 @@ TUMBLERD_SCRIPT="tumblerd_cpu"
 TUMBLERD_SCRIPT_SRC="./i3/scripts/$TUMBLERD_SCRIPT"
 TUMBLERD_TARGET_DIR="/usr/local/bin/$TUMBLERD_SCRIPT"
 
+# Define variables for setup-monitor (setup external monitor)
+SETUP_MONITOR_SCRIPT="setup-monitor"
+SETUP_MONITOR_SCRIPT_SRC="./i3/scripts/$SETUP_MONITOR_SCRIPT"
+SETUP_MONITOR_SYMLINK_DEST="/usr/local/bin/$SETUP_MONITOR_SCRIPT"
+
 # Set execute permission on both scripts
-chmod +x "$YOUTUBE_SCRIPT_SRC" "$I3EXIT_SCRIPT_SRC" "$TUMBLERD_SCRIPT_SRC"
+chmod +x "$YOUTUBE_SCRIPT_SRC" "$I3EXIT_SCRIPT_SRC" "$TUMBLERD_SCRIPT_SRC" "$SETUP_MONITOR_SCRIPT_SRC"
 
 # Define function to exit script if Ctrl+C is pressed
 function exit_on_ctrl_c() {
@@ -102,7 +107,7 @@ sudo cp "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
 sudo cp "$TUMBLERD_SCRIPT_SRC" "$TUMBLERD_TARGET_DIR"
 
 # Install required packages
-packages="git terminator python polkit polkit-gnome dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux"
+packages="git terminator python polkit polkit-gnome binutils openssl ffmpeg dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux ripgrep lazygit xcompmgr xclip clipit netctl net-tools evince"
 
 echo "The following packages will be installed:"
 echo -e "\033[1m$packages\033[0m"
@@ -174,7 +179,7 @@ else
 fi
 
 # Install additional packages
-$aur_helper -S --noconfirm networkmanager-dmenu-git pulseaudio-control drun3 picom-jonaburg-git
+$aur_helper -S --noconfirm networkmanager-dmenu-git pulseaudio-control drun3 picom-jonaburg-git websocat xev spotifyd spotify-tui exuberant-ctags ack-grep
 
 # Create .config directory if it doesn't exist
 if [ ! -d "$CONFIG_DIR" ]; then

@@ -1,5 +1,7 @@
 #!/bin/env sh
 
+sleep 3;
+
 # enumerate the monitors
 connected_monitors=$(polybar --list-monitors | wc -l)
 

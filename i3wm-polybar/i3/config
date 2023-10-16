@@ -231,7 +231,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 #exec --no-startup-id tumblerd_cpu
 exec --no-startup-id setup-monitor
 
-exec_always --no-startup-id $HOME/.config/polybar/extend_polybar.sh
+exec_always --no-startup-id $HOME/.config/polybar/extend_polybar.sh &
 
 # activate monitor by shortcut
 bindsym $mod+m setup-monitor
