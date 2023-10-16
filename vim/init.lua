@@ -20,7 +20,7 @@ else
 	require("lsp-config.completion")
 	require("lsp-config.null-ls")
 	require("nvim-spectre-config")
-	require("nvim-tree-config")
+	require("nvim-neo-tree-config")
 	require("rust-tools-config")
 	require("telescope-config")
 	require("treesitter-config")

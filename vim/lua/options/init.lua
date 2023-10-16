@@ -34,7 +34,6 @@ set.termguicolors = true
 set.wildignore = "*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store/*,*/target/*,*/node_modules/*" -- ignored
 set.background = "dark"
 
---vim.cmd("colorscheme itabyss")
 vim.cmd("colorscheme sonokai")
 
 -- Fix broken padding Terminator

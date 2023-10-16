@@ -3,14 +3,20 @@ return require("packer").startup(function()
 	use("asvetliakov/vim-easymotion") --> for VSCode
 
 	--> colorschemes
-	use("nubilfi/itabyss.vim")
 	use("sainnhe/sonokai")
-	--use { "bluz71/vim-moonfly-colors", as = "moonfly" }
 	
 	--> misc
 	use("lewis6991/gitsigns.nvim") --> Git integration for buffers 
 	use("nvim-tree/nvim-web-devicons") --> file icons
-	use("nvim-tree/nvim-tree.lua") --> file explorer
+	use {
+  "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
 	--use("dstein64/vim-startuptime")
 	use("nvim-lua/plenary.nvim") --> Lua functions
 	use("nvim-pack/nvim-spectre") --> find and replace
@@ -42,7 +48,7 @@ return require("packer").startup(function()
 
 	--> lsp
 	use("neovim/nvim-lspconfig") --> Collection of configurations for built-in LSP client
-	use("jose-elias-alvarez/null-ls.nvim") --> inject lsp diagnistocs, formattings, code actions, and more ...
+	use("nvimtools/none-ls.nvim") --> inject lsp diagnistocs, formattings, code actions, etc. (null-ls.nvim Reloaded, maintained by the community).
 	use("hrsh7th/nvim-cmp") --> Autocompletion plugin
 	use("hrsh7th/cmp-nvim-lsp") --> LSP source for nvim-cmp
 	use("saadparwaiz1/cmp_luasnip") --> Snippets source for nvim-cmp

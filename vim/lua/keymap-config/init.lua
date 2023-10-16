@@ -47,18 +47,15 @@ map("n", "th", ":tabfirst<CR>", opts)
 map("n", "tl", ":tablast<CR>", opts)
 map("n", "tc", ":tabclose<CR>", opts)
 
---> nvim tree mappings <--
-map("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
-map("n", "<leader>gn", ":NvimTreeFocus<CR>", opts)
-map("n", "<leader>t", ":NvimTreeFindFile<CR>", opts)
-map("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
+--> neo-tree mappings <--
+map("n", "<C-b>", ":Neotree toggle<CR>", opts)
+map("n", "<leader>o", [[<Cmd>lua if vim.bo.filetype == "neotree" then vim.cmd('wincmd p') else vim.cmd('Neotree focus') end<CR>]], opts)
 
 --> telescope mappings <--
 map("n", "<leader>ff", ":Telescope find_files hidden=true<cr>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>fb", ":Telescope buffers<cr>", opts)
 
---> spectre mappings <--
 map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = "Toggle Spectre"
 })

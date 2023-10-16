@@ -4,45 +4,39 @@
 
 I used Packer for the plugins manager, follow the instructions from the [Packer](https://github.com/wbthomason/packer.nvim) official documentation for setup and installation.
 
-As an addition to this config (optional), please install these packages: `exuberant-ctags git ack-grep fzf xclip xsel wl-clipboard`. Find that packages name according to your Linux distro, it might be different on each distro.
+As an addition to this config (optional), please install these packages: `exuberant-ctags git ack-grep fzf xclip xsel wl-clipboard ripgrep`. Find that packages name according to your Linux distro, it might be different on each distro.
 
 I'm using [lua_lsp](https://github.com/sumneko/lua-language-server) for `intellisense engine`, so please check on that link for more details about the installation. Finally, here are the list of the `packages` that I installed:
 
-- [nvim-colorizer](https://github.com/norcalli/nvim-colorizer.lua): Color highlighter
-- [fidget](https://github.com/j-hui/fidget.nvim): Progress info
-- [vim-gitgutter](https://github.com/airblade/vim-gitgutter): Git diff markes
-- [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme): Colorscheme
-- [allomancer](https://github.com/Nequo/vim-allomancer): Colorscheme
-- [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua): File explorer
-- [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): Icons
-- [lualine](https://github.com/nvim-lualine/lualine.nvim): Status line
 - [autopairs](https://github.com/windwp/nvim-autopairs): Autopairs
-- [plenary](https://github.com/nvim-lua/plenary.nvim): Lua functions
-- [telescope](https://github.com/nvim-telescope/telescope.nvim): Find, filter, preview files
-- [notify](https://github.com/rcarriga/nvim-notify): Notification manager
-- [tabline](https://github.com/kdheepak/tabline.nvim): Tabs for vim
-- [treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Abstraction layer
-- [textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects): Syntax aware
-- [refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor): Treesitter refactor module
-- [rainbow](https://github.com/p00f/nvim-ts-rainbow): Rainbow pairs
-- [playground](https://github.com/nvim-treesitter/playground): Vim Integrated playground
-- [commenting](https://github.com/JoosepAlviste/nvim-ts-context-commentstring): Commenting
-- [smart-comment](https://github.com/numToStr/Comment.nvim): Smart comment
-- [indent](https://github.com/lukas-reineke/indent-blankline.nvim): Indentation
-- [debug](https://github.com/mfussenegger/nvim-dap): Debug
-- [terminal](https://github.com/akinsho/toggleterm.nvim): Terminal
-- [motion](https://github.com/ggandor/lightspeed.nvim): Motion plugin
-- [startup-screen](https://github.com/startup-nvim/startup.nvim): Vim startup screen
-- [lspconfig](https://github.com/neovim/nvim-lspconfig): Configure built-in LSP client
-- [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim): Diagnostics, formatting, etc.
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): Autocompletion plugin
+- [bufferline](https://github.com/akinsho/bufferline.nvim): Tabs for vim
 - [cmp-lsp](https://github.com/hrsh7th/cmp-nvim-lsp): LSP sourec for nvim-cmp
 - [cmp-luasnip](https://github.com/saadparwaiz1/cmp_luasnip): Snippets for nvim-cmp
+- [commenting](https://github.com/JoosepAlviste/nvim-ts-context-commentstring): Commenting
+- [fidget](https://github.com/j-hui/fidget.nvim): Progress info
+- [gitsigns](https://github.com/lewis6991/gitsigns.nvim): Git integration for buffers
+- [lualine](https://github.com/nvim-lualine/lualine.nvim): Status line
+- [lspconfig](https://github.com/neovim/nvim-lspconfig): Configure built-in LSP client
 - [luasnip](https://github.com/L3MON4D3/LuaSnip): Snippets plugin
-- [lspsaga](https://github.com/kkharji/lspsaga.nvim): Icons for LSP diagnostics
 - [lspkind](https://github.com/onsails/lspkind.nvim): pictograms LSP completion
 - [mason](https://github.com/williamboman/mason.nvim): Manage LSP server
-
+- [motion](https://github.com/ggandor/lightspeed.nvim): Motion plugin
+- [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim): File explorer
+- [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): Icons
+- [notify](https://github.com/rcarriga/nvim-notify): Notification manager
+- [nvim-spectre](https://github.com/nvim-pack/nvim-spectre):  Find the enemy and replace them with dark power. 
+- [none-ls](https://github.com/nvimtools/none-ls.nvim): Diagnostics, formatting, etc.
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): Autocompletion plugin
+- [playground](https://github.com/nvim-treesitter/playground): Vim Integrated playground
+- [plenary](https://github.com/nvim-lua/plenary.nvim): Lua functions
+- [refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor): Treesitter refactor module
+- [rust-tools](https://github.com/simrat39/rust-tools.nvim/):  Tools for better development in rust using neovim's builtin lsp 
+- [smart-comment](https://github.com/numToStr/Comment.nvim): Smart comment
+- [sonokai](https://github.com/sainnhe/sonokai): Colorscheme
+- [startup-screen](https://github.com/startup-nvim/startup.nvim): Vim startup screen
+- [telescope](https://github.com/nvim-telescope/telescope.nvim): Find, filter, preview files
+- [treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Abstraction layer
+- [textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects): Syntax aware
 
 Brief help:
 
