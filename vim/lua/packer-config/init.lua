@@ -1,6 +1,5 @@
 return require("packer").startup(function()
 	use("wbthomason/packer.nvim") --> packer plugin manager
-	use("asvetliakov/vim-easymotion") --> for VSCode
 
 	--> colorschemes
 	use("sainnhe/sonokai")
@@ -21,8 +20,8 @@ return require("packer").startup(function()
 	use("nvim-lua/plenary.nvim") --> Lua functions
 	use("nvim-pack/nvim-spectre") --> find and replace
 	use {
-	  'nvim-lualine/lualine.nvim',
-	  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+	  "nvim-lualine/lualine.nvim",
+	  requires = { "nvim-tree/nvim-web-devicons", opt = true }
 	} --> a statusline written in lua
 	use("windwp/nvim-autopairs") --> ({["''"]})
 	use {
@@ -40,8 +39,8 @@ return require("packer").startup(function()
 
 	use("simrat39/rust-tools.nvim") --> better development in rust
 	use {
-		'saecki/crates.nvim',
-	    requires = { 'nvim-lua/plenary.nvim' }
+		"saecki/crates.nvim",
+	    requires = { "nvim-lua/plenary.nvim" }
 	} --> managing crates.io dependencies
 	use("numToStr/Comment.nvim") --> easy for comment
 	use("mfussenegger/nvim-dap") --> debug adapter protocol
@@ -57,4 +56,8 @@ return require("packer").startup(function()
 	use({ "williamboman/mason.nvim", run = ":MasonUpdate" }) --> manage LSP servers
 	use("williamboman/mason-lspconfig.nvim") --> extension to mason
 	use({"j-hui/fidget.nvim",  tag = "legacy" }) --> lsp progress
+	use {
+  	"hinell/lsp-timeout.nvim",
+    requires= { "neovim/nvim-lspconfig" }
+  } --> Start/stop LSP servers upon demand
 end)
