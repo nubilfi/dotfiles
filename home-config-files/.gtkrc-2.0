@@ -3,7 +3,7 @@
 
 include "/home/bill/.gtkrc-2.0.mine"
 gtk-theme-name="Greybird"
-gtk-icon-theme-name="Faenza-CrunchBang"
+gtk-icon-theme-name="Faenza-Dark"
 gtk-font-name="Sans 11"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
@@ -17,3 +17,6 @@ gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintslight"
 gtk-xft-rgba="rgb"
+# or
+# gtk-xft-hintstyle="hintfull"
+# gtk-xft-rgba="none"

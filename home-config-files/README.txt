@@ -1,0 +1,1 @@
+Put all of those files inside /home/$USER directory

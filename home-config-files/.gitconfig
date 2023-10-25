@@ -1,3 +1,5 @@
 [user]
 	email = ibnu.habil.h@gmail.com
 	name = Muh Ibnu Habil Hanafi
+[init]
+	defaultBranch = main
