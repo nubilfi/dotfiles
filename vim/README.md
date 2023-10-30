@@ -1,42 +1,12 @@
 # Nubilfi's dotfiles
 
-### Neovim setup for Rust & Javascript
+### Neovim setup for Rust
 
 I used Packer for the plugins manager, follow the instructions from the [Packer](https://github.com/wbthomason/packer.nvim) official documentation for setup and installation.
 
 As an addition to this config (optional), please install these packages: `exuberant-ctags git ack-grep fzf xclip xsel wl-clipboard ripgrep`. Find that packages name according to your Linux distro, it might be different on each distro.
 
-I'm using [lua_lsp](https://github.com/sumneko/lua-language-server) for `intellisense engine`, so please check on that link for more details about the installation. Finally, here are the list of the `packages` that I installed:
-
-- [autopairs](https://github.com/windwp/nvim-autopairs): Autopairs
-- [bufferline](https://github.com/akinsho/bufferline.nvim): Tabs for vim
-- [cmp-lsp](https://github.com/hrsh7th/cmp-nvim-lsp): LSP sourec for nvim-cmp
-- [cmp-luasnip](https://github.com/saadparwaiz1/cmp_luasnip): Snippets for nvim-cmp
-- [commenting](https://github.com/JoosepAlviste/nvim-ts-context-commentstring): Commenting
-- [fidget](https://github.com/j-hui/fidget.nvim): Progress info
-- [gitsigns](https://github.com/lewis6991/gitsigns.nvim): Git integration for buffers
-- [lualine](https://github.com/nvim-lualine/lualine.nvim): Status line
-- [lspconfig](https://github.com/neovim/nvim-lspconfig): Configure built-in LSP client
-- [luasnip](https://github.com/L3MON4D3/LuaSnip): Snippets plugin
-- [lspkind](https://github.com/onsails/lspkind.nvim): pictograms LSP completion
-- [mason](https://github.com/williamboman/mason.nvim): Manage LSP server
-- [motion](https://github.com/ggandor/lightspeed.nvim): Motion plugin
-- [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim): File explorer
-- [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): Icons
-- [notify](https://github.com/rcarriga/nvim-notify): Notification manager
-- [nvim-spectre](https://github.com/nvim-pack/nvim-spectre):  Find the enemy and replace them with dark power. 
-- [none-ls](https://github.com/nvimtools/none-ls.nvim): Diagnostics, formatting, etc.
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): Autocompletion plugin
-- [playground](https://github.com/nvim-treesitter/playground): Vim Integrated playground
-- [plenary](https://github.com/nvim-lua/plenary.nvim): Lua functions
-- [refactor](https://github.com/nvim-treesitter/nvim-treesitter-refactor): Treesitter refactor module
-- [rust-tools](https://github.com/simrat39/rust-tools.nvim/):  Tools for better development in rust using neovim's builtin lsp 
-- [smart-comment](https://github.com/numToStr/Comment.nvim): Smart comment
-- [sonokai](https://github.com/sainnhe/sonokai): Colorscheme
-- [startup-screen](https://github.com/startup-nvim/startup.nvim): Vim startup screen
-- [telescope](https://github.com/nvim-telescope/telescope.nvim): Find, filter, preview files
-- [treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Abstraction layer
-- [textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects): Syntax aware
+I'm using [lua_lsp](https://github.com/sumneko/lua-language-server) for `intellisense engine`, so please check on that link for more details about the installation. List of installed `plugins` is on [this file](https://github.com/nubilfi/dotfiles/blob/master/vim/lua/packer-config/init.lua).
 
 Brief help:
 

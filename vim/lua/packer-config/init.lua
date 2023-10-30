@@ -3,19 +3,19 @@ return require("packer").startup(function()
 
 	--> colorschemes
 	use("sainnhe/sonokai")
-	
+
 	--> misc
 	use("lewis6991/gitsigns.nvim") --> Git integration for buffers 
 	use("nvim-tree/nvim-web-devicons") --> file icons
 	use {
-  "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    requires = { 
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    }
-  }
+	"nvim-neo-tree/neo-tree.nvim",
+	  branch = "v3.x",
+	  requires = { 
+	    "nvim-lua/plenary.nvim",
+	    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+	    "MunifTanjim/nui.nvim",
+	  }
+	}
 	--use("dstein64/vim-startuptime")
 	use("nvim-lua/plenary.nvim") --> Lua functions
 	use("nvim-pack/nvim-spectre") --> find and replace
@@ -29,7 +29,6 @@ return require("packer").startup(function()
 	  requires = { {"nvim-lua/plenary.nvim"} }
 	} --> Find, Filter, Preview, Pick. 
 	use("rcarriga/nvim-notify") --> notification manager
-	use("akinsho/bufferline.nvim") --> tabs for neovim
 
 	--> treesitter & treesitter modules/plugins
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) --> treesitter
@@ -57,7 +56,7 @@ return require("packer").startup(function()
 	use("williamboman/mason-lspconfig.nvim") --> extension to mason
 	use({"j-hui/fidget.nvim",  tag = "legacy" }) --> lsp progress
 	use {
-  	"hinell/lsp-timeout.nvim",
-    requires= { "neovim/nvim-lspconfig" }
-  } --> Start/stop LSP servers upon demand
+		"hinell/lsp-timeout.nvim",
+	  requires= { "neovim/nvim-lspconfig" }
+	} --> Start/stop LSP servers upon demand
 end)
