@@ -107,7 +107,7 @@ sudo cp "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
 sudo cp "$TUMBLERD_SCRIPT_SRC" "$TUMBLERD_TARGET_DIR"
 
 # Install required packages
-packages="git terminator python polkit polkit-gnome binutils openssl ffmpeg dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux ripgrep lazygit xcompmgr xclip clipit netctl net-tools evince"
+packages="git terminator python polkit polkit-gnome binutils openssl ffmpeg dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux ripgrep lazygit xcompmgr xclip clipit netctl net-tools evince ctags"
 
 echo "The following packages will be installed:"
 echo -e "\033[1m$packages\033[0m"
@@ -236,6 +236,7 @@ display_font_values() {
 echo
 echo "Activating your new wallpaper..."
 nitrogen --set-zoom-fill ./nitrogen/teal-mountain.jpg
+cp ./nitrogen/teal-mountain.jpg "$USERHOME_DEST"
 echo "Done."
 echo
 
@@ -302,7 +303,9 @@ echo "7. Also change openweathermap attributes (KEY, UNITS, ID, CITY, SYMBOL) in
 echo ""
 echo "8. Run command: $ pacmd list-sink-inputs, you'll get the sink output for your machine then change the sink value for [module/pulse] inside ~/.config/polybar/config file and don't forget to change the sink name for [module/pulseaudio-control]"
 echo ""
-echo "9. You might want to update your thunar settings, you can check it in ~/.config/Thunar directory."
+echo "9. If you want to make your microphone much better, use \033[1mstereo-pulse-mic.txt\033[0m as your \033[1m/etc/pulse/default.pa\033[0m config."
+echo ""
+echo "10. You might want to update your thunar settings, you can check it in ~/.config/Thunar directory."
 echo ""
 echo "Thank you for using this setup script. Enjoy your i3wm-polybar setup!"
 echo ""

@@ -24,11 +24,11 @@ if [ -n "$MONITOR" ]; then
 
   # Set wallpaper using Nitrogen
   sleep 3
-  nitrogen --head=0 --set-scaled ~/Downloads/wallpaper/teal-mountain.jpg --save
+  nitrogen --head=0 --set-scaled ~/teal-mountain.jpg --save
 
   if [ -n "$MODE" ]; then
 	sleep 3
-    nitrogen --head=1 --set-scaled ~/Downloads/wallpaper/teal-mountain.jpg --save
+    nitrogen --head=1 --set-scaled ~/teal-mountain.jpg --save
   fi
 
   i3-msg restart
