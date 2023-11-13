@@ -1,3 +1,3 @@
 require'lualine'.setup({
-    options = { theme = 'itabyss' },
+    options = { theme = 'everforest' },
 })

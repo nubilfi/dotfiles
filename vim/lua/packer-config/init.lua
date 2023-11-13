@@ -2,8 +2,11 @@ return require("packer").startup(function()
 	use("wbthomason/packer.nvim") --> packer plugin manager
 
 	--> colorschemes
-	use("sainnhe/sonokai")
-
+	-- use("nubilfi/itabyss.vim")
+	-- use("sainnhe/sonokai")
+	--vuse { "bluz71/vim-moonfly-colors", as = "moonfly" }
+	use('sainnhe/everforest')
+	
 	--> misc
 	use("lewis6991/gitsigns.nvim") --> Git integration for buffers 
 	use("nvim-tree/nvim-web-devicons") --> file icons
