@@ -2,18 +2,20 @@
 
 ### Neovim setup for Rust
 
-I used Packer for the plugins manager, follow the instructions from the [Packer](https://github.com/wbthomason/packer.nvim) official documentation for setup and installation.
+I've utilized Packer as the plugins manager for this configuration. Please refer to the official [Packer documentation](https://github.com/wbthomason/packer.nvim) for precise instructions on setup and installation.
 
-As an addition to this config (optional), please install these packages: `exuberant-ctags git ack-grep fzf xclip xsel wl-clipboard ripgrep`. Find that packages name according to your Linux distro, it might be different on each distro.
+As an optional addition to this configuration, consider installing the following packages: `exuberant-ctags, git, ack-grep, fzf, xclip, xsel, wl-clipboard, and ripgrep`. Keep in mind that package names may differ across various Linux distributions, so ensure compatibility by identifying the equivalent packages in your system.
 
-I'm using [lua_lsp](https://github.com/sumneko/lua-language-server) for `intellisense engine`, so please check on that link for more details about the installation. List of installed `plugins` is on [this file](https://github.com/nubilfi/dotfiles/blob/master/vim/lua/packer-config/init.lua).
+For the intellisense engine, I've integrated [lua_lsp](https://github.com/sumneko/lua-language-server). Detailed installation instructions can be found at the provided link for further insight.
+
+List of installed `plugins` is on [this file](https://github.com/nubilfi/dotfiles/blob/master/vim/lua/packer-config/init.lua).
 
 Brief help:
 
 - :PackerInstall - installs plugins
 - :PackerClean - confirms removal of unused plugins
 
-Here are some information about mappings:
+For a quick reference on mappings:
 
 - n: normal only
 - v: visual and select
