@@ -56,6 +56,7 @@ map("n", "<leader>ff", ":Telescope find_files hidden=true<cr>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>fb", ":Telescope buffers<cr>", opts)
 
+--> spectre mappings <--
 map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = "Toggle Spectre"
 })
