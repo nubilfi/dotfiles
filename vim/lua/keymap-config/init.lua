@@ -48,7 +48,7 @@ map("n", "tl", ":tablast<CR>", opts)
 map("n", "tc", ":tabclose<CR>", opts)
 
 --> neo-tree mappings <--
-map("n", "<C-b>", ":Neotree toggle<CR>", opts)
+map("n", "<C-z>", ":Neotree toggle<CR>", opts)
 map("n", "<leader>o", [[<Cmd>lua if vim.bo.filetype == "neotree" then vim.cmd('wincmd p') else vim.cmd('Neotree focus') end<CR>]], opts)
 
 --> telescope mappings <--

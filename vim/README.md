@@ -54,6 +54,6 @@ For a quick reference on mappings:
 | normal | Shift + << | indent line to the left              |
 | normal | Shift + Y  | yank to the end of line              |
 | normal |   Y + p    | Duplicate line (Sublime like Ctrl+d) |
-| normal |  Ctrl + b  | toggle sidebar                       |
+| normal |  Ctrl + z  | toggle sidebar                       |
 | normal | comma + ff | find file (fzf)                      |
 | insert |    tab     | navigate the completion (down)       |
