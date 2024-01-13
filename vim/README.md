@@ -2,18 +2,16 @@
 
 ### Neovim setup for Rust
 
-I've utilized Packer as the plugins manager for this configuration. Please refer to the official [Packer documentation](https://github.com/wbthomason/packer.nvim) for precise instructions on setup and installation.
+I've utilized Lazy.nvim as the plugins manager for this configuration. Please refer to the official [Lazy.nvim documentation](https://github.com/folke/lazy.nvim) for precise instructions on setup by yourself, but you don't have to since you can use my setup as your starter. 
 
 As an optional addition to this configuration, consider installing the following packages: `exuberant-ctags, git, ack-grep, fzf, xclip, xsel, wl-clipboard, and ripgrep`. Keep in mind that package names may differ across various Linux distributions, so ensure compatibility by identifying the equivalent packages in your system.
 
-For the intellisense engine, I've integrated [lua_lsp](https://github.com/sumneko/lua-language-server). Detailed installation instructions can be found at the provided link for further insight.
-
-List of installed `plugins` is on [this file](https://github.com/nubilfi/dotfiles/blob/master/vim/lua/packer-config/init.lua).
+For the language server, I've integrated [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig). Detailed installation instructions can be found at the provided link for further insight.
 
 Brief help:
 
-- :PackerInstall - installs plugins
-- :PackerClean - confirms removal of unused plugins
+- :checkhealt lazy - recommended to run after installation
+- :Lazy - to manage Plugins
 
 For a quick reference on mappings:
 
