@@ -10,7 +10,7 @@ For the language server, I've integrated [nvim-lspconfig](https://github.com/neo
 
 Brief help:
 
-- :checkhealt lazy - recommended to run after installation
+- :checkhealth lazy - recommended to run after installation
 - :Lazy - to manage Plugins
 
 For a quick reference on mappings:
