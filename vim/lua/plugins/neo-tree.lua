@@ -5,8 +5,7 @@ return {
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
-  lazy = true,
-  -- event = "VeryLazy", TODO: flickering NeoVim welcome page on startup, no clue...
+  event = "VeryLazy",
   keys = {
     { "<C-zf>", ":Neotree toggle float<CR>", silent = true, desc = "Float File Explorer" },
     { "<C-z>",  ":Neotree toggle left<CR>",  silent = true, desc = "Left File Explorer" },

@@ -50,3 +50,9 @@ api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
+
+-- resize neovim split when terminal is resized
+api.nvim_command("autocmd VimResized * wincmd =")
+
+-- don't auto comment new line
+-- api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
