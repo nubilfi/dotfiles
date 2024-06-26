@@ -4,7 +4,7 @@
 
 I've utilized Lazy.nvim as the plugins manager for this configuration. Please refer to the official [Lazy.nvim documentation](https://github.com/folke/lazy.nvim) for precise instructions on setup by yourself, but you don't have to since you can use my setup as your starter. 
 
-As an optional addition to this configuration, consider installing the following packages: `exuberant-ctags, git, ack-grep, fzf, xclip, xsel, wl-clipboard, and ripgrep`. Keep in mind that package names may differ across various Linux distributions, so ensure compatibility by identifying the equivalent packages in your system.
+As an optional addition to this configuration, consider installing the following packages: `exuberant-ctags, git, ack-grep, fzf, xclip, xsel, wl-clipboard, lldb, fd and ripgrep`. Keep in mind that package names may differ across various Linux distributions, so ensure compatibility by identifying the equivalent packages in your system.
 
 For the language server, I've integrated [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig). Detailed installation instructions can be found at the provided link for further insight.
 
