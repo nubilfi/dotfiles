@@ -1,15 +1,10 @@
 return {
   {
     'mrcjkb/rustaceanvim',
-    version = '^3', -- Recommended
+    version = '^4', -- Recommended
     ft = { 'rust' },
-    -- NOTES: InlayHint is natively support on NeoVim v0.10.x, disable later
     dependencies = {
       "nvim-lua/plenary.nvim",
-      {
-        "lvimuser/lsp-inlayhints.nvim",
-        opts = {}
-      },
     },
     config = function()
       vim.g.rustaceanvim = {
@@ -23,7 +18,7 @@ return {
         },
         server = {
           on_attach = function(client, bufnr)
-            require("lsp-inlayhints").on_attach(client, bufnr)
+            vim.lsp.inlay_hint.enable()
           end
         }
       }
@@ -38,7 +33,9 @@ return {
     event = { "BufRead", "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("crates").setup {}
+      require("crates").setup {
+        popup = {}
+      }
     end,
   },
 }

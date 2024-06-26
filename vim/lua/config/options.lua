@@ -57,3 +57,20 @@ set.ffs = "unix,dos" -- Use Unix as the standard file type
 set.magic = true -- For regular expressions turn magic on
 set.linespace = 15
 set.conceallevel = 2
+
+vim.filetype.add({
+  extension = {
+    env = "dotenv",
+  },
+  filename = {
+    [".env"] = "dotenv",
+    ["env"] = "dotenv",
+  },
+  pattern = {
+    -- ["[jt]sconfig.*.json"] = "jsonc",
+    ["%.env%.[%w_.-]+"] = "dotenv",
+  },
+})
+
+-- Enable blinking together with different cursor shapes for insert/command mode, and cursor highlighting:
+set.guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'

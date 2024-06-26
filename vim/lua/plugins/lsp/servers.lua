@@ -7,9 +7,12 @@ return {
           [vim.fn.stdpath("config") .. "/lua"] = true,
         },
       },
-      telemetry = { enable = false },
-      diagnostics = {
-        globals = { "vim" },
+      -- telemetry = { enable = false },
+      -- diagnostics = {
+      --   globals = { "vim" },
+      -- },
+      completion = {
+        callSnippet = "Replace",
       },
     },
   },
@@ -19,7 +22,7 @@ return {
   vimls = {
     filetypes = { "vim" },
   },
-  rust_analyzer = {
-    filetypes = { "rust"},
-  },
+  -- rust_analyzer = {
+  --   filetypes = { "rust"},
+  -- },
 }

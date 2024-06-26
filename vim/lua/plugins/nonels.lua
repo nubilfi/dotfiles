@@ -5,8 +5,13 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "jay-babu/mason-null-ls.nvim",
+      "nvimtools/none-ls-extras.nvim",
+      "gbprod/none-ls-shellcheck.nvim",
     },
     config = function()
+      require("null-ls").register(require("none-ls-shellcheck.diagnostics"))
+      require("null-ls").register(require("none-ls-shellcheck.code_actions"))
+
       local mason_null_ls = require("mason-null-ls")
       local null_ls = require("null-ls")
 
@@ -17,9 +22,9 @@ return {
           "stylua", -- lua formatter
           "shellcheck", -- shell linter
           "buf", -- buf formatter
-          "beautysh", -- shell formatter
+          "shfmt", -- shell formatter
           "spell", -- spell checker
-          "rustfmt", -- deprecated, but it's still usable
+          "rustfmt", -- deprecated, but it's still usable for legacy none-ls
           "taplo", -- toml
         },
       })
@@ -36,7 +41,7 @@ return {
         sources = {
           formatting.stylua,
           formatting.buf,
-          formatting.beautysh,
+          formatting.shfmt,
           formatting.rustfmt.with({
               extra_args = function(params)
                   local Path = require("plenary.path")

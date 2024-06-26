@@ -1,27 +1,5 @@
 local api = vim.api
 
--- api.nvim_create_autocmd("ColorScheme", {
---   group = api.nvim_create_augroup("settermbg", {}),
---   callback = function(_)
---     local bg = api.nvim_get_hl(0, { name = "Normal", link = false }).bg
---     if not bg then
---       return
---     end
-
---     if os.getenv("TMUX") then
---       bg = string.format('printf "\\ePtmux;\\e\\033]11;#%06x\\007\\e\\\\"', bg)
---     else
---       bg = string.format('printf "\\033]11;#%06x\\007"', bg)
---     end
-
---     os.execute(bg)
-
---     vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
---     vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "Normal" })
---     vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
---   end,
--- })
-
 -- Enable spell checking for certain file types
 api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },
@@ -50,6 +28,17 @@ api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
+
+-- Highlight on yank
+api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
+-- auto close brackets
+-- this
+-- api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
 
 -- resize neovim split when terminal is resized
 api.nvim_command("autocmd VimResized * wincmd =")
