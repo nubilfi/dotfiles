@@ -107,7 +107,7 @@ sudo cp "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
 sudo cp "$TUMBLERD_SCRIPT_SRC" "$TUMBLERD_TARGET_DIR"
 
 # Install required packages
-packages="git terminator python polkit binutils openssl ffmpeg dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux ripgrep lazygit xcompmgr xclip netctl net-tools evince ctags pulseaudio pulseaudio-alsa alsa-utils upower p7zip lemurs zsh"
+packages="xorg xorg-xinit git terminator python polkit binutils openssl ffmpeg dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux ripgrep lazygit xcompmgr xclip netctl net-tools evince ctags pulseaudio pulseaudio-alsa alsa-utils upower p7zip lemurs zsh"
 
 echo "The following packages will be installed:"
 echo -e "\033[1m$packages\033[0m"
