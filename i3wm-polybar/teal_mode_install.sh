@@ -107,7 +107,7 @@ sudo cp "$I3EXIT_SCRIPT_SRC" "$I3EXIT_TARGET_DIR"
 sudo cp "$TUMBLERD_SCRIPT_SRC" "$TUMBLERD_TARGET_DIR"
 
 # Install required packages
-packages="git terminator python polkit polkit-gnome binutils openssl ffmpeg dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux ripgrep lazygit xcompmgr xclip clipit netctl net-tools evince ctags"
+packages="git terminator python polkit binutils openssl ffmpeg dunst i3 thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman nitrogen polybar ranger redshift mpv ffmpegthumbnailer xdotool rxvt-unicode rofi dmenu jq udisks2 w3m tmux ripgrep lazygit xcompmgr xclip netctl net-tools evince ctags pulseaudio pulseaudio-alsa alsa-utils upower p7zip lemurs zsh"
 
 echo "The following packages will be installed:"
 echo -e "\033[1m$packages\033[0m"
@@ -117,7 +117,7 @@ read -p "Do you want to continue with the installation? [Y/n] " -n 1 -r
 echo
 
 if [[ $REPLY =~ ^[Yy]$ || $REPLY == "" ]]; then
-  if ! sudo pacman -Sy --noconfirm $packages 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2); then
+  if ! sudo pacman -Sy --noconfirm --needed $packages 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2); then
     echo "Failed to install packages."
     exit 1
   fi
@@ -125,6 +125,12 @@ else
   echo "Installation cancelled by user."
   exit 1
 fi
+
+echo "Setting Lemurs display manager"
+
+sudo bash -c 'echo -e "#! /bin/sh\nexec i3" > /etc/lemurs/wms/i3wm && chmod 755 /etc/lemurs/wms/i3wm' && echo -e "#! /bin/bash\nexec i3" > ~/.xinitrc
+
+sudo systemctl enable lemurs
 
 # Check if Paru is installed
 if command -v paru &> /dev/null
@@ -158,7 +164,7 @@ else
                 ;;
             "yay")
                 sudo pacman -S --needed base-devel --noconfirm
-                if ! git clone https://aur.archlinux.org/yay.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
+                if ! git clone https://aur.archlinux.org/yay-bin.git 2> >(tee /dev/tty | sed 's/^/[ERROR] /' >&2) ; then
                     echo "Failed to clone Yay repository."
                     exit 1
                 fi
@@ -179,7 +185,7 @@ else
 fi
 
 # Install additional packages
-$aur_helper -S --noconfirm networkmanager-dmenu-git pulseaudio-control drun3 picom-jonaburg-git websocat xev spotifyd spotify-tui exuberant-ctags ack-grep
+$aur_helper -S --noconfirm --needed networkmanager-dmenu-git pulseaudio-control drun3 picom-jonaburg-git websocat xev spotifyd spotify-tui exuberant-ctags ack-grep
 
 # Create .config directory if it doesn't exist
 if [ ! -d "$CONFIG_DIR" ]; then
@@ -303,7 +309,7 @@ echo "7. Also change openweathermap attributes (KEY, UNITS, ID, CITY, SYMBOL) in
 echo ""
 echo "8. Run command: $ pacmd list-sink-inputs, you'll get the sink output for your machine then change the sink value for [module/pulse] inside ~/.config/polybar/config file and don't forget to change the sink name for [module/pulseaudio-control]"
 echo ""
-echo "9. If you want to make your microphone much better, use \033[1mstereo-pulse-mic.txt\033[0m as your \033[1m/etc/pulse/default.pa\033[0m config."
+echo "9. If no sound, run alsactl init command and if you want to make your microphone much better, use \033[1mstereo-pulse-mic.txt\033[0m as your \033[1m/etc/pulse/default.pa\033[0m config."
 echo ""
 echo "10. You might want to update your thunar settings, you can check it in ~/.config/Thunar directory."
 echo ""

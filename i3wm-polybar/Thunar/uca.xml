@@ -13,7 +13,7 @@
 	<icon>Terminal</icon>
 	<name>Open Terminal Here</name>
 	<unique-id>1367866030392833-1</unique-id>
-	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<command>terminator --working-directory %f</command>
 	<description></description>
 	<patterns>*</patterns>
 	<startup-notify/>
