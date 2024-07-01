@@ -241,8 +241,11 @@ display_font_values() {
 
 echo
 echo "Activating your new wallpaper..."
-nitrogen --set-zoom-fill ./nitrogen/teal-mountain.jpg
+current_user=$(whoami)
+config_file="$CONFIG_DIR/nitrogen/bg-saved.cfg"
+sed -i "s|\$USER|$current_user|g" "$config_file"
 cp ./nitrogen/teal-mountain.jpg "$USERHOME_DEST"
+nitrogen --set-zoom-fill ./nitrogen/teal-mountain.jpg
 echo "Done."
 echo
 
