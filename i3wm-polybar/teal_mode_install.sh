@@ -185,7 +185,7 @@ else
 fi
 
 # Install additional packages
-$aur_helper -S --noconfirm --needed networkmanager-dmenu-git pulseaudio-control drun3 picom-jonaburg-git websocat xev spotifyd spotify-tui exuberant-ctags ack-grep
+$aur_helper -S --noconfirm --needed networkmanager-dmenu-git pulseaudio-control drun3 picom-git websocat xev spotifyd spotify-tui exuberant-ctags ack-grep
 
 # Create .config directory if it doesn't exist
 if [ ! -d "$CONFIG_DIR" ]; then
