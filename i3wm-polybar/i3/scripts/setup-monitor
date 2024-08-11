@@ -11,24 +11,43 @@ PRIMARY_MONITOR=$(xrandr --query | awk '/ primary/{print $1}')
 MONITOR=$(xrandr --query | awk '/ connected/{print $1}' | grep -v "$PRIMARY_MONITOR")
 
 if [ -n "$MONITOR" ]; then
-  # Get the highest available resolution for the secondary monitor
-  MODE=$(xrandr --query | awk -v monitor="$MONITOR" '/ connected/ && $1 == monitor {found=1; next} found && /^[[:space:]]+[0-9]+x[0-9]+/ {print $1; exit}' | sort -r | head -n 1)
+  # Prompt user for mode
+  echo "Choose display mode:"
+  echo "1) Extend"
+  echo "2) Mirror"
+  echo "3) Turn off secondary monitor"
+  read -p "Enter your choice [1-3]: " choice
 
-  xrandr --output "$MONITOR" --off
+  if [ "$choice" == "1" ]; then
+    # Get the highest available resolution for the secondary monitor
+    MODE=$(xrandr --query | awk -v monitor="$MONITOR" '/ connected/ && $1 == monitor {found=1; next} found && /^[[:space:]]+[0-9]+x[0-9]+/ {print $1; exit}' | sort -r | head -n 1)
 
-  if [ -n "$MODE" ]; then
-    xrandr --dpi 96 --output "$MONITOR" --mode "$MODE" --right-of "$PRIMARY_MONITOR" --scale 1x1
+    xrandr --output "$MONITOR" --off
+
+    if [ -n "$MODE" ]; then
+      xrandr --dpi 96 --output "$MONITOR" --mode "$MODE" --right-of "$PRIMARY_MONITOR" --scale 1x1
+    else
+      xrandr --dpi 96 --output "$MONITOR" --auto --right-of "$PRIMARY_MONITOR" --scale 1x1
+    fi
+  elif [ "$choice" == "2" ]; then
+    # Mirror displays
+    MODE=$(xrandr --query | awk -v monitor="$PRIMARY_MONITOR" '/ connected/ && $1 == monitor {found=1; next} found && /^[[:space:]]+[0-9]+x[0-9]+/ {print $1; exit}' | sort -r | head -n 1)
+    xrandr --output "$MONITOR" --mode "$MODE" --same-as "$PRIMARY_MONITOR"
+  elif [ "$choice" == "3" ]; then
+    # Turn off secondary monitor
+    xrandr --output "$MONITOR" --off
   else
-    xrandr --dpi 96 --output "$MONITOR" --auto --right-of "$PRIMARY_MONITOR" --scale 1x1
+    echo "Invalid choice. Exiting."
+    exit 1
   fi
 
   # Set wallpaper using Nitrogen
   sleep 3
-  nitrogen --head=0 --set-scaled ~/teal-mountain.jpg --save
+  nitrogen --head=0 --set-scaled ~/Downloads/wallpaper/teal-mountain.jpg --save
 
-  if [ -n "$MODE" ]; then
-	sleep 3
-    nitrogen --head=1 --set-scaled ~/teal-mountain.jpg --save
+  if [ "$choice" == "1" ]; then
+    sleep 3
+    nitrogen --head=1 --set-scaled ~/Downloads/wallpaper/teal-mountain.jpg --save
   fi
 
   i3-msg restart
