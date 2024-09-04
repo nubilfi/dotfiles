@@ -99,10 +99,10 @@ run_cmd() {
 		tmux command-prompt -p " TMUX >>> kill PANE with pane-id: " "kill-pane -t '%%'"
 		;;
 	--cmd-022-split-vetical)
-		tmux split-window -v -c "#{pane_current_path}"
+		tmux split-window -h -c "#{pane_current_path}"
 		;;
 	--cmd-023-split-horizontal)
-		tmux split-window -h -c "#{pane_current_path}"
+		tmux split-window -v -c "#{pane_current_path}"
 		;;
 	--cmd-024-swap-window-left)
 		tmux swap-window -t -1\; select-window -t -1
