@@ -31,7 +31,6 @@ local mappings = {
     },
     l = {
         name = "+LSP",
-        -- c = { "<cmd>lua require('config.utils').copyFilePathAndLineNumber()<CR>", "Copy File Path and Line Number" },
         a = { "<cmd>lua vim.cmd.RustLsp('codeAction')<cr>", "Rust Code Action" },
         k = { "<cmd>lua vim.cmd.RustLsp { 'hover', 'actions' }<cr>", "Hover" },
         d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
@@ -48,7 +47,7 @@ local mappings = {
     },
 }
 
-which_key.register(mappings, opts)
+-- which_key.register(mappings, opts)
 
 vim.keymap.set("n", "K", "<cmd>RustLsp hover actions<CR>", { silent = true, desc = "Rust Hover" })
 vim.keymap.set("n", "gl", "<cmd>RustLsp explainError<CR>", { silent = true, desc = "Explain error" })

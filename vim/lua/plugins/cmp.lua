@@ -2,12 +2,12 @@ return {
   "hrsh7th/nvim-cmp", --> Autocompletion plugin
   event = "InsertEnter",
   dependencies = {
-    "L3MON4D3/LuaSnip",  --> Snippets plugin
-    "saadparwaiz1/cmp_luasnip", --> Snippets source for nvim-cmp
-    "hrsh7th/cmp-nvim-lsp", --> LSP source for nvim-cmp
+    "L3MON4D3/LuaSnip",             --> Snippets plugin
+    "saadparwaiz1/cmp_luasnip",     --> Snippets source for nvim-cmp
+    "hrsh7th/cmp-nvim-lsp",         --> LSP source for nvim-cmp
     "hrsh7th/cmp-path",
     "rafamadriz/friendly-snippets", --> Adds a number of user-friendly preconfigured snippets for different languages
-    "onsails/lspkind.nvim", --> vscode-like pictograms for neovim lsp completion items
+    "onsails/lspkind.nvim",         --> vscode-like pictograms for neovim lsp completion items
   },
   config = function()
     local cmp = require("cmp")
@@ -57,10 +57,6 @@ return {
           end
         end, { "i", "s" }),
       }),
-      -- window = {
-      --   completion = cmp.config.window.bordered(),
-      --   documentation = cmp.config.window.bordered(),
-      -- },
       sources = {
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
@@ -71,7 +67,7 @@ return {
         { name = "treesitter" },
         { name = "crates" },
         { name = "tmux" },
-        { name = "copilot" },
+        -- { name = "copilot" },
       },
       formatting = {
         format = function(entry, vim_item)
@@ -83,7 +79,7 @@ return {
               nvim_lua = "[Lua]",
               luasnip = "[LuaSnip]",
               buffer = "[Buffer]",
-              copilot = "[Copilot]",
+              -- copilot = "[Copilot]",
             })[entry.source.name]
             return vim_item
           else

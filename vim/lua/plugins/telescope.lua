@@ -1,14 +1,138 @@
 return {
-	{
-    -- Find, Filter, Preview, Pick. 
-    "nvim-telescope/telescope.nvim", 
-		cmd = "Telescope",
-		version = false,
-		lazy = true,
-	    dependencies = { 
-				"nvim-lua/plenary.nvim",
-		    "nvim-tree/nvim-web-devicons",
-		},
+  {
+    -- Find, Filter, Preview, Pick.
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    version = false,
+    lazy = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    keys = {
+      {
+        "<leader>o", function() require("telescope.builtin").buffers() end, desc = "Buffers",
+      },
+      {
+        "<leader>sf",
+        function()
+          require("telescope.builtin").find_files()
+        end,
+        desc = "Find File (CWD)",
+      },
+      {
+        "<leader>sg",
+        function()
+          require("telescope.builtin").git_files()
+        end,
+        desc = "Search Git Files",
+      },
+      {
+        "<leader>sh",
+        function()
+          require("telescope.builtin").help_tags()
+        end,
+        desc = "Find Help",
+      },
+      {
+        "<leader>sH",
+        function()
+          require("telescope.builtin").highlights()
+        end,
+        desc = "Find highlight groups",
+      },
+      {
+        "<leader>sM",
+        function()
+          require("telescope.builtin").man_pages()
+        end,
+        desc = "Map Pages",
+      },
+      {
+        "<leader>so",
+        function()
+          require("telescope.builtin").oldfiles()
+        end,
+        desc = "Open Recent File",
+      },
+      {
+        "<leader>sR",
+        function()
+          require("telescope.builtin").registers()
+        end,
+        desc = "Registers",
+      },
+      {
+        "<leader>st",
+        function()
+          require("telescope.builtin").live_grep()
+        end,
+        desc = "Live Grep",
+      },
+      {
+        "<leader>sT",
+        function()
+          require("telescope.builtin").grep_string()
+        end,
+        desc = "Grep String",
+      },
+      {
+        "<leader>sk",
+        function()
+          require("telescope.builtin").keymaps()
+        end,
+        desc = "Keymaps",
+      },
+      {
+        "<leader>sC",
+        function()
+          require("telescope.builtin").commands()
+        end,
+        desc = "Commands",
+      },
+      {
+        "<leader>sl",
+        function()
+          require("telescope.builtin").resume()
+        end,
+        desc = "Resume last search",
+      },
+      {
+        "<leader>sc",
+        function()
+          require("telescope.builtin").git_commits()
+        end,
+        desc = "Git commits",
+      },
+      {
+        "<leader>sB",
+        function()
+          require("telescope.builtin").git_branches()
+        end,
+        desc = "Git branches",
+      },
+      {
+        "<leader>sm",
+        function()
+          require("telescope.builtin").git_status()
+        end,
+        desc = "Git status",
+      },
+      {
+        "<leader>sS",
+        function()
+          require("telescope.builtin").git_stash()
+        end,
+        desc = "Git stash",
+      },
+      {
+        "<leader>sb",
+        function()
+          require("telescope.builtin").buffers()
+        end,
+        desc = "Buffers",
+      },
+    },
     config = function()
       local telescope = require("telescope")
       local actions = require("telescope.actions")
@@ -23,15 +147,6 @@ return {
         end,
       })
 
-      local function formattedName(_, path)
-        local tail = vim.fs.basename(path)
-        local parent = vim.fs.dirname(path)
-        if parent == "." then
-          return tail
-        end
-        return string.format("%s\t\t%s", tail, parent)
-      end
-
       telescope.setup({
         file_ignore_patterns = { "%.git/." },
         defaults = {
@@ -40,8 +155,11 @@ return {
               ["<esc>"] = actions.close,
             },
           },
+          path_display = {
+            "filename_first",
+          },
           previewer = false,
-	    		file_ignore_patterns = { "node_modules", "target", ".git", ".cargo", ".rustup", ".venv", ".config", ".vim" },
+          file_ignore_patterns = { "node_modules", "target", ".git", ".cargo", ".rustup", ".venv", ".config", ".vim", "package-lock.json" },
           initial_mode = "insert",
           select_strategy = "reset",
           sorting_strategy = "ascending",
@@ -66,7 +184,6 @@ return {
         pickers = {
           find_files = {
             previewer = false,
-            path_display = formattedName,
             layout_config = {
               height = 0.4,
               prompt_position = "top",
@@ -75,7 +192,6 @@ return {
           },
           git_files = {
             previewer = false,
-            path_display = formattedName,
             layout_config = {
               height = 0.4,
               prompt_position = "top",
@@ -83,7 +199,6 @@ return {
             },
           },
           buffers = {
-            path_display = formattedName,
             mappings = {
               i = {
                 ["<c-d>"] = actions.delete_buffer,

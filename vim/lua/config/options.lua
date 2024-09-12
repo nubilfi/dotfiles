@@ -1,4 +1,4 @@
-vim.g.mapleader = "," -- leader key
+vim.g.mapleader = ","      -- leader key
 vim.g.maplocalleader = "," -- leader key
 
 -- disable netrw
@@ -9,7 +9,7 @@ local set = vim.opt
 
 -- Tab / Indentation
 set.tabstop = 2
-set.shiftwidth = 2 -- amount of block indenting
+set.shiftwidth = 2   -- amount of block indenting
 set.softtabstop = 2
 set.expandtab = true -- convert tabs into spaces
 set.smartindent = true
@@ -23,7 +23,7 @@ set.hlsearch = false
 
 -- Appearance
 set.background = "dark"
-set.number = true -- always show line numbers
+set.number = true         -- always show line numbers
 set.relativenumber = true -- always show line numbers
 set.termguicolors = true
 -- have a fixed column for the diagnostics to appear in
@@ -46,17 +46,22 @@ set.iskeyword:append("-")
 set.mouse:append("a")
 set.clipboard:append("unnamedplus")
 set.modifiable = true
-set.encoding = "UTF-8" -- change the output encoding that is shown in the terminal. 
-set.fileencoding = "UTF-8" -- change the output encoding of the file that is written.
+set.encoding = "UTF-8"                                                                            -- change the output encoding that is shown in the terminal.
+set.fileencoding = "UTF-8"                                                                        -- change the output encoding of the file that is written.
 set.showmode = false
-set.autoread = true -- Set to auto read when a file is changed from the outside
-set.ruler = true -- Always show current position
-set.shortmess:append("c") -- Avoid showing extra messages when using completion
-set.wildignore = "*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store/*,*/target/*,*/node_modules/*" -- ignored
-set.ffs = "unix,dos" -- Use Unix as the standard file type
-set.magic = true -- For regular expressions turn magic on
+set.autoread = true                                                                               -- Set to auto read when a file is changed from the outside
+set.ruler = true                                                                                  -- Always show current position
+set.shortmess:append("c")                                                                         -- Avoid showing extra messages when using completion
+set.wildignore = "*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store/*,*/target/*,*/node_modules/*,*.config/*" -- ignored
+set.ffs = "unix,dos"                                                                              -- Use Unix as the standard file type
+set.magic = true                                                                                  -- For regular expressions turn magic on
 set.linespace = 15
 set.conceallevel = 2
+
+-- Enable code folding
+set.foldmethod = "expr"
+set.foldexpr = "nvim_treesitter#foldexpr()"
+set.foldlevel = 20
 
 vim.filetype.add({
   extension = {
@@ -73,4 +78,5 @@ vim.filetype.add({
 })
 
 -- Enable blinking together with different cursor shapes for insert/command mode, and cursor highlighting:
-set.guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
+set.guicursor =
+'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
