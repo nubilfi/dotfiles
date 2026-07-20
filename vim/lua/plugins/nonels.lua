@@ -22,6 +22,7 @@ return {
           "shellcheck", -- shell linter
           "buf",        -- buf formatter
           "shfmt",      -- shell formatter
+          "ruff",       -- python formatter
           "spell",      -- spell checker
           "taplo",      -- toml
         },
@@ -46,7 +47,8 @@ return {
         },
         -- configure format on save
         on_attach = function(current_client, bufnr)
-          if current_client.supports_method("textDocument/formatting") then
+          -- Use the new API: client:supports_method() instead of client.supports_method()
+          if current_client:supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
             vim.api.nvim_create_autocmd("BufWritePre", {
               group = augroup,

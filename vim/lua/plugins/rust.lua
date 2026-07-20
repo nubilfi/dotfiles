@@ -1,7 +1,9 @@
+local rust_format_group = vim.api.nvim_create_augroup("RustFormat", { clear = true })
+
 return {
   {
     'mrcjkb/rustaceanvim',
-    version = '^4', -- Recommended
+    version = '^4',
     ft = { 'rust' },
     config = function()
       vim.g.rustaceanvim = {
@@ -9,11 +11,10 @@ return {
           on_attach = function(client, bufnr)
             vim.lsp.inlay_hint.enable()
 
-            -- format on save rust_analyzer
-            -- https://github.com/nvimtools/none-ls.nvim/issues/58#issuecomment-1924105768
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            -- Format on save for Rust
+            vim.api.nvim_clear_autocmds({ group = rust_format_group, buffer = bufnr })
             vim.api.nvim_create_autocmd("BufWritePre", {
-              group = augroup,
+              group = rust_format_group,
               buffer = bufnr,
               callback = function()
                 vim.lsp.buf.format({ bufnr = bufnr })

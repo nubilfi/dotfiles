@@ -1,5 +1,30 @@
-vim.g.mapleader = ","      -- leader key
+vim.g.mapleader = "," -- leader key
 vim.g.maplocalleader = "," -- leader key
+
+vim.o.exrc = true -- for esp32 projects
+
+-- Suppress specific deprecation warnings from plugins that haven't updated yet for Neovim 0.12
+-- These warnings are from none-ls.nvim and rustaceanvim, not our config
+-- Remove this once the plugins are updated
+local original_deprecate = vim.deprecate
+vim.deprecate = function(name, alternative, version, plugin, backtrace)
+  -- Suppress specific known deprecation warnings from plugins
+  local suppress_patterns = {
+    "client%.supports_method",           -- from none-ls.nvim
+    "vim%.validate%{",                   -- from rustaceanvim
+    "client%.request",                   -- from rustaceanvim
+    "vim%.lsp%.get_buffers_by_client_id", -- from rustaceanvim
+  }
+
+  for _, pattern in ipairs(suppress_patterns) do
+    if name and name:match(pattern) then
+      return
+    end
+  end
+
+  -- Show other deprecation warnings
+  original_deprecate(name, alternative, version, plugin, backtrace)
+end
 
 -- disable netrw
 vim.g.loaded_netrw = 1
@@ -9,7 +34,7 @@ local set = vim.opt
 
 -- Tab / Indentation
 set.tabstop = 2
-set.shiftwidth = 2   -- amount of block indenting
+set.shiftwidth = 2 -- amount of block indenting
 set.softtabstop = 2
 set.expandtab = true -- convert tabs into spaces
 set.smartindent = true
@@ -23,7 +48,7 @@ set.hlsearch = false
 
 -- Appearance
 set.background = "dark"
-set.number = true         -- always show line numbers
+set.number = true -- always show line numbers
 set.relativenumber = true -- always show line numbers
 set.termguicolors = true
 -- have a fixed column for the diagnostics to appear in
@@ -46,37 +71,36 @@ set.iskeyword:append("-")
 set.mouse:append("a")
 set.clipboard:append("unnamedplus")
 set.modifiable = true
-set.encoding = "UTF-8"                                                                            -- change the output encoding that is shown in the terminal.
-set.fileencoding = "UTF-8"                                                                        -- change the output encoding of the file that is written.
+set.encoding = "UTF-8" -- change the output encoding that is shown in the terminal.
+set.fileencoding = "UTF-8" -- change the output encoding of the file that is written.
 set.showmode = false
-set.autoread = true                                                                               -- Set to auto read when a file is changed from the outside
-set.ruler = true                                                                                  -- Always show current position
-set.shortmess:append("c")                                                                         -- Avoid showing extra messages when using completion
+set.autoread = true -- Set to auto read when a file is changed from the outside
+set.ruler = true -- Always show current position
+set.shortmess:append("c") -- Avoid showing extra messages when using completion
 set.wildignore = "*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store/*,*/target/*,*/node_modules/*,*.config/*" -- ignored
-set.ffs = "unix,dos"                                                                              -- Use Unix as the standard file type
-set.magic = true                                                                                  -- For regular expressions turn magic on
+set.ffs = "unix,dos" -- Use Unix as the standard file type
+set.magic = true -- For regular expressions turn magic on
 set.linespace = 15
 set.conceallevel = 2
 
 -- Enable code folding
 set.foldmethod = "expr"
-set.foldexpr = "nvim_treesitter#foldexpr()"
+set.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 set.foldlevel = 20
 
 vim.filetype.add({
-  extension = {
-    env = "dotenv",
-  },
-  filename = {
-    [".env"] = "dotenv",
-    ["env"] = "dotenv",
-  },
-  pattern = {
-    -- ["[jt]sconfig.*.json"] = "jsonc",
-    ["%.env%.[%w_.-]+"] = "dotenv",
-  },
+	extension = {
+		env = "dotenv",
+	},
+	filename = {
+		[".env"] = "dotenv",
+		["env"] = "dotenv",
+	},
+	pattern = {
+		["%.env%.[%w_.-]+"] = "dotenv",
+	},
 })
 
 -- Enable blinking together with different cursor shapes for insert/command mode, and cursor highlighting:
 set.guicursor =
-'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
+	"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"

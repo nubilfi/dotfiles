@@ -1,8 +1,8 @@
 return {
-  "sainnhe/everforest",
-  enabled = true,
-  priority = 1000,
-  config = function()
-    vim.cmd.colorscheme("everforest")
-  end,
+	"sainnhe/everforest",
+	lazy = false,
+	enabled = true,
+	config = function()
+		vim.cmd.colorscheme("everforest")
+	end,
 }

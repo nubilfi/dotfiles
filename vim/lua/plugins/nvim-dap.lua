@@ -15,7 +15,7 @@ return {
 
         dap.adapters.lldb = {
             type = 'executable',
-            command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
+            command = '/usr/bin/lldb', -- adjust as needed, must be absolute path
             name = 'lldb'
         }
 
